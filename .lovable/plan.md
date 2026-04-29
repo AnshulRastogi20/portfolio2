@@ -1,109 +1,97 @@
+## Goal
 
-# Finish Anshul's Personal Brand Platform
+Replace placeholder copy with real content pulled from your three live sites:
 
-Two tracks: **(A) wire up the backend** for everything that's currently UI-only, and **(B) ship the missing pieces + fix bugs**.
+- **upnrunning.in** → company / studio (services, products, stats, testimonials, CTA)
+- **anshulrastogi.xyz** → personal portfolio history (skills triad, project categories, client testimonials)
+- **socioverse.io** → flagship product detail (features, how it works, pricing, audience)
 
-## A. Backend: bring the forms to life
+Everything funnels into the existing site structure; no new routes are needed except a Ventures detail page and a Services page.
 
-The project is connected to Supabase. We'll add 5 tables, RLS, an admin role system, an admin dashboard, and email sending.
+---
 
-### A1. Database (one migration)
+## What changes
 
-```text
-subscribers          (id, email UNIQUE, source, created_at)
-waitlist_entries     (id, email, kind 'course'|'product', slug, created_at)
-contact_submissions  (id, name, email, topic, message, created_at)
-blog_posts           (id, slug UNIQUE, title, excerpt, content, category,
-                      tags text[], cover_url, read_time, featured bool,
-                      published bool, published_at, created_at, updated_at)
-app_role             ENUM ('admin', 'editor')
-user_roles           (id, user_id → auth.users, role app_role, UNIQUE(user_id, role))
-```
+### 1. `src/lib/data.ts` — full rewrite of the seed data
 
-RLS rules:
-- **Public INSERT** allowed on `subscribers`, `waitlist_entries`, `contact_submissions` (anyone can sign up / write in)
-- **No public SELECT** on those three (no email harvesting)
-- `blog_posts` SELECT public when `published = true`; admin/editor can do everything
-- `user_roles` readable by the owner; only admins can mutate (via `has_role()` security-definer fn to avoid recursion)
+| Constant | New content |
+|---|---|
+| `SITE` | Real name "Anshul Rastogi", bio from upnrunning ("Building AI products that make Indian businesses Up N Running"), location India, real socials (placeholders flagged for you to fill) |
+| `STATS` | Pulled from upnrunning: 50%+ lower workload, 3–10× more leads, 30–60% faster response, 20–40% higher retention. Plus a "10K+ creators on Socioverse" stat. |
+| `VALUES` | Keep current 4 values — they're on-brand. |
+| `VENTURES` | Three real ventures with full descriptions, taglines, URLs, tags, and feature bullets (Socioverse, Up N Running, BunkToBrains) |
+| `SERVICES` (new) | The 6 Up N Running products: OTO Engine, Instagram RAG, Voice AI Assistant, LinkedIn Agent, Creative Studio AI, AI Proposal Generator — each with bullets and "What it does" copy |
+| `PROJECT_CATEGORIES` | Web Dev / Video Editing / Graphic Design with the exact tool stacks from anshulrastogi.xyz (React/TS/Tailwind/Node; Premiere/After Effects/DaVinci/FCP; Photoshop/Illustrator/Figma/InDesign) |
+| `PROJECTS` | Real entries: Socioverse, Up N Running platform, OTO Engine, Instagram RAG, Voice AI, plus the legacy Attendance/Editing/Graphic items from the old portfolio |
+| `TESTIMONIALS` | Real quotes: Ankur Warikoo + Mradul Sharma (Socioverse), Sarah Johnson / Mike Chen / Jennifer Davis (upnrunning), Karan Bhadauria + Utkarsh Bhatia (old portfolio) — 7 total |
+| `COURSES` | Keep waitlist structure; retitle one as "Build Your Own OTO Engine" sourced from upnrunning playbook |
+| `TIMELINE` (About) | Add "Founded Up N Running", "Launched Socioverse", "Old portfolio site shipped" entries |
 
-Plus `has_role(uuid, app_role)` security-definer function — used by every admin policy.
+### 2. New page: `src/pages/Services.tsx` + route `/services`
 
-### A2. Wire the UI to the database
+A dedicated page rendering the 6 Up N Running products with: stat hero (the 4 outcome metrics), product grid (each card = name, one-liner, 3 bullets, "Book a call" CTA), CTA banner ("Book a free strategy call · 30-day automation wins") linking to your Calendly. Add `/services` to nav (replace "Coaching" position; coaching stays accessible from footer).
 
-- `SignupForm` → insert into `subscribers` (when context is "newsletter") or `waitlist_entries` (otherwise). Handle duplicate-email gracefully.
-- Footer signup → same as newsletter.
-- Contact form → insert into `contact_submissions`, then invoke the email edge function.
-- All inserts use the anon key + RLS-allowed insert policies — no auth required.
+### 3. Rewrite `src/pages/ProductDetail.tsx` for `/shop/socioverse` (Socioverse showcase)
 
-### A3. Email (Lovable Emails, built-in)
+Repurpose the existing product detail page so visiting Socioverse renders a real product page:
+- Hero: "AI-Powered Instagram Growth Engine" + Warikoo/Mradul testimonial chips
+- Problems block: Creative Burnout, Lead Leakage, DM Overwhelm
+- 4 modules: Content Studio, DM Automation, Analytics, Lead Bank (each with bullets)
+- "How it works" 4-step: Connect → Analyze → Generate → Automate
+- Stats: 3× faster content, 50% engagement, 10× leads, 5hrs saved/week
+- Audience: Creators / Agencies / D2C / Coaches
+- Pricing tiers: Free / Starter $18 / Creator $48 / Agency $88
+- FAQ block (8 questions from socioverse)
+- CTA → socioverse.io/signup
 
-Two transactional templates:
-1. **`contact-confirmation`** → sent to the visitor when they submit the contact form.
-2. **`contact-notification`** → sent to **you** (Anshul) when a contact form is submitted, so you actually find out. (This is still a transactional email — single recipient, triggered by a specific event.)
+### 4. Refresh existing pages with the new copy
 
-Both fire from a single `supabase.functions.invoke('send-transactional-email', ...)` call site after the contact insert succeeds. Idempotency keys derived from the submission ID.
+- **Home**: hero subtitle uses real bio, stats use upnrunning numbers, ventures section pulls from new VENTURES, testimonials section pulls 4 of the 7 real ones.
+- **About**: hero copy "Builder. Engineer. Storyteller." stays, but body copy uses real positioning ("I run Up N Running, build Socioverse, and ship side projects in public"). Timeline gets real entries.
+- **Skills (`/skills`)**: 3 categories with the real tool stacks; project list uses new PROJECTS array.
+- **Coaching**: keep page, but tighten copy to position it as "1:1 with the Up N Running founder" and add the 4 outcome stats.
+- **Contact**: add Calendly link `https://calendly.com/upnrunning0/30min` as a third option alongside the form. Pre-fills topic from `?service=` (already wired).
+- **Footer**: add Up N Running, Socioverse, BunkToBrains under "Ventures" column; real socials.
 
-Newsletter "lead magnet" delivery is **not** done as bulk email — when someone subscribes we just show them a download link in the success toast / on a `/thank-you` page (a single PDF link). Sending newsletters is out of scope for transactional emails by design.
+### 5. Image guidance (no uploads yet — placeholders documented)
 
-### A4. Admin dashboard
-
-- `/admin/login` — Supabase email + password sign-in.
-- `/admin` — protected route. Checks `has_role(user, 'admin')` before rendering. If not admin → redirects to `/`.
-- Tabs:
-  - **Subscribers** — table, search, count, **Export CSV**.
-  - **Waitlists** — grouped by `kind:slug`, count per group, **Export CSV** per group.
-  - **Contact submissions** — table, mark-as-read toggle (add `read_at` column), reply-to-email link.
-  - **Blog posts** — list + create/edit/delete form (title, slug, excerpt, content as markdown textarea, category, tags, cover URL, featured, published toggle).
-- Bootstrap: a small `useEffect` in admin login that, **only if zero admins exist**, allows the first signed-in user to claim admin (one-time). After that, admins must be granted via SQL or by another admin in the dashboard.
-
-### A5. Make the public blog read from the DB
-
-`Blog` and `BlogPost` pages read from `blog_posts` where `published = true`. Falls back to the static seed data if the table is empty (so the site keeps looking populated until you write your first post).
-
-## B. Missing UI pieces + bug fixes
-
-### B1. Bug fixes
-- **Footer ref warning** — `FooterCol` is being given a ref by something in its tree. Wrap it with `React.forwardRef` (or inline its JSX into Footer). Fixes the React dev-mode warning currently in the console.
-- **Custom cursor jitter** — the `useEffect` re-runs on every mouse move because `pos.x/pos.y` are in the dep array. Refactor to use refs so the animation loop is created once.
-- **`/skills` Resume route** — nav has no link to a `/resume` page. Add a simple `/resume` page that opens a PDF in a new tab (placeholder PDF until you upload yours).
-
-### B2. Floating "Back to top"
-Small motion button, shows after 600px scroll, smooth-scrolls to top.
-
-### B3. Project detail pages
-`/skills/:slug` — problem → approach → outcome → lessons layout, links from the project cards.
-
-### B4. About page additions
-- Photo strip (4–6 placeholder images in a horizontal scrolling band).
-- Press / featured-in logos marquee.
-
-### B5. RSS feed
-Static `/rss.xml` route generated from `blog_posts` (or seed data) — link in Blog page header.
-
-### B6. /resume page
-Page with a preview + download button. PDF lives in `public/resume.pdf` (placeholder, you replace it later).
-
-## Implementation order
+Where to drop your photos when you have them — comments will mark each spot:
 
 ```text
-1. DB migration (tables + RLS + has_role + first-admin trigger)
-2. Generate Supabase types, create `useAuth` hook
-3. Wire SignupForm + Footer + Contact form to DB
-4. Set up email infrastructure + 2 templates + wire contact emails
-5. /admin/login + /admin (subscribers, waitlists, contacts tabs first)
-6. Blog CMS (read public from DB; admin editor)
-7. Bug fixes (Footer ref, cursor)
-8. /resume, project detail pages, back-to-top, RSS, About additions
+src/assets/profile.jpg      → About page hero (replaces giant "A")
+src/assets/upnrunning.jpg   → Services page hero
+src/assets/socioverse-*.png → Socioverse product detail (4 module screenshots)
+public/og-image.jpg         → social share image
+public/resume.pdf           → already wired to /resume
 ```
 
-## Out of scope (intentional — ask if you want them)
+Each component will have an `// IMAGE: <path>` comment + commented-out `<img>` so you swap in 5 seconds.
 
-- Payments / checkout — wait until first product is launch-ready.
-- Course player / video hosting — waitlist only for now.
-- Comments on blog posts — direct to social instead.
-- Marketing newsletter sending from inside Lovable — use Buttondown/Beehiiv/ConvertKit when you actually start sending. The DB will collect subscribers; you export the CSV and import.
+---
 
-## Notes
+## Out of scope (intentional)
 
-- One thing I'd recommend: I'll ask for **your email address** before wiring contact-notification emails so they actually go to you.
-- Email setup will require enabling an email domain (you'll see a one-time setup dialog) — needed for the contact form confirmation. If you'd rather skip emails entirely for now and just collect submissions in the DB, say the word.
+- No backend/schema changes — all content lives in `src/lib/data.ts` (you can later move blog posts to Supabase via the existing admin).
+- No image uploads — I'll leave clearly marked spots and the existing gradient placeholders.
+- No payment integration for Socioverse pricing display (it links out to socioverse.io/signup).
+- No scraping of live socials follower counts.
+
+---
+
+## Files touched
+
+```text
+NEW   src/pages/Services.tsx
+EDIT  src/lib/data.ts              (full rewrite of constants)
+EDIT  src/App.tsx                  (add /services route)
+EDIT  src/components/Nav.tsx       (swap Coaching → Services in primary nav)
+EDIT  src/components/Footer.tsx    (real ventures + socials)
+EDIT  src/pages/Home.tsx           (real stats + testimonials wiring)
+EDIT  src/pages/About.tsx          (real bio + timeline + photo slot)
+EDIT  src/pages/Skills.tsx         (real categories + projects)
+EDIT  src/pages/ProductDetail.tsx  (Socioverse-specific layout)
+EDIT  src/pages/Coaching.tsx       (tightened positioning)
+EDIT  src/pages/Contact.tsx        (Calendly link)
+```
+
+After approval I'll ship it in one pass.
