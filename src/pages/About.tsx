@@ -9,38 +9,37 @@ const About = () => (
     {/* HERO */}
     <section className="container py-24">
       <div className="grid lg:grid-cols-12 gap-12 items-center">
-        <Reveal>
-          <div className="lg:col-span-7">
-            <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// About me</p>
-            <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
-              Builder. <br />
-              Engineer. <br />
-              <span className="text-gradient">Storyteller.</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-xl mb-8">
-              I'm Anshul — based in {SITE.location}. I build AI-powered products, ship side projects in public, and write essays about the craft of making things on the internet.
-              My north star: do work I'm proud of, with people I respect, in service of an audience I genuinely care about.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" className="rounded-full gap-2">
-                <Link to="/contact">Work with me <ArrowRight className="w-4 h-4" /></Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full glass">
-                <Link to="/now">What I'm doing now</Link>
-              </Button>
-            </div>
+        <Reveal className="lg:col-span-7">
+          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// About me</p>
+          <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
+            Builder. <br />
+            Engineer. <br />
+            <span className="text-gradient">Storyteller.</span>
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-xl mb-8">
+            I'm Anshul — based in {SITE.location}. I build AI-powered products, ship side projects in public, and write essays about the craft of making things on the internet.
+            My north star: do work I'm proud of, with people I respect, in service of an audience I genuinely care about.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg" className="rounded-full gap-2">
+              <Link to="/contact">Work with me <ArrowRight className="w-4 h-4" /></Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="rounded-full glass">
+              <Link to="/now">What I'm doing now</Link>
+            </Button>
           </div>
         </Reveal>
-        <Reveal delay={0.15}>
-          <div className="lg:col-span-5">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-gold/30 blur-3xl rounded-full" />
-              <div className="relative aspect-square rounded-[2rem] glass-strong overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-mesh" />
-                <div className="absolute inset-0 grid-bg opacity-50" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display text-[10rem] font-bold text-gradient leading-none">A</span>
-                </div>
+        <Reveal delay={0.15} className="lg:col-span-5">
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-gold/30 blur-3xl rounded-full" />
+            <div className="relative aspect-square rounded-[2rem] glass-strong overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-mesh" />
+              <div className="absolute inset-0 grid-bg opacity-50" />
+              {/* Replace this letter block with your photo:
+                  <img src={profilePhoto} alt="Anshul" className="absolute inset-0 w-full h-full object-cover" />
+                  Place the file at src/assets/profile.jpg and: import profilePhoto from "@/assets/profile.jpg" */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="font-display text-[8rem] md:text-[10rem] font-bold text-gradient leading-none">A</span>
               </div>
             </div>
           </div>
