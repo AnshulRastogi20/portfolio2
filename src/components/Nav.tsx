@@ -12,6 +12,7 @@ const links = [
   { to: "/achievements", label: "Awards" },
   { to: "/blog", label: "Blog" },
   { to: "/newsletter", label: "Newsletter" },
+  { to: "/services", label: "Services" },
   { to: "/courses", label: "Courses" },
   { to: "/shop", label: "Shop" },
   { to: "/coaching", label: "Coaching" },

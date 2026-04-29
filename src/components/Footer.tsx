@@ -5,15 +5,15 @@ import { SignupForm } from "./SignupForm";
 const cols: { title: string; links: [string, string][] }[] = [
   { title: "Site", links: [["/", "Home"], ["/about", "About"], ["/skills", "Work"], ["/achievements", "Awards"]] },
   { title: "Audience", links: [["/blog", "Blog"], ["/newsletter", "Newsletter"], ["/now", "Now"], ["/uses", "Uses"]] },
-  { title: "Offers", links: [["/courses", "Courses"], ["/shop", "Shop"], ["/coaching", "Coaching"], ["/contact", "Contact"]] },
-  { title: "Connect", links: [["#", "Twitter / X"], ["#", "GitHub"], ["#", "LinkedIn"], ["#", "YouTube"]] },
+  { title: "Offers", links: [["/services", "Services"], ["/courses", "Courses"], ["/shop", "Shop"], ["/coaching", "Coaching"]] },
+  { title: "Ventures", links: [["https://www.upnrunning.in", "Up N Running"], ["https://www.socioverse.io", "Socioverse"], ["#", "BunkToBrains"], ["/contact", "Contact"]] },
 ];
 
 const socials = [
-  { Icon: Twitter, href: "#" },
-  { Icon: Github, href: "#" },
-  { Icon: Linkedin, href: "#" },
-  { Icon: Youtube, href: "#" },
+  { Icon: Twitter, href: "https://twitter.com" },
+  { Icon: Github, href: "https://github.com" },
+  { Icon: Linkedin, href: "https://linkedin.com" },
+  { Icon: Youtube, href: "https://youtube.com" },
   { Icon: Mail, href: "/contact" },
 ];
 
@@ -41,14 +41,25 @@ export const Footer = () => {
               <div key={c.title}>
                 <h4 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">{c.title}</h4>
                 <ul className="space-y-2.5">
-                  {c.links.map(([href, label]) => (
-                    <li key={label}>
-                      <Link to={href} className="group inline-flex items-center gap-1 text-sm hover:text-primary transition-colors">
+                  {c.links.map(([href, label]) => {
+                    const external = /^https?:\/\//.test(href);
+                    const className = "group inline-flex items-center gap-1 text-sm hover:text-primary transition-colors";
+                    const inner = (
+                      <>
                         {label}
                         <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all" />
-                      </Link>
-                    </li>
-                  ))}
+                      </>
+                    );
+                    return (
+                      <li key={label}>
+                        {external ? (
+                          <a href={href} target="_blank" rel="noreferrer" className={className}>{inner}</a>
+                        ) : (
+                          <Link to={href} className={className}>{inner}</Link>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
