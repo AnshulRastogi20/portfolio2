@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { z } from "zod";
 import { SITE } from "@/lib/data";
+import { supabase } from "@/integrations/supabase/client";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Name required").max(100),
@@ -31,12 +32,23 @@ const Contact = () => {
       return toast.error(parsed.error.issues[0].message);
     }
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setLoading(false);
-    setSent(true);
-    toast.success("Message sent! I'll reply within 48 hours.");
-    setForm({ name: "", email: "", topic: "General", message: "" });
-    setTimeout(() => setSent(false), 4000);
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        topic: parsed.data.topic,
+        message: parsed.data.message,
+      });
+      if (error) throw error;
+      setSent(true);
+      toast.success("Message sent! I'll reply within 48 hours.");
+      setForm({ name: "", email: "", topic: "General", message: "" });
+      setTimeout(() => setSent(false), 4000);
+    } catch (err: any) {
+      toast.error(err?.message ?? "Failed to send. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
