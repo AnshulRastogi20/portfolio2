@@ -88,15 +88,17 @@ const BlogPost = () => {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="prose-content space-y-6 text-lg leading-relaxed text-foreground/90">
-            <p>This is where the full article lives. The header, metadata, and reader UI are all wired up — drop your real content in via the data file (or hook up Lovable Cloud later for a true CMS).</p>
-            <p>I write about AI, products, and the discipline of shipping things you'd actually use yourself. Each essay is meant to leave you with one clear, actionable idea.</p>
-            <h2 className="font-display text-3xl font-bold pt-4">A subhead, for rhythm</h2>
-            <p>Long-form structure handled. Inline links, lists, blockquotes — all styled by the design system. Replace this placeholder with your draft when ready.</p>
-            <blockquote className="border-l-2 border-primary pl-6 italic text-muted-foreground my-8">
-              "The audience you build today is the leverage you'll have tomorrow."
-            </blockquote>
-            <p>Thanks for reading. If this resonated, the newsletter is the best place to keep up.</p>
+          <div className="prose-content space-y-6 text-lg leading-relaxed text-foreground/90 whitespace-pre-wrap">
+            {post.content ? (
+              post.content
+            ) : (
+              <>
+                <p>This essay is still in the works — the title and metadata are live, but the body is on the way. In the meantime, the newsletter has fresh writing every Sunday.</p>
+                <blockquote className="border-l-2 border-primary pl-6 italic text-muted-foreground my-8">
+                  "The audience you build today is the leverage you'll have tomorrow."
+                </blockquote>
+              </>
+            )}
           </div>
         </Reveal>
 
