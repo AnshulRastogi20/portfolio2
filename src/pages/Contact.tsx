@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Mail, MapPin, Clock, Send } from "lucide-react";
+import { Mail, MapPin, Clock, Send, Calendar } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,8 +61,24 @@ const Contact = () => {
               Let's <span className="text-gradient">talk.</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-10">
-              Got a project, question, or just want to say hi? Drop a note. I read everything and reply within 48 hours.
+              Got a project, question, or just want to say hi? Drop a note — or skip the form and book a 30-min strategy call directly.
             </p>
+
+            <a
+              href={SITE.calendly}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-4 glass-strong rounded-2xl p-5 mb-6 hover:border-primary/40 transition-all hover-lift"
+            >
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                <Calendar className="w-5 h-5 text-primary" />
+              </div>
+              <div className="flex-1">
+                <div className="font-display text-lg font-bold">Book a free strategy call</div>
+                <div className="font-mono text-xs text-muted-foreground">30 min · Up N Running founder</div>
+              </div>
+              <span className="font-mono text-xs text-primary group-hover:translate-x-1 transition-transform">→</span>
+            </a>
 
             <div className="space-y-5">
               <InfoRow icon={Mail} label="Email" value={SITE.email} />

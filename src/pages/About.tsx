@@ -12,12 +12,12 @@ const About = () => (
         <Reveal className="lg:col-span-7">
           <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// About me</p>
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
+            Founder. <br />
             Builder. <br />
-            Engineer. <br />
             <span className="text-gradient">Storyteller.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mb-8">
-            I'm Anshul — based in {SITE.location}. I build AI-powered products, ship side projects in public, and write essays about the craft of making things on the internet.
+            I'm Anshul Rastogi — based in {SITE.location}. I founded <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, and I built <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a> — an Instagram growth engine used by 10K+ creators.
             My north star: do work I'm proud of, with people I respect, in service of an audience I genuinely care about.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -77,18 +77,23 @@ const About = () => (
         </h2>
       </Reveal>
       <div className="grid md:grid-cols-3 gap-6">
-        {VENTURES.map((v, i) => (
-          <Reveal key={v.name} delay={i * 0.1}>
-            <a href={v.url} className="group block glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">
-              <div className="flex items-start justify-between mb-6">
-                <span className="font-mono text-xs uppercase tracking-wider text-gold glass rounded-full px-3 py-1">{v.tag}</span>
-                <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform" />
-              </div>
-              <h3 className="font-display text-2xl font-bold mb-2">{v.name}</h3>
-              <p className="text-sm text-muted-foreground">{v.desc}</p>
-            </a>
-          </Reveal>
-        ))}
+        {VENTURES.map((v, i) => {
+          const external = /^https?:\/\//.test(v.url);
+          const Comp: any = external ? "a" : "a";
+          const linkProps = external ? { href: v.url, target: "_blank", rel: "noreferrer" } : { href: v.url };
+          return (
+            <Reveal key={v.name} delay={i * 0.1}>
+              <Comp {...linkProps} className="group block glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">
+                <div className="flex items-start justify-between mb-6">
+                  <span className="font-mono text-xs uppercase tracking-wider text-gold glass rounded-full px-3 py-1">{v.tag}</span>
+                  <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform" />
+                </div>
+                <h3 className="font-display text-2xl font-bold mb-2">{v.name}</h3>
+                <p className="text-sm text-muted-foreground">{v.desc}</p>
+              </Comp>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
 

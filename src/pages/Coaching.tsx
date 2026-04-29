@@ -8,13 +8,13 @@ const Coaching = () => (
   <>
     <section className="container py-20">
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// 1:1 Work</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// 1:1 with the Up N Running founder</p>
         <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6 max-w-4xl">
           Work with me, <br />
           <span className="text-gradient">one-on-one.</span>
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
-          High-leverage, focused sessions for founders, indie makers, and builders.
+          High-leverage sessions for founders, indie makers, and operators who want to ship AI automations the way Up N Running does for clients.
           Three ways to work together — pick the one that fits your moment.
         </p>
       </Reveal>
