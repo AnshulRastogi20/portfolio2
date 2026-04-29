@@ -93,7 +93,7 @@ const Home = () => {
       {/* MARQUEE */}
       <section className="py-12 border-y border-border/50">
         <Marquee>
-          {["TypeScript", "React", "Next.js", "OpenAI", "Tailwind", "Supabase", "Figma", "Vercel", "Python", "Postgres"].map((t) => (
+          {["TypeScript", "React", "Next.js", "OpenAI", "Tailwind", "Supabase", "LangChain", "Premiere Pro", "After Effects", "Figma", "Photoshop", "Illustrator"].map((t) => (
             <span key={t} className="font-display text-3xl md:text-5xl font-bold text-muted-foreground/50 hover:text-primary transition-colors">
               {t} <span className="text-primary/60">·</span>
             </span>
