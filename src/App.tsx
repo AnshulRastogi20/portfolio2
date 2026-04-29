@@ -18,6 +18,7 @@ import CourseDetail from "./pages/CourseDetail";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import Coaching from "./pages/Coaching";
+import Services from "./pages/Services";
 import Now from "./pages/Now";
 import Uses from "./pages/Uses";
 import Contact from "./pages/Contact";
@@ -50,6 +51,7 @@ const App = () => (
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/shop/:slug" element={<ProductDetail />} />
                 <Route path="/coaching" element={<Coaching />} />
+                <Route path="/services" element={<Services />} />
                 <Route path="/now" element={<Now />} />
                 <Route path="/uses" element={<Uses />} />
                 <Route path="/contact" element={<Contact />} />
