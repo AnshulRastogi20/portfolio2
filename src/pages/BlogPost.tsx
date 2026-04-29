@@ -1,13 +1,59 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { SignupForm } from "@/components/SignupForm";
 import { BLOG_POSTS } from "@/lib/data";
+import { supabase } from "@/integrations/supabase/client";
+
+type Post = {
+  slug: string; title: string; excerpt: string; content?: string;
+  date: string; readTime: string; category: string; tags: string[];
+};
 
 const BlogPost = () => {
   const { slug } = useParams();
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
-  const related = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 3);
+  const [post, setPost] = useState<Post | null>(null);
+  const [related, setRelated] = useState<Post[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .eq("slug", slug!)
+        .eq("published", true)
+        .maybeSingle();
+      if (data) {
+        setPost({
+          slug: data.slug, title: data.title, excerpt: data.excerpt ?? "",
+          content: data.content, date: data.published_at?.slice(0, 10) ?? "",
+          readTime: data.read_time ?? "", category: data.category ?? "",
+          tags: data.tags ?? [],
+        });
+        const { data: more } = await supabase
+          .from("blog_posts")
+          .select("slug,title,excerpt,published_at,read_time,category,tags")
+          .eq("published", true)
+          .neq("slug", slug!)
+          .limit(3);
+        setRelated((more ?? []).map((p: any) => ({
+          slug: p.slug, title: p.title, excerpt: p.excerpt ?? "",
+          date: p.published_at?.slice(0, 10) ?? "", readTime: p.read_time ?? "",
+          category: p.category ?? "", tags: p.tags ?? [],
+        })));
+      } else {
+        // Fallback to seed data
+        const seed = BLOG_POSTS.find((p) => p.slug === slug);
+        if (seed) setPost(seed as Post);
+        setRelated(BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 3) as Post[]);
+      }
+      setLoaded(true);
+    })();
+  }, [slug]);
+
+  if (!loaded) return <section className="container py-32 text-center text-muted-foreground">Loading...</section>;
 
   if (!post) {
     return (

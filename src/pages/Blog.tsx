@@ -1,17 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Calendar, Clock } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { Input } from "@/components/ui/input";
 import { SignupForm } from "@/components/SignupForm";
 import { BLOG_POSTS } from "@/lib/data";
+import { supabase } from "@/integrations/supabase/client";
+
+type Post = {
+  slug: string; title: string; excerpt: string;
+  date: string; readTime: string; category: string;
+  tags: string[]; featured: boolean;
+};
 
 const Blog = () => {
   const [q, setQ] = useState("");
   const [tag, setTag] = useState<string | null>(null);
-  const allTags = Array.from(new Set(BLOG_POSTS.flatMap((p) => p.tags)));
-  const featured = BLOG_POSTS.find((p) => p.featured);
-  const rest = BLOG_POSTS.filter((p) => p !== featured);
+  const [posts, setPosts] = useState<Post[]>(BLOG_POSTS as Post[]);
+
+  useEffect(() => {
+    (async () => {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("slug,title,excerpt,published_at,read_time,category,tags,featured")
+        .eq("published", true)
+        .order("published_at", { ascending: false });
+      if (!error && data && data.length > 0) {
+        setPosts(data.map((p: any) => ({
+          slug: p.slug,
+          title: p.title,
+          excerpt: p.excerpt ?? "",
+          date: p.published_at ? new Date(p.published_at).toISOString().slice(0, 10) : "",
+          readTime: p.read_time ?? "",
+          category: p.category ?? "",
+          tags: p.tags ?? [],
+          featured: !!p.featured,
+        })));
+      }
+    })();
+  }, []);
+
+  const allTags = Array.from(new Set(posts.flatMap((p) => p.tags)));
+  const featured = posts.find((p) => p.featured);
+  const rest = posts.filter((p) => p !== featured);
   const filtered = rest.filter((p) =>
     (!tag || p.tags.includes(tag)) &&
     (q === "" || p.title.toLowerCase().includes(q.toLowerCase()) || p.excerpt.toLowerCase().includes(q.toLowerCase()))
