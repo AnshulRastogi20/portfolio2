@@ -4,7 +4,7 @@ import { Reveal } from "@/components/PageTransition";
 import { Counter } from "@/components/Counter";
 import { ACHIEVEMENTS } from "@/lib/data";
 
-const FILTERS = ["All", "Certifications", "Awards", "Recognition"];
+const FILTERS = ["All", "Ventures", "Awards", "Certifications", "Recognition"];
 
 const Achievements = () => {
   const [filter, setFilter] = useState("All");
