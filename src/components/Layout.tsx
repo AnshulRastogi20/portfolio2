@@ -6,9 +6,11 @@ import { CustomCursor } from "./CustomCursor";
 import { ScrollProgress } from "./ScrollProgress";
 import { SmoothScroll } from "./SmoothScroll";
 import { PageTransition } from "./PageTransition";
+import { BackToTop } from "./BackToTop";
 
 export const Layout = () => {
   const loc = useLocation();
+  const isAdmin = loc.pathname.startsWith("/admin");
   return (
     <SmoothScroll>
       <div className="min-h-screen grain relative overflow-x-hidden">
@@ -22,8 +24,10 @@ export const Layout = () => {
             </main>
           </PageTransition>
         </AnimatePresence>
-        <Footer />
+        {!isAdmin && <Footer />}
+        <BackToTop />
       </div>
     </SmoothScroll>
   );
 };
+
