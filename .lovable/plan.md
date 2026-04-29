@@ -1,162 +1,109 @@
 
-# Anshul's Portfolio → Personal Brand Platform v2
+# Finish Anshul's Personal Brand Platform
 
-Evolve the existing dark/mint portfolio into a premium, animated personal brand site. **Every existing page stays.** New sections layer on top to grow your audience for future courses, products, and services.
+Two tracks: **(A) wire up the backend** for everything that's currently UI-only, and **(B) ship the missing pieces + fix bugs**.
 
-## Visual System
+## A. Backend: bring the forms to life
 
-### Themes (dual, dark default)
-- **Dark (default):** deep near-black background `#0A0F0D`, elevated card `#0F1815`, mint primary `#9FE8C4` (refined from current), soft cream text `#F4F1EA`, muted `#8B9A93`, gold accent `#D4B896` for premium highlights.
-- **Light (warm):** cream `#F7F3EC`, deep brown text `#2A1F1A`, terracotta accent `#C97B5B`, mint secondary preserved for continuity.
-- Glassmorphism cards (`backdrop-blur` + 1px border + subtle inner glow), gradient mesh backgrounds, fine grid overlay on hero (kept from current), noise/grain texture for premium feel.
+The project is connected to Supabase. We'll add 5 tables, RLS, an admin role system, an admin dashboard, and email sending.
 
-### Typography
-- **Display:** Cabinet Grotesk (or Satoshi) — large, tight tracking, used for hero, page titles, section headers.
-- **Body:** Inter — clean, readable.
-- **Accent/labels:** JetBrains Mono for tags, timestamps, code badges.
-- Generous line-height, large headings (clamp 3rem–6rem on hero), refined letter-spacing.
-
-### Motion (heavy interactive)
-- Custom magnetic cursor (subtle, dot + ring).
-- Framer Motion page transitions (fade + slight scale).
-- Scroll-triggered reveals (fade-up, stagger) on every section.
-- Animated gradient mesh + parallax grid in hero.
-- Text scramble effect on hero title rotation ("I Build AI" → "I Ship Systems" → "I Teach Builders").
-- Hover: magnetic buttons, project card tilt (3D), image zoom-on-hover.
-- Smooth scroll (Lenis), animated number counters on stats, marquee strip for tech logos.
-- Respects `prefers-reduced-motion`.
-
-## Site Map
+### A1. Database (one migration)
 
 ```text
-Existing (kept + redesigned)
-/                Home
-/about           About
-/skills          Skills & Projects
-/achievements    Achievements
-/blog            Blog list
-/blog/[slug]     Blog post
-/contact         Contact
-/resume          Resume download (existing)
-
-New
-/newsletter      Newsletter landing + archive + lead magnet
-/courses         Course catalog (Coming Soon + waitlists)
-/courses/[slug]  Individual course detail + waitlist
-/shop            Digital products + merch (waitlist)
-/shop/[slug]     Product detail + notify-me
-/coaching        1:1 services + booking CTA
-/now             What I'm currently working on
-/uses            Gear, stack, software, setup
-/admin           Protected dashboard (blog, subscribers, waitlists)
-/admin/login     Admin auth
+subscribers          (id, email UNIQUE, source, created_at)
+waitlist_entries     (id, email, kind 'course'|'product', slug, created_at)
+contact_submissions  (id, name, email, topic, message, created_at)
+blog_posts           (id, slug UNIQUE, title, excerpt, content, category,
+                      tags text[], cover_url, read_time, featured bool,
+                      published bool, published_at, created_at, updated_at)
+app_role             ENUM ('admin', 'editor')
+user_roles           (id, user_id → auth.users, role app_role, UNIQUE(user_id, role))
 ```
 
-## Page-by-Page
+RLS rules:
+- **Public INSERT** allowed on `subscribers`, `waitlist_entries`, `contact_submissions` (anyone can sign up / write in)
+- **No public SELECT** on those three (no email harvesting)
+- `blog_posts` SELECT public when `published = true`; admin/editor can do everything
+- `user_roles` readable by the owner; only admins can mutate (via `has_role()` security-definer fn to avoid recursion)
 
-### Home (rebuilt premium)
-- Animated grid + gradient mesh hero, rotating headline (text scramble), dual CTA "View My Work" / "Join Newsletter".
-- **New:** stats strip (subscribers, projects shipped, hackathons won) with count-up animation.
-- **New:** featured newsletter signup card (glass).
-- Kept: My Projects (Web Dev / Video / Graphic) — redesigned with 3D tilt cards.
-- **New:** Latest from the blog (3 cards).
-- **New:** "Building Next" teaser → courses/products waitlist.
-- **New:** Marquee of tech logos / brands worked with.
-- **New:** Testimonials carousel.
-- **New:** Final newsletter CTA (full-width gradient block).
+Plus `has_role(uuid, app_role)` security-definer function — used by every admin policy.
 
-### About (kept + enhanced)
-- Same photo, name, role, mission text — kept.
-- Kept: 4 value cards (Depth Over Hacks, Authenticity, Value-First, Offer-Centric) — restyled with glass + animated icons.
-- Kept: 3 venture cards (Socioverse, Up N Running, BunkToBrains) — restyled with hover animation.
-- **New:** Animated timeline of journey.
-- **New:** Photo strip / behind-the-scenes gallery.
-- **New:** Press & features logo strip.
+### A2. Wire the UI to the database
 
-### Skills & Projects (kept + expanded)
-- Kept: Web Development / Video Editing / Graphic Design category cards.
-- **New:** Tabbed sub-view per category showing actual project cards with cover, description, tech stack, live/repo links.
-- **New:** Filterable skill grid (Languages, AI/ML, Frameworks, Tools) with proficiency indicators.
-- **New:** Individual project detail pages (problem → approach → outcome → lessons).
+- `SignupForm` → insert into `subscribers` (when context is "newsletter") or `waitlist_entries` (otherwise). Handle duplicate-email gracefully.
+- Footer signup → same as newsletter.
+- Contact form → insert into `contact_submissions`, then invoke the email edge function.
+- All inserts use the anon key + RLS-allowed insert policies — no auth required.
 
-### Achievements (kept, polished)
-- Kept: featured certificate carousel + filter tabs (All / Certifications / Awards / Recognition).
-- Kept: all current cards (Data Structures, Programming in Java, HackKRMU 4.0, District Chess Champion).
-- **New:** scroll-snap horizontal carousel with smooth nav, certificate lightbox on click.
-- **New:** counters for "X certifications, Y awards".
+### A3. Email (Lovable Emails, built-in)
 
-### Blog (kept + upgraded)
-- Kept: search bar, all category tags, all 4 existing posts, date stamps, card layout.
-- **New:** featured post hero at top, reading time, author chip, view count.
-- **New:** Individual blog post reader page (was missing — currently cards don't open) with cover, rich content, table of contents, inline newsletter CTA, related posts.
-- **New:** RSS feed link.
+Two transactional templates:
+1. **`contact-confirmation`** → sent to the visitor when they submit the contact form.
+2. **`contact-notification`** → sent to **you** (Anshul) when a contact form is submitted, so you actually find out. (This is still a transactional email — single recipient, triggered by a specific event.)
 
-### Newsletter (new)
-- What you write about, frequency, who it's for.
-- Big signup with lead-magnet promise ("Get my AI Builder's Starter Kit free").
-- Past issues archive.
-- Reader testimonials.
-- Subscriber count social proof.
+Both fire from a single `supabase.functions.invoke('send-transactional-email', ...)` call site after the contact insert succeeds. Idempotency keys derived from the submission ID.
 
-### Courses (new, waitlist mode)
-- Catalog grid with "Coming Soon" badges + estimated launch.
-- Per-course detail page: outline preview, who it's for, instructor bio, early-bird pricing teaser, **waitlist signup**.
+Newsletter "lead magnet" delivery is **not** done as bulk email — when someone subscribes we just show them a download link in the success toast / on a `/thank-you` page (a single PDF link). Sending newsletters is out of scope for transactional emails by design.
 
-### Shop (new, waitlist mode)
-- Tabs: Digital Products (ebooks, templates, prompts) + Merch.
-- Each product card: cover, teaser price, "Notify me when live" → captures email + product interest.
+### A4. Admin dashboard
 
-### Coaching (new)
-- Service tiers (1:1 call, code review, project consulting).
-- What's included, pricing range, process steps, FAQ.
-- Booking CTA → contact form pre-filled with service.
+- `/admin/login` — Supabase email + password sign-in.
+- `/admin` — protected route. Checks `has_role(user, 'admin')` before rendering. If not admin → redirects to `/`.
+- Tabs:
+  - **Subscribers** — table, search, count, **Export CSV**.
+  - **Waitlists** — grouped by `kind:slug`, count per group, **Export CSV** per group.
+  - **Contact submissions** — table, mark-as-read toggle (add `read_at` column), reply-to-email link.
+  - **Blog posts** — list + create/edit/delete form (title, slug, excerpt, content as markdown textarea, category, tags, cover URL, featured, published toggle).
+- Bootstrap: a small `useEffect` in admin login that, **only if zero admins exist**, allows the first signed-in user to claim admin (one-time). After that, admins must be granted via SQL or by another admin in the dashboard.
 
-### /now & /uses (new)
-- `/now`: short, frequently-updated note on current focus + what you're learning.
-- `/uses`: hardware, software, dev setup, browser extensions, fonts — community-loved SEO page.
+### A5. Make the public blog read from the DB
 
-### Contact (kept + improved)
-- Kept: Name / Email / Message form, dark card, mint Send button — restyled premium.
-- **New:** topic dropdown (General / Coaching / Speaking / Press), social links row, response-time note, success animation on submit, **email actually sends** to your inbox.
+`Blog` and `BlogPost` pages read from `blog_posts` where `published = true`. Falls back to the static seed data if the table is empty (so the site keeps looking populated until you write your first post).
 
-### Admin (new, protected)
-- Login (email + password, role-gated).
-- Dashboard: subscriber count, recent waitlist signups, contact submissions.
-- Blog editor: create/edit/delete posts (rich text), manage tags.
-- CSV export for newsletter subscribers and each waitlist.
+## B. Missing UI pieces + bug fixes
 
-## Global Elements
+### B1. Bug fixes
+- **Footer ref warning** — `FooterCol` is being given a ref by something in its tree. Wrap it with `React.forwardRef` (or inline its JSX into Footer). Fixes the React dev-mode warning currently in the console.
+- **Custom cursor jitter** — the `useEffect` re-runs on every mouse move because `pos.x/pos.y` are in the dep array. Refactor to use refs so the animation loop is created once.
+- **`/skills` Resume route** — nav has no link to a `/resume` page. Add a simple `/resume` page that opens a PDF in a new tab (placeholder PDF until you upload yours).
 
-- **Top nav (kept logo + structure):** Home · About · Skills · Achievements · Blog · Newsletter · Courses · Shop · Contact · theme toggle · Resume.
-- Mobile: slide-in sheet menu with stagger animation.
-- **Footer (new):** sitemap columns, mini newsletter signup, social icons (X, GitHub, LinkedIn, YouTube), copyright.
-- Sticky scroll-progress bar at top.
-- Floating "Back to top" (kept).
-- Custom 404 with personality.
+### B2. Floating "Back to top"
+Small motion button, shows after 600px scroll, smooth-scrolls to top.
 
-## Audience-Building Mechanics
+### B3. Project detail pages
+`/skills/:slug` — problem → approach → outcome → lessons layout, links from the project cards.
 
-1. Newsletter signup in 4 places: hero, after every blog post, footer, dedicated page.
-2. Waitlist capture on every Course and Shop item before launch.
-3. Lead magnet (free download) gates newsletter signup → high conversion.
-4. Social proof everywhere: subscriber count, testimonials, brand logos, hackathon wins.
-5. SEO surface area: blog, /uses, /now, individual project pages.
+### B4. About page additions
+- Photo strip (4–6 placeholder images in a horizontal scrolling band).
+- Press / featured-in logos marquee.
 
-## Technical Notes
+### B5. RSS feed
+Static `/rss.xml` route generated from `blog_posts` (or seed data) — link in Blog page header.
 
-- React + Vite + Tailwind + shadcn/ui (existing stack preserved).
-- **Framer Motion** for all motion, **Lenis** for smooth scroll, **GSAP** only if needed for text scramble.
-- Premium fonts loaded via Fontshare or self-hosted.
-- **Lovable Cloud** backend for: `subscribers`, `waitlist_entries` (course/product), `blog_posts`, `contact_submissions`, `admin_users` (role-based RLS).
-- Admin auth with email/password + `user_roles` table (roles in separate table per security best practice).
-- Contact form + lead magnet send transactional email via Lovable's built-in email system.
-- Payments NOT wired in this build — waitlists capture demand now; enable Stripe/Paddle when first product is ready.
-- Full responsive (mobile-first), `prefers-reduced-motion` honored, semantic HTML, accessible focus states.
+### B6. /resume page
+Page with a preview + download button. PDF lives in `public/resume.pdf` (placeholder, you replace it later).
 
-## What's NOT in this build (intentional)
+## Implementation order
 
-- Actual course player / video hosting (waitlist only).
-- Checkout / payments (added when first product is ready).
-- Comments on blog (link to social discussion instead).
+```text
+1. DB migration (tables + RLS + has_role + first-admin trigger)
+2. Generate Supabase types, create `useAuth` hook
+3. Wire SignupForm + Footer + Contact form to DB
+4. Set up email infrastructure + 2 templates + wire contact emails
+5. /admin/login + /admin (subscribers, waitlists, contacts tabs first)
+6. Blog CMS (read public from DB; admin editor)
+7. Bug fixes (Footer ref, cursor)
+8. /resume, project detail pages, back-to-top, RSS, About additions
+```
 
-After this ships, natural next steps: write 2–3 blog posts, design your lead-magnet PDF, then enable payments when your first course/product is launch-ready.
+## Out of scope (intentional — ask if you want them)
+
+- Payments / checkout — wait until first product is launch-ready.
+- Course player / video hosting — waitlist only for now.
+- Comments on blog posts — direct to social instead.
+- Marketing newsletter sending from inside Lovable — use Buttondown/Beehiiv/ConvertKit when you actually start sending. The DB will collect subscribers; you export the CSV and import.
+
+## Notes
+
+- One thing I'd recommend: I'll ask for **your email address** before wiring contact-notification emails so they actually go to you.
+- Email setup will require enabling an email domain (you'll see a one-time setup dialog) — needed for the contact form confirmation. If you'd rather skip emails entirely for now and just collect submissions in the DB, say the word.
