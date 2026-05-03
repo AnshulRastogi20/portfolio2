@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { PROJECT_CATEGORIES, PROJECTS, SKILLS } from "@/lib/data";
 
