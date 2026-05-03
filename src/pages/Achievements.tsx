@@ -52,7 +52,7 @@ const Achievements = () => {
         <div className="flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {featured.map((a, i) => (
             <Reveal key={a.title} delay={i * 0.08}>
-              <div className="snap-start shrink-0 w-[320px] md:w-[420px] glass-strong rounded-3xl p-8 hover-lift hover:border-gold/50 transition-all">
+              <a href={a.link || undefined} target={a.link ? "_blank" : undefined} rel={a.link ? "noreferrer" : undefined} className={`snap-start shrink-0 w-[320px] md:w-[420px] glass-strong rounded-3xl p-8 hover-lift hover:border-gold/50 transition-all block ${a.link ? "cursor-pointer" : ""}`}>
               <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/20 to-gold/20 mb-6 flex items-center justify-center relative overflow-hidden">
                   {a.imageUrl ? (
                     <img src={a.imageUrl} alt={a.title} className="absolute inset-0 w-full h-full object-contain bg-white" />
@@ -68,11 +68,11 @@ const Achievements = () => {
                 <p className="text-sm text-muted-foreground">{a.issuer} · {a.date}</p>
                 {a.description && <p className="text-xs text-muted-foreground mt-2">{a.description}</p>}
                 {a.link && (
-                  <a href={a.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-xs text-primary mt-3 hover:underline">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-primary mt-3">
                     <ExternalLink className="w-3 h-3" /> View
-                  </a>
+                  </span>
                 )}
-              </div>
+              </a>
             </Reveal>
           ))}
         </div>
@@ -94,7 +94,7 @@ const Achievements = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {visible.map((a, i) => (
             <Reveal key={a.title + i} delay={i * 0.04}>
-              <div className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-all">
+              <a href={a.link || undefined} target={a.link ? "_blank" : undefined} rel={a.link ? "noreferrer" : undefined} className={`glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-all block ${a.link ? "cursor-pointer" : ""}`}>
                 {a.imageUrl && (
                   <div className="aspect-[16/10] rounded-2xl mb-5 overflow-hidden bg-white">
                     <img src={a.imageUrl} alt={a.title} className="w-full h-full object-contain" />
@@ -108,11 +108,11 @@ const Achievements = () => {
                 <p className="text-sm text-muted-foreground">{a.issuer}</p>
                 {a.description && <p className="text-xs text-muted-foreground mt-2">{a.description}</p>}
                 {a.link && (
-                  <a href={a.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-xs text-primary mt-3 hover:underline">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-primary mt-3">
                     <ExternalLink className="w-3 h-3" /> View
-                  </a>
+                  </span>
                 )}
-              </div>
+              </a>
             </Reveal>
           ))}
         </div>

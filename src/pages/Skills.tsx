@@ -46,7 +46,7 @@ const Skills = () => {
         <div className="grid md:grid-cols-2 gap-5">
           {filtered.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
-              <div className="group glass rounded-3xl p-7 hover-lift hover:border-primary/40 transition-all">
+              <a href={p.demoUrl || p.githubUrl || undefined} target="_blank" rel="noreferrer" className="group glass rounded-3xl p-7 hover-lift hover:border-primary/40 transition-all block cursor-pointer">
                 <div className="aspect-[16/10] rounded-2xl bg-gradient-mesh mb-6 relative overflow-hidden">
                   {p.coverUrl ? (
                     <img src={p.coverUrl} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
@@ -69,18 +69,18 @@ const Skills = () => {
                   </div>
                   <div className="flex gap-2">
                     {p.demoUrl && (
-                      <a href={p.demoUrl} target="_blank" rel="noreferrer" className="p-2 glass rounded-full hover:border-primary/60 transition" title="Live Demo">
+                      <span className="p-2 glass rounded-full hover:border-primary/60 transition" title="Live Demo">
                         <ExternalLink className="w-4 h-4" />
-                      </a>
+                      </span>
                     )}
                     {p.githubUrl && (
-                      <a href={p.githubUrl} target="_blank" rel="noreferrer" className="p-2 glass rounded-full hover:border-primary/60 transition" title="GitHub">
+                      <span onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(p.githubUrl, '_blank'); }} className="p-2 glass rounded-full hover:border-primary/60 transition cursor-pointer" title="GitHub">
                         <Github className="w-4 h-4" />
-                      </a>
+                      </span>
                     )}
                   </div>
                 </div>
-              </div>
+              </a>
             </Reveal>
           ))}
         </div>
