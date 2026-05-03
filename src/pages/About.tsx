@@ -34,14 +34,7 @@ const About = () => (
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-gold/30 blur-3xl rounded-full" />
             <div className="relative aspect-square rounded-[2rem] glass-strong overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-mesh" />
-              <div className="absolute inset-0 grid-bg opacity-50" />
-              {/* Replace this letter block with your photo:
-                  <img src={profilePhoto} alt="Anshul" className="absolute inset-0 w-full h-full object-cover" />
-                  Place the file at src/assets/profile.jpg and: import profilePhoto from "@/assets/profile.jpg" */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display text-[8rem] md:text-[10rem] font-bold text-gradient leading-none">A</span>
-              </div>
+              <img src={profilePhoto} alt="Anshul Rastogi" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         </Reveal>
