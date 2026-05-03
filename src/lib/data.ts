@@ -127,16 +127,7 @@ export const PROJECT_CATEGORIES = [
   },
 ];
 
-// Cover image map for projects
-const COVER_MAP: Record<string, string> = {
-  socioverse: "/covers/socioverse.jpg",
-  upnrunning: "/covers/upnrunning.jpg",
-  bunktobrains: "/covers/bunktobrains.jpg",
-  "oto-engine": "/covers/oto-engine.jpg",
-  "instagram-rag": "/covers/instagram-rag.jpg",
-  "uptime-monitor": "/covers/uptime-monitor.jpg",
-  "waste-segregator": "/covers/waste-segregator.jpg",
-};
+// Project cover images — upload your own screenshots to public/covers/{slug}.jpg
 
 export const PROJECTS: { slug: string; title: string; category: string; desc: string; stack: string[]; cover: string; coverUrl?: string; demoUrl?: string; githubUrl?: string }[] = [
   { slug: "socioverse", title: "Socioverse", category: "web", desc: "AI-powered Instagram growth engine — viral script generation, DM automation, Lead Bank CRM. 100+ signups.", stack: ["React", "TypeScript", "Supabase", "Gemini", "Meta API"], cover: "social", coverUrl: COVER_MAP["socioverse"], demoUrl: "https://www.socioverse.io" },
