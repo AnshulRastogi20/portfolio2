@@ -1,22 +1,12 @@
+## Make Review Cards Clickable with Direct & Video Links
 
-## Plan
+The testimonials section on the Home page already fetches `link`, `photo_url`, and `video_url` from the database, but the cards themselves aren't clickable as a whole. This plan makes them fully interactive.
 
-### 1. Make achievement cards clickable
-Currently achievement cards show a small "View" link at the bottom. We'll wrap the entire card (both in the featured carousel and the grid) in an `<a>` tag so clicking anywhere on the card opens its `link` URL. Cards without a `link` will remain non-clickable.
+### Changes
 
-**File:** `src/pages/Achievements.tsx`
+**File: `src/pages/Home.tsx`**
 
-### 2. Make project cards clickable  
-Project cards on the Skills page show small icon buttons for demo/GitHub. We'll wrap each card so clicking it opens the `demoUrl` (primary action). The GitHub icon button will remain separate via `stopPropagation`.
-
-**File:** `src/pages/Skills.tsx`
-
-### 3. Make blog post cards clickable
-Blog cards already link to `/blog/:slug` via `<Link>`. We'll verify this works correctly and ensure the featured post card is also fully clickable.
-
-**File:** `src/pages/Blog.tsx` (verify, likely already working)
-
-### 4. Change favicon to profile.png
-- Copy `src/assets/profile.png` to `public/favicon.png`
-- Delete `public/favicon.ico`
-- Update `index.html` to reference `/favicon.png`
+1. Wrap each testimonial card in an `<a>` tag linking to `t.link` (when available), so clicking anywhere on the card opens the review source.
+2. Make the video link button more prominent — larger icon, styled as a small pill/badge (e.g., gold-colored "Watch Video" button) so it's clearly visible and tappable.
+3. Use `e.stopPropagation()` on the video link so it navigates to the video URL independently of the card's main link.
+4. Cards without a `link` remain non-clickable but still show video buttons if `video_url` exists.

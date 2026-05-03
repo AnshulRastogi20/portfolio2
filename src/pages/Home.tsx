@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Star, Quote, Play } from "lucide-react";
+import { ArrowRight, Sparkles, Star, Quote, Play, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/PageTransition";
 import { TextScramble } from "@/components/TextScramble";
@@ -234,42 +234,49 @@ const Home = () => {
         </Reveal>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {testimonials.map((t, i) => (
-            <Reveal key={i} delay={i * 0.08}>
-              <div className="glass rounded-3xl p-8 h-full relative">
-                <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, k) => (
-                    <Star key={k} className="w-4 h-4 fill-gold text-gold" />
-                  ))}
-                </div>
-                <p className="text-lg leading-relaxed mb-6">"{t.quote}"</p>
-                <div className="font-mono text-xs flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    {t.photo_url && (
-                      <img src={t.photo_url} alt={t.author} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20" />
-                    )}
-                    <div>
-                      <div className="font-semibold">{t.author}</div>
-                      <div className="text-muted-foreground">{t.role}</div>
+          {testimonials.map((t, i) => {
+            const CardWrapper = t.link ? 'a' : 'div';
+            const cardProps = t.link ? { href: t.link, target: "_blank", rel: "noreferrer" } : {};
+            return (
+              <Reveal key={i} delay={i * 0.08}>
+                <CardWrapper {...cardProps} className={`glass rounded-3xl p-8 h-full relative block hover-lift transition-all ${t.link ? "cursor-pointer hover:border-primary/40" : ""}`}>
+                  <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
+                  <div className="flex gap-0.5 mb-4">
+                    {Array.from({ length: 5 }).map((_, k) => (
+                      <Star key={k} className="w-4 h-4 fill-gold text-gold" />
+                    ))}
+                  </div>
+                  <p className="text-lg leading-relaxed mb-6">"{t.quote}"</p>
+                  <div className="font-mono text-xs flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      {t.photo_url && (
+                        <img src={t.photo_url} alt={t.author} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20" />
+                      )}
+                      <div>
+                        <div className="font-semibold">{t.author}</div>
+                        <div className="text-muted-foreground">{t.role}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      {t.video_url && (
+                        <span
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(t.video_url!, '_blank'); }}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/15 text-gold hover:bg-gold/25 transition-colors cursor-pointer text-[11px] font-semibold"
+                        >
+                          <Play className="w-3.5 h-3.5 fill-gold" /> Watch Video
+                        </span>
+                      )}
+                      {t.link && (
+                        <span className="inline-flex items-center gap-1 text-primary text-[11px]">
+                          <ExternalLink className="w-3 h-3" /> View
+                        </span>
+                      )}
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    {t.video_url && (
-                      <a href={t.video_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-gold hover:underline text-[10px]">
-                        <Play className="w-3 h-3" /> Video
-                      </a>
-                    )}
-                    {t.link && (
-                      <a href={t.link} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[10px]">
-                        View review →
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+                </CardWrapper>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
