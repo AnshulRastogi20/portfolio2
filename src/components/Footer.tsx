@@ -4,16 +4,16 @@ import { SignupForm } from "./SignupForm";
 
 const cols: { title: string; links: [string, string][] }[] = [
   { title: "Site", links: [["/", "Home"], ["/about", "About"], ["/skills", "Work"], ["/achievements", "Awards"]] },
-  { title: "Audience", links: [["/blog", "Blog"], ["/newsletter", "Newsletter"], ["/now", "Now"], ["/uses", "Uses"]] },
+  { title: "Audience", links: [["/blog", "Blog"], ["/newsletter", "Newsletter"], ["/now", "Now"], ["/resume", "Resume"]] },
   { title: "Offers", links: [["/services", "Services"], ["/courses", "Courses"], ["/shop", "Shop"], ["/coaching", "Coaching"]] },
-  { title: "Ventures", links: [["https://www.upnrunning.in", "Up N Running"], ["https://www.socioverse.io", "Socioverse"], ["#", "BunkToBrains"], ["/contact", "Contact"]] },
+  { title: "Ventures", links: [["https://www.upnrunning.in", "Up N Running"], ["https://www.socioverse.io", "Socioverse"], ["https://www.bunktobrains.com", "BunkToBrains"], ["/contact", "Contact"]] },
 ];
 
 const socials = [
-  { Icon: Twitter, href: "https://twitter.com" },
-  { Icon: Github, href: "https://github.com" },
-  { Icon: Linkedin, href: "https://linkedin.com" },
-  { Icon: Youtube, href: "https://youtube.com" },
+  { Icon: Twitter, href: "https://x.com/AnshulR20" },
+  { Icon: Github, href: "https://github.com/AnshulRastogi20" },
+  { Icon: Linkedin, href: "https://www.linkedin.com/in/anshulrastogi20" },
+  { Icon: Youtube, href: "https://youtube.com/@sightofanshul" },
   { Icon: Mail, href: "/contact" },
 ];
 
@@ -73,16 +73,30 @@ export const Footer = () => {
             <span>Crafted with intention.</span>
           </div>
           <div className="flex gap-2">
-            {socials.map((s, i) => (
-              <a
-                key={i}
-                href={s.href}
-                className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover-lift"
-                aria-label={`Social link ${i}`}
-              >
-                <s.Icon className="w-4 h-4" />
-              </a>
-            ))}
+            {socials.map((s, i) => {
+              const isExternal = /^https?:\/\//.test(s.href);
+              return isExternal ? (
+                <a
+                  key={i}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover-lift"
+                  aria-label={`Social link ${i}`}
+                >
+                  <s.Icon className="w-4 h-4" />
+                </a>
+              ) : (
+                <Link
+                  key={i}
+                  to={s.href}
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover-lift"
+                  aria-label={`Social link ${i}`}
+                >
+                  <s.Icon className="w-4 h-4" />
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

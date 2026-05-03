@@ -7,13 +7,13 @@ export const SITE = {
   tagline: "Founder, Up N Running · Builder of Socioverse · AI Engineer",
   bio: "I build AI products that make Indian businesses Up N Running. Founder of Up N Running and Socioverse — I ship outreach, content, and ops automations for founders and creators.",
   location: "India",
-  email: "hello@upnrunning.in",
+  email: "upnrunning0@gmail.com",
   calendly: "https://calendly.com/upnrunning0/30min",
   socials: {
-    twitter: "https://twitter.com",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    youtube: "https://youtube.com",
+    twitter: "https://x.com/AnshulR20",
+    github: "https://github.com/AnshulRastogi20",
+    linkedin: "https://www.linkedin.com/in/anshulrastogi20",
+    youtube: "https://youtube.com/@sightofanshul",
     upnrunning: "https://www.upnrunning.in",
     socioverse: "https://www.socioverse.io",
   },
@@ -24,7 +24,7 @@ export const STATS = [
   { value: 50, suffix: "%+", label: "Lower manual workload" },
   { value: 10, suffix: "x", label: "More qualified leads" },
   { value: 60, suffix: "%", label: "Faster response time" },
-  { value: 10, suffix: "K+", label: "Creators on Socioverse" },
+  { value: 5, suffix: "+", label: "Hrs saved/week" },
 ];
 
 export const VALUES = [
@@ -49,9 +49,9 @@ export const VENTURES = [
   },
   {
     name: "BunkToBrains",
-    desc: "Turning lecture bunks into genuine learning. Bite-sized study tools for students.",
+    desc: "EdTech startup with a 25+ member team and 7,000+ students in the WhatsApp community. Helping students ace semester exams with notes, courses, and community.",
     tag: "EdTech",
-    url: "#",
+    url: "https://www.bunktobrains.com",
   },
 ];
 
@@ -107,31 +107,32 @@ export const PROJECT_CATEGORIES = [
     slug: "web",
     title: "Web Development",
     desc: "Modern web apps built with React, Next.js, and TypeScript.",
-    count: 18,
+    count: 100,
     icon: "</>",
   },
   {
     slug: "video",
     title: "Video Editing",
     desc: "Professional video editing and post-production.",
-    count: 12,
+    count: 100,
     icon: "▶",
   },
   {
     slug: "graphic",
     title: "Graphic Design",
     desc: "Creative design solutions for digital and print media.",
-    count: 24,
+    count: 50,
     icon: "◐",
   },
 ];
 
 export const PROJECTS = [
-  { slug: "socioverse", title: "Socioverse", category: "web", desc: "AI-powered Instagram growth engine — viral script generation, DM automation, Lead Bank CRM. 10K+ creators.", stack: ["React", "TypeScript", "Supabase", "OpenAI", "Meta API"], cover: "social" },
+  { slug: "socioverse", title: "Socioverse", category: "web", desc: "AI-powered Instagram growth engine — viral script generation, DM automation, Lead Bank CRM. 100+ signups.", stack: ["React", "TypeScript", "Supabase", "Gemini", "Meta API"], cover: "social" },
   { slug: "upnrunning", title: "Up N Running", category: "web", desc: "AI products studio for Indian businesses — OTO Engine, Voice AI, LinkedIn Agent and more.", stack: ["Next.js", "TypeScript", "Tailwind", "Supabase"], cover: "rocket" },
-  { slug: "oto-engine", title: "OTO Engine", category: "web", desc: "Outreach-to-onboard automation pipeline that books 24 meetings in 10 days.", stack: ["Node.js", "OpenAI", "Postgres"], cover: "ai" },
+  { slug: "bunktobrains", title: "BunkToBrains", category: "web", desc: "EdTech platform with Stealth PDF Engine, academic leaderboard, and 7000+ student community.", stack: ["Next.js", "Supabase", "Bunny.net"], cover: "edu" },
+  { slug: "oto-engine", title: "OTO Engine", category: "web", desc: "Outreach-to-onboard automation pipeline for agencies.", stack: ["n8n", "Apollo.io", "GPT-5", "Fathom"], cover: "ai" },
+  { slug: "alveek", title: "Alveek SaaS", category: "web", desc: "Appointment reminder automation to reduce patient no-shows for clinics.", stack: ["n8n", "WaSendarAPI", "Twilio"], cover: "health" },
   { slug: "instagram-rag", title: "Instagram RAG", category: "web", desc: "RAG-powered Instagram caption and DM generator grounded in founder knowledge bases.", stack: ["Python", "LangChain", "Pinecone"], cover: "rag" },
-  { slug: "attendance", title: "Attendance Tracker", category: "web", desc: "Responsive student attendance dashboard built with React and Next.js.", stack: ["React", "Next.js", "Tailwind"], cover: "attendance" },
 
   { slug: "doc-edit", title: "Documentary Cut", category: "video", desc: "30-min documentary feature edit with color grading and sound design.", stack: ["Premiere Pro", "DaVinci Resolve"], cover: "film" },
   { slug: "creator-shorts", title: "Creator Shorts Pack", category: "video", desc: "Story-driven short-form edits for personal-brand creators.", stack: ["After Effects", "Premiere Pro"], cover: "shorts" },
@@ -143,14 +144,15 @@ export const PROJECTS = [
 ];
 
 export const ACHIEVEMENTS = [
-  { title: "Founded Up N Running", category: "Ventures", issuer: "Self", date: "2024", featured: true },
-  { title: "Launched Socioverse to 10K+ creators", category: "Ventures", issuer: "Self", date: "2025", featured: true },
-  { title: "HackKRMU 4.0 Winner", category: "Awards", issuer: "KRMU", date: "2024", featured: true },
-  { title: "Data Structures & Algorithms", category: "Certifications", issuer: "Coursera", date: "2024", featured: false },
+  { title: "Founded Up N Running", category: "Ventures", issuer: "AI Software Company", date: "Jun 2025", featured: true },
+  { title: "Launched Socioverse", category: "Ventures", issuer: "AI-Powered SaaS", date: "Jan 2026", featured: true },
+  { title: "Co-Founded BunkToBrains", category: "Ventures", issuer: "EdTech Startup · 7000+ students", date: "Feb 2025", featured: true },
+  { title: "Won Hack-KRMU Hackathon", category: "Awards", issuer: "KRMU", date: "2024", featured: true },
+  { title: "AI Automation Expert", category: "Certifications", issuer: "Udemy", date: "2024", featured: false },
+  { title: "Data Structures & Algorithms using Java", category: "Certifications", issuer: "NPTEL", date: "2024", featured: false },
   { title: "Programming in Java", category: "Certifications", issuer: "NPTEL", date: "2024", featured: false },
-  { title: "District Chess Champion", category: "Recognition", issuer: "District Sports Authority", date: "2022", featured: false },
-  { title: "Full-Stack Web Development", category: "Certifications", issuer: "Meta", date: "2023", featured: false },
-  { title: "AI for Everyone", category: "Certifications", issuer: "DeepLearning.AI", date: "2024", featured: false },
+  { title: "Former District Chess Champion", category: "Recognition", issuer: "District Sports Authority", date: "2022", featured: false },
+  { title: "Vice President, Career Development Cell", category: "Recognition", issuer: "VIPS Technical Campus", date: "Jan 2025 – Present", featured: false },
 ];
 
 export const BLOG_POSTS = [
@@ -224,96 +226,41 @@ export const SKILLS = {
   ],
 };
 
-export const COURSES = [
-  {
-    slug: "oto-engine-playbook",
-    title: "Build Your Own OTO Engine",
-    summary: "The exact outreach-to-onboard automation we run for Up N Running clients — yours to ship.",
-    level: "Intermediate",
-    launchEta: "Q3 2025",
-    earlyBird: "$199",
-    bullets: ["6 weeks of live + recorded", "Build the full OTO pipeline", "Templates, prompts, and scripts", "Cohort + community access"],
-  },
-  {
-    slug: "indie-launch",
-    title: "Indie Launch Playbook",
-    summary: "The marketing system I used to bring Socioverse from 0 to 10K+ creators.",
-    level: "Beginner",
-    launchEta: "Q2 2025",
-    earlyBird: "$79",
-    bullets: ["Launch scripts + templates", "Audience-first frameworks", "Real launch breakdowns"],
-  },
-  {
-    slug: "design-for-devs",
-    title: "Design for Developers",
-    summary: "Make your apps look 10x better in 10 days.",
-    level: "Beginner",
-    launchEta: "Q4 2025",
-    earlyBird: "$129",
-    bullets: ["Type, color, spacing fundamentals", "Component design system", "Tailwind mastery"],
-  },
-];
-
 export const PRODUCTS = [
   { slug: "socioverse", title: "Socioverse", type: "saas", price: "From $0", desc: "AI-powered Instagram growth engine. Free for 30 days.", cover: "social" },
-  { slug: "ai-starter-kit", title: "AI Builder's Starter Kit", type: "digital", price: "$0", desc: "Free PDF + Notion template to launch your first AI project this week.", cover: "kit" },
-  { slug: "saas-template", title: "Premium SaaS Template", type: "digital", price: "$49", desc: "Production-ready Next.js + Stripe + Supabase template.", cover: "code" },
-  { slug: "prompt-vault", title: "The Prompt Vault", type: "digital", price: "$29", desc: "200+ battle-tested prompts for builders and creators.", cover: "vault" },
-  { slug: "merch-tee", title: "Builder Tee", type: "merch", price: "$32", desc: "Soft-cotton tee. Wear your craft.", cover: "tee" },
-  { slug: "merch-sticker", title: "Sticker Pack", type: "merch", price: "$8", desc: "Vinyl sticker set for your laptop.", cover: "sticker" },
+  { slug: "oto-engine", title: "OTO Engine", type: "service", price: "Custom", desc: "End-to-end outreach-to-onboard automation for agencies.", cover: "ai" },
+  { slug: "voice-ai", title: "Voice AI Assistant", type: "service", price: "Custom", desc: "AI-powered call handling, lead qualification, and appointment booking.", cover: "voice" },
+  { slug: "linkedin-agent", title: "LinkedIn Agent", type: "service", price: "Custom", desc: "Intelligent LinkedIn automation for lead generation.", cover: "linkedin" },
+  { slug: "creative-studio", title: "Creative Studio AI", type: "service", price: "Custom", desc: "AI-powered creative automation — posters, thumbnails, video cuts.", cover: "creative" },
+  { slug: "ai-proposal", title: "AI Proposal Generator", type: "service", price: "Custom", desc: "Auto-draft proposals from discovery calls with pricing and scope.", cover: "proposal" },
 ];
 
 export const COACHING = [
   {
-    name: "1:1 Strategy Call",
-    price: "$120",
-    duration: "60 min",
-    desc: "One sharp call with the Up N Running founder. We diagnose, prioritize, and walk away with a 30-day automation plan.",
-    includes: ["60-min Zoom call", "Recording + notes", "7 days follow-up via email"],
-  },
-  {
-    name: "Code & Product Review",
-    price: "$340",
-    duration: "1 week",
-    desc: "I review your codebase, UX, and positioning. You get a written report + Loom walkthrough.",
-    includes: ["Async repo + product review", "20-min Loom walkthrough", "Written priorities doc"],
-    popular: true,
-  },
-  {
-    name: "Monthly Mentorship",
-    price: "$680/mo",
-    duration: "Ongoing",
-    desc: "I'm in your corner. Weekly calls, async DMs, accountability.",
-    includes: ["4 calls/month", "Slack DM access", "Project reviews on demand"],
+    name: "Coming Soon",
+    price: "TBD",
+    duration: "TBD",
+    desc: "1:1 coaching and mentorship programs are coming soon. Stay tuned!",
+    includes: ["Details to be announced"],
   },
 ];
 
-// Real testimonials pulled from socioverse.io, upnrunning.in, anshulrastogi.xyz
+// Static testimonials kept as fallback — live data comes from Supabase
 export const TESTIMONIALS = [
   { quote: "Socioverse looks quite cool.", author: "Ankur Warikoo", role: "Entrepreneur, Content Creator & Author · 3M+ followers" },
   { quote: "Socioverse is sick.", author: "Mradul Sharma", role: "Founder, Akima Films" },
-  { quote: "Up N Running transformed our entire sales process. We went from struggling to book meetings to having a pipeline full of qualified prospects.", author: "Sarah Johnson", role: "VP of Sales, TechFlow Solutions · 24 meetings in 10 days" },
-  { quote: "The automation freed up our team to focus on creative work instead of administrative tasks. Client satisfaction scores went through the roof.", author: "Mike Chen", role: "Creative Director, Creative Marketing Hub · 14× faster proposals" },
-  { quote: "The Voice AI handles our initial calls better than our junior staff. It never misses a follow-up and captures every detail perfectly.", author: "Jennifer Davis", role: "Managing Partner, GrowthMax Consulting · 85% qualification accuracy" },
-  { quote: "Anshul is fully immersed in the project — once we sit down, it's all in or nothing, no middle ground.", author: "Karan Bhadauria", role: "Client" },
-  { quote: "Anshul is exceptionally talented in terms of understanding the project demand and quickly delivering it.", author: "Utkarsh Bhatia", role: "Client" },
-];
-
-export const USES = [
-  { category: "Hardware", items: ["MacBook Pro 14\" M3", "LG 27\" 4K display", "Keychron Q1 Pro", "Logitech MX Master 3S", "Sony WH-1000XM5"] },
-  { category: "Editor", items: ["Cursor (primary)", "VS Code", "Zed (occasional)", "GitHub Copilot + Claude"] },
-  { category: "Design", items: ["Figma", "Photoshop", "Illustrator", "InDesign", "Linear", "Raycast"] },
-  { category: "Video", items: ["Adobe Premiere Pro", "After Effects", "DaVinci Resolve", "Final Cut Pro"] },
-  { category: "Stack", items: ["React + Next.js", "TypeScript", "Tailwind", "Supabase", "Vercel"] },
+  { quote: "He exceeded every expectation and delivered work that was more polished, disciplined, and thoughtful than many senior developers I have worked with.", author: "Norton Wong", role: "Founder, Alveek AI & Flow" },
+  { quote: "I told him what my vision was and he made it into a reality within 24 hours — his speed and explanations are insane.", author: "Rohit Iyyer", role: "Founder, Clients Forge" },
+  { quote: "Anshul is fully immersed in the project — once we sit down, it's all in or nothing, no middle ground.", author: "Karan Bhadauria", role: "Founder, DJKC Studios" },
+  { quote: "Anshul is exceptionally talented at understanding the project demand and quickly delivering it.", author: "Utkarsh Bhatia", role: "Founder, DJKC Studios" },
 ];
 
 export const NOW = {
-  updated: "2025-04-29",
+  updated: "2026-05-03",
   items: [
-    { title: "Building", text: "Shipping new modules inside Socioverse — Lead Bank CRM v2 and smarter DM sequences." },
-    { title: "Running", text: "Up N Running's OTO Engine for a handful of founder clients this quarter." },
-    { title: "Writing", text: "An essay on \"the death of the personal brand\" — out next week." },
-    { title: "Reading", text: "Working in Public — Nadia Eghbal." },
+    { title: "Building", text: "Shipping new modules inside Socioverse — Lead Bank CRM v2, smarter DM sequences, and the Emotional DNA Engine." },
+    { title: "Running", text: "Up N Running — helping businesses automate with AI. Building OTO Engine, Voice AI, and more." },
+    { title: "Growing", text: "BunkToBrains — scaling our EdTech community to 7000+ students with courses and study resources." },
   ],
 };
 
@@ -322,8 +269,10 @@ export const TIMELINE = [
   { year: "2021", title: "First freelance project", text: "Built a website for a local business. Got paid in pizza and confidence." },
   { year: "2022", title: "District Chess Champion", text: "Discipline from chess shaped how I approach every craft." },
   { year: "2023", title: "Old portfolio shipped", text: "Launched anshulrastogi.xyz — the three-craft (web / video / design) portfolio." },
-  { year: "2024", title: "Founded Up N Running", text: "Started the AI products studio. HackKRMU 4.0 win in the same year." },
-  { year: "2025", title: "Launched Socioverse", text: "AI-powered Instagram growth engine — 10K+ creators using it." },
+  { year: "2024", title: "Won Hack-KRMU 4.0", text: "Hackathon win that validated my builder instincts." },
+  { year: "Feb 2025", title: "Co-Founded BunkToBrains", text: "EdTech startup helping students ace exams. 25+ team, 7000+ students in WhatsApp community." },
+  { year: "Jun 2025", title: "Founded Up N Running", text: "Started the AI software company — shipping automation products for businesses." },
+  { year: "Jan 2026", title: "Launched Socioverse", text: "AI-powered Instagram growth engine — 100+ signups and growing." },
 ];
 
 // FAQ for the Socioverse product page

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import profilePhoto from "@/assets/profile.png";
 import { Reveal } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { VALUES, VENTURES, TIMELINE, SITE } from "@/lib/data";
@@ -17,7 +18,7 @@ const About = () => (
             <span className="text-gradient">Storyteller.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mb-8">
-            I'm Anshul Rastogi — based in {SITE.location}. I founded <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, and I built <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a> — an Instagram growth engine used by 10K+ creators.
+            I'm Anshul Rastogi — based in {SITE.location}. I founded <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, built <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a> — an Instagram growth engine, and co-founded <a href="https://www.bunktobrains.com" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a> — an EdTech startup with 7000+ students.
             My north star: do work I'm proud of, with people I respect, in service of an audience I genuinely care about.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -33,14 +34,7 @@ const About = () => (
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-gold/30 blur-3xl rounded-full" />
             <div className="relative aspect-square rounded-[2rem] glass-strong overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-mesh" />
-              <div className="absolute inset-0 grid-bg opacity-50" />
-              {/* Replace this letter block with your photo:
-                  <img src={profilePhoto} alt="Anshul" className="absolute inset-0 w-full h-full object-cover" />
-                  Place the file at src/assets/profile.jpg and: import profilePhoto from "@/assets/profile.jpg" */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display text-[8rem] md:text-[10rem] font-bold text-gradient leading-none">A</span>
-              </div>
+              <img src={profilePhoto} alt="Anshul Rastogi" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         </Reveal>

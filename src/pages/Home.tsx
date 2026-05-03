@@ -7,9 +7,25 @@ import { TextScramble } from "@/components/TextScramble";
 import { Counter } from "@/components/Counter";
 import { Marquee } from "@/components/Marquee";
 import { SignupForm } from "@/components/SignupForm";
-import { STATS, BLOG_POSTS, PROJECT_CATEGORIES, TESTIMONIALS, COURSES } from "@/lib/data";
+import { STATS, BLOG_POSTS, PROJECT_CATEGORIES, TESTIMONIALS } from "@/lib/data";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [dbTestimonials, setDbTestimonials] = useState<{ quote: string; author: string; role: string | null; link: string | null }[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("testimonials")
+      .select("quote, author, role, link")
+      .order("display_order")
+      .then(({ data }) => {
+        if (data && data.length > 0) setDbTestimonials(data);
+      });
+  }, []);
+
+  const testimonials = dbTestimonials.length > 0 ? dbTestimonials : TESTIMONIALS.map(t => ({ ...t, link: null }));
+
   return (
     <>
       {/* HERO */}
@@ -54,7 +70,7 @@ const Home = () => {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Founder of <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> and builder of <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>. I make AI products people use, automate the work nobody wants to do, and write essays about the craft of shipping.
+            Founder of <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a>, builder of <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>, and co-founder of <a href="https://www.bunktobrains.com" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a>. I build AI products, automate the work nobody wants to do, and write about the craft of shipping.
           </motion.p>
 
           <motion.div
@@ -137,37 +153,34 @@ const Home = () => {
         </div>
       </section>
 
-      {/* BUILDING NEXT */}
+      {/* VENTURES HIGHLIGHT */}
       <section className="container py-32">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <p className="font-mono text-xs uppercase tracking-widest text-gold mb-3">// 02 — Building Next</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-gold mb-3">// 02 — Ventures</p>
             <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
-              Get on the <span className="text-gradient-gold">waitlist.</span>
+              What I'm <span className="text-gradient-gold">building.</span>
             </h2>
-            <p className="text-muted-foreground text-lg">Three things in the oven. Be first to know when they're out.</p>
+            <p className="text-muted-foreground text-lg">Three ventures, one mission — ship products people actually use.</p>
           </div>
         </Reveal>
-
         <div className="grid md:grid-cols-3 gap-6">
-          {COURSES.map((c, i) => (
-            <Reveal key={c.slug} delay={i * 0.1}>
-              <Link to={`/courses/${c.slug}`} className="block group">
+          {[
+            { name: "Up N Running", desc: "AI software company — automation products for businesses.", url: "https://www.upnrunning.in", tag: "Studio" },
+            { name: "Socioverse", desc: "AI-powered Instagram growth engine for creators.", url: "https://www.socioverse.io", tag: "SaaS" },
+            { name: "BunkToBrains", desc: "EdTech platform with 7000+ students.", url: "https://www.bunktobrains.com", tag: "EdTech" },
+          ].map((v, i) => (
+            <Reveal key={v.name} delay={i * 0.1}>
+              <a href={v.url} target="_blank" rel="noreferrer" className="block group">
                 <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs uppercase tracking-wider text-gold">Coming · {c.launchEta}</span>
-                    <span className="text-xs glass rounded-full px-3 py-1">{c.level}</span>
+                    <span className="font-mono text-xs uppercase tracking-wider text-gold">{v.tag}</span>
+                    <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform" />
                   </div>
-                  <h3 className="font-display text-2xl font-bold mb-3">{c.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-6">{c.summary}</p>
-                  <div className="flex items-center justify-between font-mono text-xs pt-6 border-t border-border/50">
-                    <span>Early-bird {c.earlyBird}</span>
-                    <span className="text-primary group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                      Join waitlist <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </div>
+                  <h3 className="font-display text-2xl font-bold mb-3">{v.name}</h3>
+                  <p className="text-muted-foreground text-sm">{v.desc}</p>
                 </div>
-              </Link>
+              </a>
             </Reveal>
           ))}
         </div>
@@ -221,7 +234,7 @@ const Home = () => {
         </Reveal>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {TESTIMONIALS.map((t, i) => (
+          {testimonials.map((t, i) => (
             <Reveal key={i} delay={i * 0.08}>
               <div className="glass rounded-3xl p-8 h-full relative">
                 <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
@@ -231,9 +244,16 @@ const Home = () => {
                   ))}
                 </div>
                 <p className="text-lg leading-relaxed mb-6">"{t.quote}"</p>
-                <div className="font-mono text-xs">
-                  <div className="font-semibold">{t.author}</div>
-                  <div className="text-muted-foreground">{t.role}</div>
+                <div className="font-mono text-xs flex items-center justify-between">
+                  <div>
+                    <div className="font-semibold">{t.author}</div>
+                    <div className="text-muted-foreground">{t.role}</div>
+                  </div>
+                  {t.link && (
+                    <a href={t.link} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[10px]">
+                      View review →
+                    </a>
+                  )}
                 </div>
               </div>
             </Reveal>
