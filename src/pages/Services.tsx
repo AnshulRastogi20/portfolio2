@@ -99,7 +99,7 @@ const Services = () => (
               Book a free 30-min strategy call. We'll map out the fastest 30-day automation wins across outreach, content, client delivery and reporting.
             </p>
             <Button asChild size="lg" className="rounded-full h-12 px-7 gap-2 shadow-glow">
-              <a href={SITE.calendly} target="_blank" rel="noreferrer">
+              <a href={SITE.calendly}>
                 <Calendar className="w-4 h-4" /> Book a call
               </a>
             </Button>
