@@ -4,8 +4,8 @@
 export const SITE = {
   name: "Anshul",
   fullName: "Anshul Rastogi",
-  tagline: "Founder, Up N Running · Builder of Socioverse · AI Engineer",
-  bio: "I build AI products that make Indian businesses Up N Running. Founder of Up N Running and Socioverse — I ship outreach, content, and ops automations for founders and creators.",
+  tagline: "Systems Architect · Founder, Up N Running · Builder of Socioverse",
+  bio: "I design and implement robust, end-to-end ecosystems that solve foundational business challenges. My mission is to replace manual friction with intelligent, efficient, and automated pathways to growth.",
   location: "India",
   email: "upnrunning0@gmail.com",
   calendly: "https://calendly.com/upnrunning0/30min",
