@@ -95,6 +95,12 @@ const Achievements = () => {
                 </div>
                 <h3 className="font-display text-lg font-bold mb-2 leading-tight">{a.title}</h3>
                 <p className="text-sm text-muted-foreground">{a.issuer}</p>
+                {a.description && <p className="text-xs text-muted-foreground mt-2">{a.description}</p>}
+                {a.link && (
+                  <a href={a.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-xs text-primary mt-3 hover:underline">
+                    <ExternalLink className="w-3 h-3" /> View
+                  </a>
+                )}
               </div>
             </Reveal>
           ))}
