@@ -147,16 +147,16 @@ export const PROJECTS: { slug: string; title: string; category: string; desc: st
   { slug: "print-collateral", title: "Print Collateral", category: "graphic", desc: "Pitch deck, posters, and print kit for an event.", stack: ["InDesign", "Illustrator"], cover: "print" },
 ];
 
-export const ACHIEVEMENTS = [
-  { title: "Founded Up N Running", category: "Ventures", issuer: "AI Software Company", date: "Jun 2025", featured: true },
-  { title: "Launched Socioverse", category: "Ventures", issuer: "AI-Powered SaaS", date: "Jan 2026", featured: true },
-  { title: "Co-Founded BunkToBrains", category: "Ventures", issuer: "EdTech Startup · 7000+ students", date: "Feb 2025", featured: true },
-  { title: "Won Hack-KRMU Hackathon", category: "Awards", issuer: "KRMU", date: "2024", featured: true },
-  { title: "AI Automation Expert", category: "Certifications", issuer: "Udemy", date: "2024", featured: false },
-  { title: "Data Structures & Algorithms using Java", category: "Certifications", issuer: "NPTEL", date: "2024", featured: false },
-  { title: "Programming in Java", category: "Certifications", issuer: "NPTEL", date: "2024", featured: false },
-  { title: "Former District Chess Champion", category: "Recognition", issuer: "District Sports Authority", date: "2022", featured: false },
-  { title: "Vice President, Career Development Cell", category: "Recognition", issuer: "VIPS Technical Campus", date: "Jan 2025 – Present", featured: false },
+export const ACHIEVEMENTS: { title: string; category: string; issuer: string; date: string; featured: boolean; description?: string; link?: string; tags?: string[] }[] = [
+  { title: "Founded Up N Running", category: "Ventures", issuer: "AI Software Company", date: "Jun 2025", featured: true, description: "A productized AI Automation Agency delivering fixed-scope solutions.", link: "https://www.upnrunning.in" },
+  { title: "Launched Socioverse", category: "Ventures", issuer: "AI-Powered SaaS", date: "Jan 2026", featured: true, description: "Advanced Content Intelligence & Automation Platform with Emotional DNA extraction.", link: "https://www.socioverse.io" },
+  { title: "Co-Founded BunkToBrains", category: "Ventures", issuer: "EdTech Startup · 7000+ students", date: "Feb 2025", featured: true, description: "Student-led platform focused on practical, real-world skills beyond academics.", link: "https://www.bunktobrains.com" },
+  { title: "Won Hack-KRMU 4.0", category: "Awards", issuer: "KRM University", date: "Feb 2025", featured: true, description: "Built a waste segregator web app in 2 days — won second prize for innovative accessibility solution.", tags: ["Hackathon", "Innovation", "Accessibility"] },
+  { title: "AI Automation Expert", category: "Certifications", issuer: "Udemy", date: "2024", featured: false, description: "Certified in AI automation workflows and implementation." },
+  { title: "Data Structures & Algorithms using Java", category: "Certifications", issuer: "NPTEL", date: "Jul 2024", featured: false, description: "Certified in DSA covering OOP, functional programming, and algorithmic thinking.", tags: ["Java", "Algorithms", "Data Structures"] },
+  { title: "Programming in Java", category: "Certifications", issuer: "NPTEL", date: "Jul 2024", featured: false, description: "Certified in Java programming covering OOP, functional programming, and core concepts.", tags: ["Java", "Programming", "OOP"] },
+  { title: "Former District Chess Champion", category: "Recognition", issuer: "District Sports Association", date: "2018", featured: false, description: "Strategic foresight, pattern recognition, and resource management — skills now applied to systems architecture." },
+  { title: "Vice President, Career Development Cell", category: "Recognition", issuer: "VIPS Technical Campus", date: "Jan 2025 – Present", featured: false, description: "Leading career development initiatives and mentorship programs." },
 ];
 
 export const BLOG_POSTS = [
