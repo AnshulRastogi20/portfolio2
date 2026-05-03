@@ -137,7 +137,13 @@ const Blog = () => {
           {filtered.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
               <Link to={`/blog/${p.slug}`} className="group block">
-                <article className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-all">
+                <article className="glass rounded-3xl overflow-hidden h-full hover-lift hover:border-primary/40 transition-all">
+                  {p.coverUrl && (
+                    <div className="aspect-[16/9] overflow-hidden">
+                      <img src={p.coverUrl} alt={p.title} loading="lazy" className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                  <div className="p-7">
                   <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground mb-5">
                     <span className="text-primary">{p.category}</span>
                     <span>·</span>
