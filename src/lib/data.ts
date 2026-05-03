@@ -201,9 +201,6 @@ export const BLOG_POSTS = [
     featured: false,
   },
 ];
-    featured: false,
-  },
-];
 
 // Tool stacks per craft, mirrored from anshulrastogi.xyz
 export const SKILLS = {
