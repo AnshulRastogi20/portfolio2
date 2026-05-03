@@ -22,7 +22,7 @@ const Blog = () => {
     (async () => {
       const { data, error } = await supabase
         .from("blog_posts")
-        .select("slug,title,excerpt,published_at,read_time,category,tags,featured")
+        .select("slug,title,excerpt,published_at,read_time,category,tags,featured,cover_url")
         .eq("published", true)
         .order("published_at", { ascending: false });
       if (!error && data && data.length > 0) {
@@ -35,6 +35,7 @@ const Blog = () => {
           category: p.category ?? "",
           tags: p.tags ?? [],
           featured: !!p.featured,
+          coverUrl: p.cover_url ?? undefined,
         })));
       }
     })();
