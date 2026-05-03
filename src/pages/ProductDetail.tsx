@@ -213,7 +213,7 @@ const SocioverseShowcase = () => (
         <h2 className="font-display text-4xl md:text-6xl font-bold mb-3 leading-[0.95] text-center">
           Choose your <span className="text-gradient">plan.</span>
         </h2>
-        <p className="text-muted-foreground text-center mb-14">Launch Pack — everything free for 30 days. No credit card needed.</p>
+        <p className="text-muted-foreground text-center mb-14">Launch Pack: everything free for 30 days. No credit card needed.</p>
       </Reveal>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         {SOCIOVERSE_PRICING.map((p, i) => (
