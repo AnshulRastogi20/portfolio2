@@ -12,6 +12,20 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [dbTestimonials, setDbTestimonials] = useState<{ quote: string; author: string; role: string | null; link: string | null }[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("testimonials")
+      .select("quote, author, role, link")
+      .order("display_order")
+      .then(({ data }) => {
+        if (data && data.length > 0) setDbTestimonials(data);
+      });
+  }, []);
+
+  const testimonials = dbTestimonials.length > 0 ? dbTestimonials : TESTIMONIALS.map(t => ({ ...t, link: null }));
+
   return (
     <>
       {/* HERO */}
