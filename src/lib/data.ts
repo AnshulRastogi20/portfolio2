@@ -278,6 +278,9 @@ export const TIMELINE = [
   { year: "2024", title: "Won Hack-KRMU 4.0", text: "Hackathon win that validated my builder instincts." },
   { year: "Feb 2025", title: "Co-Founded BunkToBrains", text: "EdTech startup helping students ace exams. 25+ team, 7000+ students in WhatsApp community." },
   { year: "Jun 2025", title: "Founded Up N Running", text: "Started the AI software company — shipping automation products for businesses." },
+  { year: "Jun 2025", title: "OTO Engine Launched", text: "Flagship outreach automation system goes live — lead gen to proposal in one pipeline." },
+  { year: "Jul 2025", title: "LinkedIn Agent & Voice Agent", text: "Expanded automation suite with LinkedIn prospecting and Voice AI tools." },
+  { year: "Aug 2025", title: "Instagram RAG Launched", text: "Revolutionized content creation with Retrieval-Augmented Generation for Instagram." },
   { year: "Jan 2026", title: "Launched Socioverse", text: "AI-powered Instagram growth engine — 100+ signups and growing." },
 ];
 
