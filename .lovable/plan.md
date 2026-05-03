@@ -1,12 +1,33 @@
-## Make Review Cards Clickable with Direct & Video Links
 
-The testimonials section on the Home page already fetches `link`, `photo_url`, and `video_url` from the database, but the cards themselves aren't clickable as a whole. This plan makes them fully interactive.
+## Add Visible Direct Links to All Cards
 
-### Changes
+The cards are already clickable/linked, but the user wants each card to have a clearly visible, directly accessible link indicator. Here's what will be updated:
 
-**File: `src/pages/Home.tsx`**
+### 1. Blog Post Cards (`src/pages/Blog.tsx` and `src/pages/Home.tsx`)
 
-1. Wrap each testimonial card in an `<a>` tag linking to `t.link` (when available), so clicking anywhere on the card opens the review source.
-2. Make the video link button more prominent — larger icon, styled as a small pill/badge (e.g., gold-colored "Watch Video" button) so it's clearly visible and tappable.
-3. Use `e.stopPropagation()` on the video link so it navigates to the video URL independently of the card's main link.
-4. Cards without a `link` remain non-clickable but still show video buttons if `video_url` exists.
+- Add an `ExternalLink` icon with "Read" label at the bottom of each blog card in the grid on the Blog page
+- Add the same to the 3 blog cards shown on the Home page
+- These link to the internal blog post page (`/blog/{slug}`)
+
+### 2. Project Cards (`src/pages/Skills.tsx` and `src/pages/Home.tsx`)
+
+- Already have ExternalLink and GitHub icons — no changes needed on the Skills page
+- On the Home page, the project category cards link to `/skills` — add an arrow/link indicator to make it more obvious they're clickable
+
+### 3. Review/Testimonial Cards (`src/pages/Home.tsx`)
+
+- Already implemented with clickable cards, "View" link badge, and "Watch Video" pill
+- No changes needed — these were just updated in the previous session
+
+### Summary of Changes
+
+| Section | File | Change |
+|---------|------|--------|
+| Blog grid cards | `src/pages/Blog.tsx` | Add `ExternalLink` icon + "Read" label |
+| Blog cards on Home | `src/pages/Home.tsx` | Add `ExternalLink` icon + "Read" label |
+| Project categories on Home | `src/pages/Home.tsx` | Already has arrow — keep as-is |
+| Testimonials | `src/pages/Home.tsx` | Already done — no change |
+| Achievements | `src/pages/Achievements.tsx` | Already done — no change |
+| Projects | `src/pages/Skills.tsx` | Already done — no change |
+
+This is a small UI polish — adding visible link indicators to blog cards so every card type consistently shows it's directly openable.

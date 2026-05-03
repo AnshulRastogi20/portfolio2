@@ -212,8 +212,8 @@ const Home = () => {
                   </div>
                   <h3 className="font-display text-xl font-bold mb-3 group-hover:text-primary transition-colors">{p.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-3 mb-6">{p.excerpt}</p>
-                  <span className="font-mono text-xs inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Read <ArrowRight className="w-3 h-3" />
+                  <span className="font-mono text-xs inline-flex items-center gap-1.5 text-primary group-hover:gap-2 transition-all">
+                    <ExternalLink className="w-3 h-3" /> Read post <ArrowRight className="w-3 h-3" />
                   </span>
                 </article>
               </Link>
