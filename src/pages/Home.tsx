@@ -7,7 +7,9 @@ import { TextScramble } from "@/components/TextScramble";
 import { Counter } from "@/components/Counter";
 import { Marquee } from "@/components/Marquee";
 import { SignupForm } from "@/components/SignupForm";
-import { STATS, BLOG_POSTS, PROJECT_CATEGORIES, TESTIMONIALS, COURSES } from "@/lib/data";
+import { STATS, BLOG_POSTS, PROJECT_CATEGORIES, TESTIMONIALS } from "@/lib/data";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   return (
