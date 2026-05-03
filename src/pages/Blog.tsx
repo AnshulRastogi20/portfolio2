@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, Calendar, Clock } from "lucide-react";
+import { Search, Calendar, Clock, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { Input } from "@/components/ui/input";
 import { SignupForm } from "@/components/SignupForm";
@@ -157,6 +157,9 @@ const Blog = () => {
                       <span key={t} className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">#{t}</span>
                     ))}
                    </div>
+                   <span className="inline-flex items-center gap-1.5 text-xs text-primary mt-4 font-mono">
+                     <ExternalLink className="w-3 h-3" /> Read post
+                   </span>
                   </div>
                 </article>
               </Link>
