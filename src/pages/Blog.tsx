@@ -103,11 +103,17 @@ const Blog = () => {
               <article className="glass-strong rounded-[2rem] overflow-hidden hover:border-primary/40 transition-all">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="aspect-[4/3] md:aspect-auto bg-gradient-mesh relative overflow-hidden">
-                    <div className="absolute inset-0 grid-bg opacity-40" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="font-display text-9xl font-bold text-gradient opacity-50">{featured.title[0]}</span>
-                    </div>
-                    <span className="absolute top-6 left-6 glass rounded-full px-3 py-1 font-mono text-xs uppercase tracking-wider text-gold">Featured</span>
+                    {featured.coverUrl ? (
+                      <img src={featured.coverUrl} alt={featured.title} className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 grid-bg opacity-40" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="font-display text-9xl font-bold text-gradient opacity-50">{featured.title[0]}</span>
+                        </div>
+                      </>
+                    )}
+                    <span className="absolute top-6 left-6 glass rounded-full px-3 py-1 font-mono text-xs uppercase tracking-wider text-gold z-10">Featured</span>
                   </div>
                   <div className="p-10 md:p-12 flex flex-col justify-center">
                     <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground mb-5">
