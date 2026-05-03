@@ -61,7 +61,18 @@ const Skills = () => {
                       <span key={s} className="font-mono text-[10px] uppercase tracking-wider px-2 py-1 glass rounded-full">{s}</span>
                     ))}
                   </div>
-                  <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition" />
+                  <div className="flex gap-2">
+                    {p.demoUrl && (
+                      <a href={p.demoUrl} target="_blank" rel="noreferrer" className="p-2 glass rounded-full hover:border-primary/60 transition" title="Live Demo">
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                    {p.githubUrl && (
+                      <a href={p.githubUrl} target="_blank" rel="noreferrer" className="p-2 glass rounded-full hover:border-primary/60 transition" title="GitHub">
+                        <Github className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </Reveal>
