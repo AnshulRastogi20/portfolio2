@@ -70,7 +70,7 @@ const Home = () => {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Founder of <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a>, builder of <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>, and co-founder of <a href="https://www.bunktobrains.com" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a>. I build AI products, automate the work nobody wants to do, and write about the craft of shipping.
+            Founder of <a href="https://www.upnrunning.in" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a>, builder of <a href="https://www.socioverse.io" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>, and co-founder of <a href="https://www.bunktobrains.com" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a>. I build AI products, automate the work nobody wants to do, and write about the craft of shipping.
           </motion.p>
 
           <motion.div
@@ -122,7 +122,7 @@ const Home = () => {
         <Reveal>
           <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 01 — Selected Work</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 01 - Selected Work</p>
               <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95]">
                 Things I've <span className="text-gradient">built.</span>
               </h2>
@@ -157,21 +157,21 @@ const Home = () => {
       <section className="container py-32">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <p className="font-mono text-xs uppercase tracking-widest text-gold mb-3">// 02 — Ventures</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-gold mb-3">// 02 - Ventures</p>
             <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
               What I'm <span className="text-gradient-gold">building.</span>
             </h2>
-            <p className="text-muted-foreground text-lg">Three ventures, one mission — ship products people actually use.</p>
+            <p className="text-muted-foreground text-lg">Three ventures, one mission: ship products people actually use.</p>
           </div>
         </Reveal>
         <div className="grid md:grid-cols-3 gap-6">
           {[
-            { name: "Up N Running", desc: "AI software company — automation products for businesses.", url: "https://www.upnrunning.in", tag: "Studio" },
+            { name: "Up N Running", desc: "AI software company, automation products for businesses.", url: "https://www.upnrunning.in", tag: "Studio" },
             { name: "Socioverse", desc: "AI-powered Instagram growth engine for creators.", url: "https://www.socioverse.io", tag: "SaaS" },
             { name: "BunkToBrains", desc: "EdTech platform with 7000+ students.", url: "https://www.bunktobrains.com", tag: "EdTech" },
           ].map((v, i) => (
             <Reveal key={v.name} delay={i * 0.1}>
-              <a href={v.url} target="_blank" rel="noreferrer" className="block group">
+              <a href={v.url} className="block group">
                 <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-xs uppercase tracking-wider text-gold">{v.tag}</span>
@@ -191,7 +191,7 @@ const Home = () => {
         <Reveal>
           <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 03 — From the journal</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 03 - From the journal</p>
               <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95]">Latest writing.</h2>
             </div>
             <Link to="/blog" className="group inline-flex items-center gap-2 font-mono text-sm hover:text-primary transition-colors">
@@ -226,7 +226,7 @@ const Home = () => {
       <section className="container py-32">
         <Reveal>
           <div className="text-center mb-14">
-            <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 04 — Kind words</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 04 - Kind words</p>
             <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95]">
               People I've <span className="text-gradient">helped.</span>
             </h2>
@@ -236,7 +236,7 @@ const Home = () => {
         <div className="grid md:grid-cols-2 gap-6">
           {testimonials.map((t, i) => {
             const CardWrapper = t.link ? 'a' : 'div';
-            const cardProps = t.link ? { href: t.link, target: "_blank", rel: "noreferrer" } : {};
+            const cardProps = t.link ? { href: t.link } : {};
             return (
               <Reveal key={i} delay={i * 0.08}>
                 <CardWrapper {...cardProps} className={`glass rounded-3xl p-8 h-full relative block hover-lift transition-all ${t.link ? "cursor-pointer hover:border-primary/40" : ""}`}>
@@ -260,7 +260,7 @@ const Home = () => {
                     <div className="flex items-center gap-3">
                       {t.video_url && (
                         <span
-                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(t.video_url!, '_blank'); }}
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = t.video_url!; }}
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/15 text-gold hover:bg-gold/25 transition-colors cursor-pointer text-[11px] font-semibold"
                         >
                           <Play className="w-3.5 h-3.5 fill-gold" /> Watch Video
