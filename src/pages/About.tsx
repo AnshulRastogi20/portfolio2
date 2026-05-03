@@ -18,7 +18,7 @@ const About = () => (
             <span className="text-gradient">Storyteller.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mb-8">
-            I'm Anshul Rastogi — based in {SITE.location}. I founded <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, and I built <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a> — an Instagram growth engine used by 10K+ creators.
+            I'm Anshul Rastogi — based in {SITE.location}. I founded <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, built <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a> — an Instagram growth engine, and co-founded <a href="https://www.bunktobrains.com" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a> — an EdTech startup with 7000+ students.
             My north star: do work I'm proud of, with people I respect, in service of an audience I genuinely care about.
           </p>
           <div className="flex flex-wrap gap-3">
