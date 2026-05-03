@@ -63,6 +63,7 @@ export const SERVICES = [
     tagline: "Complete outreach-to-onboard automation",
     desc: "End-to-end pipeline that takes a cold prospect from first touch to signed proposal — without a human in the loop until the meeting starts.",
     bullets: ["Multi-channel lead gen", "Inbox management & smart routing", "Auto meeting booking", "AI proposal drafts", "Onboarding workflows"],
+    videoUrl: "https://www.youtube.com/embed/wkQnv6027gM",
   },
   {
     slug: "instagram-rag",
@@ -70,6 +71,7 @@ export const SERVICES = [
     tagline: "RAG-powered Instagram content & replies grounded in your knowledge",
     desc: "Generates on-brand captions, FAQ answers, and idea prompts using your own docs, transcripts, and past posts as context.",
     bullets: ["On-brand captions", "DM / FAQ answers", "Idea prompts from your archive", "Tone-matched to founder voice"],
+    videoUrl: "https://www.youtube.com/embed/dDf7CsJ6ilA",
   },
   {
     slug: "voice-ai-assistant",
@@ -100,7 +102,6 @@ export const SERVICES = [
     bullets: ["Performance metrics", "ROI tracking", "Optimization insights", "14× faster than manual"],
   },
 ];
-
 // Three crafts from anshulrastogi.xyz
 export const PROJECT_CATEGORIES = [
   {
@@ -147,14 +148,15 @@ export const PROJECTS: { slug: string; title: string; category: string; desc: st
   { slug: "print-collateral", title: "Print Collateral", category: "graphic", desc: "Pitch deck, posters, and print kit for an event.", stack: ["InDesign", "Illustrator"], cover: "print" },
 ];
 
-export const ACHIEVEMENTS: { title: string; category: string; issuer: string; date: string; featured: boolean; description?: string; link?: string; tags?: string[] }[] = [
+export const ACHIEVEMENTS: { title: string; category: string; issuer: string; date: string; featured: boolean; description?: string; link?: string; tags?: string[]; imageUrl?: string }[] = [
   { title: "Founded Up N Running", category: "Ventures", issuer: "AI Software Company", date: "Jun 2025", featured: true, description: "A productized AI Automation Agency delivering fixed-scope solutions.", link: "https://www.upnrunning.in" },
   { title: "Launched Socioverse", category: "Ventures", issuer: "AI-Powered SaaS", date: "Jan 2026", featured: true, description: "Advanced Content Intelligence & Automation Platform with Emotional DNA extraction.", link: "https://www.socioverse.io" },
   { title: "Co-Founded BunkToBrains", category: "Ventures", issuer: "EdTech Startup · 7000+ students", date: "Feb 2025", featured: true, description: "Student-led platform focused on practical, real-world skills beyond academics.", link: "https://www.bunktobrains.com" },
   { title: "Won Hack-KRMU 4.0", category: "Awards", issuer: "KRM University", date: "Feb 2025", featured: true, description: "Built a waste segregator web app in 2 days — won second prize for innovative accessibility solution.", tags: ["Hackathon", "Innovation", "Accessibility"] },
+  { title: "Complete Web Development Course", category: "Certifications", issuer: "Udemy · Hitesh Choudhary", date: "Mar 2025", featured: true, description: "77.5-hour comprehensive web development course. Certificate: UC-5598cfdd-445f-4d61-a3e6-68c63b9fba96.", link: "https://ude.my/UC-5598cfdd-445f-4d61-a3e6-68c63b9fba96", imageUrl: "/certificates/web.jpg", tags: ["Web Development", "Full Stack"] },
   { title: "AI Automation Expert", category: "Certifications", issuer: "Udemy", date: "2024", featured: false, description: "Certified in AI automation workflows and implementation." },
-  { title: "Data Structures & Algorithms using Java", category: "Certifications", issuer: "NPTEL", date: "Jul 2024", featured: false, description: "Certified in DSA covering OOP, functional programming, and algorithmic thinking.", tags: ["Java", "Algorithms", "Data Structures"] },
-  { title: "Programming in Java", category: "Certifications", issuer: "NPTEL", date: "Jul 2024", featured: false, description: "Certified in Java programming covering OOP, functional programming, and core concepts.", tags: ["Java", "Programming", "OOP"] },
+  { title: "Data Structures & Algorithms using Java", category: "Certifications", issuer: "NPTEL · IIT Kharagpur", date: "Jul–Oct 2024", featured: true, description: "Elite certification — 75% consolidated score. 12-week course. Roll: NPTEL24CS96S453601284.", imageUrl: "/certificates/dsa.png", tags: ["Java", "Algorithms", "Data Structures"] },
+  { title: "Programming in Java", category: "Certifications", issuer: "NPTEL · IIT Kharagpur", date: "Jul–Oct 2024", featured: true, description: "48% consolidated score. 12-week course. Roll: NPTEL24CS105S653600878.", imageUrl: "/certificates/java.png", tags: ["Java", "Programming", "OOP"] },
   { title: "Former District Chess Champion", category: "Recognition", issuer: "District Sports Association", date: "2018", featured: false, description: "Strategic foresight, pattern recognition, and resource management — skills now applied to systems architecture." },
   { title: "Vice President, Career Development Cell", category: "Recognition", issuer: "VIPS Technical Campus", date: "Jan 2025 – Present", featured: false, description: "Leading career development initiatives and mentorship programs." },
 ];
@@ -276,6 +278,9 @@ export const TIMELINE = [
   { year: "2024", title: "Won Hack-KRMU 4.0", text: "Hackathon win that validated my builder instincts." },
   { year: "Feb 2025", title: "Co-Founded BunkToBrains", text: "EdTech startup helping students ace exams. 25+ team, 7000+ students in WhatsApp community." },
   { year: "Jun 2025", title: "Founded Up N Running", text: "Started the AI software company — shipping automation products for businesses." },
+  { year: "Jun 2025", title: "OTO Engine Launched", text: "Flagship outreach automation system goes live — lead gen to proposal in one pipeline." },
+  { year: "Jul 2025", title: "LinkedIn Agent & Voice Agent", text: "Expanded automation suite with LinkedIn prospecting and Voice AI tools." },
+  { year: "Aug 2025", title: "Instagram RAG Launched", text: "Revolutionized content creation with Retrieval-Augmented Generation for Instagram." },
   { year: "Jan 2026", title: "Launched Socioverse", text: "AI-powered Instagram growth engine — 100+ signups and growing." },
 ];
 

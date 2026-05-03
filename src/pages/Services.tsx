@@ -61,6 +61,11 @@ const Services = () => (
               <h3 className="font-display text-2xl font-bold mb-2">{s.name}</h3>
               <p className="font-mono text-xs text-primary mb-4">{s.tagline}</p>
               <p className="text-sm text-muted-foreground mb-6">{s.desc}</p>
+              {s.videoUrl && (
+                <div className="aspect-video rounded-2xl overflow-hidden mb-6 bg-black/20">
+                  <iframe src={s.videoUrl} title={s.name + " demo"} className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                </div>
+              )}
               <ul className="space-y-2 mb-8">
                 {s.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-2 text-sm">

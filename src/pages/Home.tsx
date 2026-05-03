@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Star, Quote } from "lucide-react";
+import { ArrowRight, Sparkles, Star, Quote, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/PageTransition";
 import { TextScramble } from "@/components/TextScramble";
@@ -12,19 +12,19 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-  const [dbTestimonials, setDbTestimonials] = useState<{ quote: string; author: string; role: string | null; link: string | null }[]>([]);
+  const [dbTestimonials, setDbTestimonials] = useState<{ quote: string; author: string; role: string | null; link: string | null; photo_url: string | null; video_url: string | null }[]>([]);
 
   useEffect(() => {
     supabase
       .from("testimonials")
-      .select("quote, author, role, link")
+      .select("quote, author, role, link, photo_url, video_url")
       .order("display_order")
       .then(({ data }) => {
         if (data && data.length > 0) setDbTestimonials(data);
       });
   }, []);
 
-  const testimonials = dbTestimonials.length > 0 ? dbTestimonials : TESTIMONIALS.map(t => ({ ...t, link: null }));
+  const testimonials = dbTestimonials.length > 0 ? dbTestimonials : TESTIMONIALS.map(t => ({ ...t, link: null, photo_url: null, video_url: null }));
 
   return (
     <>
@@ -245,15 +245,27 @@ const Home = () => {
                 </div>
                 <p className="text-lg leading-relaxed mb-6">"{t.quote}"</p>
                 <div className="font-mono text-xs flex items-center justify-between">
-                  <div>
-                    <div className="font-semibold">{t.author}</div>
-                    <div className="text-muted-foreground">{t.role}</div>
+                  <div className="flex items-center gap-3">
+                    {t.photo_url && (
+                      <img src={t.photo_url} alt={t.author} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20" />
+                    )}
+                    <div>
+                      <div className="font-semibold">{t.author}</div>
+                      <div className="text-muted-foreground">{t.role}</div>
+                    </div>
                   </div>
-                  {t.link && (
-                    <a href={t.link} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[10px]">
-                      View review →
-                    </a>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {t.video_url && (
+                      <a href={t.video_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-gold hover:underline text-[10px]">
+                        <Play className="w-3 h-3" /> Video
+                      </a>
+                    )}
+                    {t.link && (
+                      <a href={t.link} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[10px]">
+                        View review →
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </Reveal>

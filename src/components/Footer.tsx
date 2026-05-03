@@ -5,7 +5,7 @@ import { SignupForm } from "./SignupForm";
 const cols: { title: string; links: [string, string][] }[] = [
   { title: "Site", links: [["/", "Home"], ["/about", "About"], ["/skills", "Work"], ["/achievements", "Awards"]] },
   { title: "Audience", links: [["/blog", "Blog"], ["/newsletter", "Newsletter"], ["/now", "Now"], ["/resume", "Resume"]] },
-  { title: "Offers", links: [["/services", "Services"], ["/courses", "Courses"], ["/shop", "Shop"], ["/coaching", "Coaching"]] },
+  { title: "Offers", links: [["/services", "Services"], ["/courses", "Courses"], ["/careers", "Careers"], ["/coaching", "Coaching"]] },
   { title: "Ventures", links: [["https://www.upnrunning.in", "Up N Running"], ["https://www.socioverse.io", "Socioverse"], ["https://www.bunktobrains.com", "BunkToBrains"], ["/contact", "Contact"]] },
 ];
 
