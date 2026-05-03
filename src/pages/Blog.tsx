@@ -10,7 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 type Post = {
   slug: string; title: string; excerpt: string;
   date: string; readTime: string; category: string;
-  tags: string[]; featured: boolean;
+  tags: string[]; featured: boolean; coverUrl?: string;
 };
 
 const Blog = () => {
