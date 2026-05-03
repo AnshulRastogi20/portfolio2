@@ -1,105 +1,93 @@
-## What's Missing & What We'll Fix
+# Full Integration Plan: Images, Business Data & Missing Content
 
-### 1. Missing Projects (from your old portfolio)
-
-Your current site has 12 projects but is missing these 4 with real demo/GitHub links:
+## Uploaded Assets to Integrate
 
 
-| Project                      | Demo Link                       | GitHub                                            |
-| ---------------------------- | ------------------------------- | ------------------------------------------------- |
-| Decentralized Uptime Monitor | maintenance-iota-ten.vercel.app | github.com/AnshulRastogi20/Website-Uptime-Check   |
-| Waste Segregator             | recyclopedia-xi.vercel.app      | github.com/AnshulRastogi20/waste-segregator       |
-| Attendance Tracker           | attendit.tech                   | github.com/AnshulRastogi20/self-attendence-system |
-| AMA App                      | maintenance-iota-ten.vercel.app | github.com/AnshulRastogi20/full-stack-ama-app     |
+| File          | Purpose                               | Destination                       |
+| ------------- | ------------------------------------- | --------------------------------- |
+| `karan.jpg`   | Testimonial photo for Karan Bhadauria | `src/assets/karan.jpg`            |
+| `utkarsh.jpg` | Testimonial photo for Utkarsh Bhatia  | `src/assets/utkarsh.jpg`          |
+| `dsa.png`     | NPTEL DSA certificate image           | `public/certificates/dsa.png`     |
+| `java.png`    | NPTEL Java certificate image          | `public/certificates/java.png`    |
+| `web.jpg`     | Udemy Web Dev certificate image       | `public/certificates/web.jpg`     |
+| `design.png`  | Graphic design portfolio showcase     | `src/assets/design-portfolio.png` |
+| `OG_Img.png`  | Open Graph social share image         | `public/og-image.png`             |
 
 
-Also missing proper links on existing projects (Socioverse, BunkToBrains, etc.) and video/graphic projects (DJKC Studios YouTube, Canva designs).
+## Changes
 
-### 2. Direct Clickable Links Everywhere
+### 1. Place all uploaded images into the project
 
-Currently projects and achievements have NO external links. We'll add `demoUrl`, `githubUrl`, and `link` fields to:
+Copy each file to its destination as listed above.
 
-- **PROJECTS** in data.ts -- each project gets a demo link + GitHub link
-- **ACHIEVEMENTS** in data.ts -- each certificate/award gets a verification link
-- **TESTIMONIALS** -- already have `link` field in DB, will ensure it renders as clickable
-- **Resume** -- already has download/open links (working)
+### 2. Update `index.html` with real OG/meta tags
 
-All links open in new tabs with proper icons (ExternalLink, GitHub icons).
+- Description: real bio text
+- OG image: `/og-image.png`
+- Twitter card: update site to `@AnshulR20`
 
-### 3. Real Blog Content
+### 3. Update testimonials in Supabase with real photos
 
-Your 4 blog posts currently exist only as stubs in data.ts. The full content from your old portfolio will be inserted into the Supabase `blog_posts` table with proper markdown content, real dates, and tags.
+- Karan Bhadauria: set `photo_url` to the hosted karan.jpg path
+- Utkarsh Bhatia: set `photo_url` to the hosted utkarsh.jpg path
+- Rohit Iyyer: set `video_url` to `https://www.youtube.com/shorts/Y5Vcfa5hk7E`
 
-### 5. Fix Achievement Details
+### 4. Update `Home.tsx` testimonial cards to show photos
 
-- District Chess Champion date: 2018 (not 2022)
-- Hackathon date: February 2025
-- Add descriptions from migration data to each achievement
+- Display `photo_url` as an avatar next to the author name
+- Fetch `photo_url` and `video_url` from Supabase (already in schema)
+- Show a small play icon/link if `video_url` exists
 
-### 6. Vercel SPA Routing Config
+### 5. Add certificate images to Achievements page
 
-Add `vercel.json` to project root with SPA rewrites:
+- Update `ACHIEVEMENTS` in `data.ts` to include `imageUrl` for DSA, Java, and Web Dev certificates pointing to `/certificates/dsa.png`, `/certificates/java.png`, `/certificates/web.jpg`
+- Add a new "Complete Web Development" certification entry (Udemy, March 2025, 77.5 hours)
+- Update `Achievements.tsx` featured cards and grid cards to display the certificate image instead of the gradient placeholder when `imageUrl` is set
 
-```json
-{
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
-```
+### 6. Add graphic design portfolio image to Skills/Projects
 
-### 7. Admin Panel Access
+- Use the uploaded `design.png` as the cover for the "Thumbnails & Logos" project card or as a dedicated graphic design showcase section
 
-You access admin at: `**/admin/login**`
+### 7. Add missing testimonial details from migration data
 
-Steps:
+- Update the static `TESTIMONIALS` fallback and Supabase records with full details (company names, detailed quotes) from the migration data
+- Norton Wong: add full review text as expandable content
+- Rohit Iyyer: add video link
 
-1. Go to `yoursite.com/admin/login`
-2. Create an account (sign up with email + password)
-3. Click "Claim admin" (first user becomes admin automatically)
-4. You'll be redirected to `/admin` dashboard
+### 8. Add Careers/Hiring section (from migration data)
 
-From there you can manage: Blog posts, Testimonials, Courses, Contact submissions, Subscribers.
+- Create a new `/careers` page with the 3 intern roles (Growth Lead, Brand Lead, Tech Lead) from the migration data
+- Each role card shows: title, department, location, description, requirements, benefits, and a Tally form link for applications
+- Add route in `App.tsx` and nav link
 
----
+### 9. Add Up N Running company story to About page
 
-## Images You Need to Provide
+- Add the "Company Story" verbatim text from migration data to the About page or a dedicated section
+- Add the project timeline milestones (OTO Engine launch, LinkedIn Agent, Instagram RAG) to the TIMELINE array
 
-For an image-rich site, here's every image slot:
+### 10. Update SERVICES with demo video links
 
+- OTO Engine: add `videoUrl: "https://www.youtube.com/embed/wkQnv6027gM"`
+- Instagram RAG: add `videoUrl: "https://www.youtube.com/embed/dDf7CsJ6ilA"`
+- Update Services page to embed/link these videos
 
-| Where                        | What to Upload                                                                                                                      | Current State                 |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| **Profile**                  | Your headshot                                                                                                                       | Done (profile.png)            |
-| **OG Image**                 | Social share preview (1200x630)                                                                                                     | Missing - use branded graphic |
-| **Certificate: DSA Java**    | `/certificates/dsa.png` from old site                                                                                               | Not uploaded                  |
-| **Certificate: Java**        | `/certificates/java.png` from old site                                                                                              | Not uploaded                  |
-| **Certificate: Hackathon**   | `/certificates/hackathon.jpg` from old site                                                                                         | Not uploaded                  |
-| **Certificate: Chess**       | `/certificates/chess.jpg` from old site                                                                                             | Not uploaded                  |
-| **Project covers**           | Screenshots of each project (Socioverse, Up N Running, BunkToBrains, Uptime Monitor, Waste Segregator, Attendance Tracker, AMA App) | Using gradient placeholders   |
-| **Video project thumbnails** | DJKC channel screenshots                                                                                                            | Using gradient placeholders   |
-| **Graphic design samples**   | Thumbnail/logo design images                                                                                                        | Using gradient placeholders   |
-| **Blog cover images**        | Header images for 4 blog posts                                                                                                      | None                          |
-| **Testimonial photos**       | Photos of reviewers (via admin panel upload)                                                                                        | None                          |
+## Technical Details
 
+**Database migration:** Update testimonials with photo_url and video_url values for Karan, Utkarsh, and Rohit.
 
-Upload these images in your next message and I'll place them all.
+**Files modified:**
 
----
+- `index.html` (meta tags)
+- `src/lib/data.ts` (achievements, services, timeline)
+- `src/pages/Home.tsx` (testimonial avatars)
+- `src/pages/Achievements.tsx` (certificate images)
+- `src/pages/About.tsx` (company story)
+- `src/pages/Skills.tsx` (design portfolio image)
+- `src/App.tsx` (careers route)
 
-## Technical Changes
+**Files created:**
 
-### Files to edit:
-
-- `**src/lib/data.ts**` -- Add `demoUrl`, `githubUrl` to PROJECTS; add `link` and `description` to ACHIEVEMENTS; add missing 4 projects; fix dates; update bio
-- `**src/pages/Achievements.tsx**` -- Render clickable links on certificates/awards, add image display for certificates
-- `**src/pages/Skills.tsx**` or project pages -- Add demo/GitHub link buttons to project cards
-- `**src/pages/Home.tsx**` -- Ensure testimonial links are clickable
-- `**src/pages/Shop.tsx**` / project listing pages -- Add external link buttons
-- `**vercel.json**` -- New file for SPA routing
-- **Supabase insert** -- Seed 4 real blog posts with full markdown content into `blog_posts` table
-
-### New fields in data types:
-
-```
-PROJECTS: + demoUrl?: string, githubUrl?: string
-ACHIEVEMENTS: + link?: string, description?: string, imageUrl?: string
-```
+- `src/pages/Careers.tsx`
+- `public/certificates/` directory with 3 certificate images
+- `public/og-image.png`
+- `src/assets/karan.jpg`, `src/assets/utkarsh.jpg`, `src/assets/design-portfolio.png`
