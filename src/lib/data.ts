@@ -182,6 +182,7 @@ export const BLOG_POSTS = [
     category: "Career",
     tags: ["Web Development", "MERN Stack", "Next.js", "Career"],
     featured: true,
+    coverUrl: "/covers/blog-default.jpg",
   },
   {
     slug: "first-product-failure",
@@ -192,6 +193,7 @@ export const BLOG_POSTS = [
     category: "Building",
     tags: ["Web Development", "Databases", "Product Building", "Lessons Learned"],
     featured: true,
+    coverUrl: "/covers/blog-default.jpg",
   },
   {
     slug: "advanced-web-dev",
@@ -202,6 +204,7 @@ export const BLOG_POSTS = [
     category: "Tech",
     tags: ["Web Development", "Docker", "Wasp Framework", "Advanced Topics"],
     featured: false,
+    coverUrl: "/covers/blog-default.jpg",
   },
   {
     slug: "hackathon-journey",
@@ -212,6 +215,7 @@ export const BLOG_POSTS = [
     category: "Hackathon",
     tags: ["Hackathon", "Web Development", "Competition", "Teamwork"],
     featured: false,
+    coverUrl: "/covers/blog-default.jpg",
   },
 ];
 
