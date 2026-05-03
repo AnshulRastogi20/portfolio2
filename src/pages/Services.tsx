@@ -20,7 +20,7 @@ const Services = () => (
         </p>
         <div className="flex flex-wrap gap-3">
           <Button asChild size="lg" className="rounded-full gap-2 shadow-glow">
-            <a href={SITE.calendly} target="_blank" rel="noreferrer">
+            <a href={SITE.calendly}>
               <Calendar className="w-4 h-4" /> Book a free strategy call
             </a>
           </Button>

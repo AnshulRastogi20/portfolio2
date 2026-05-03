@@ -53,7 +53,7 @@ export const Footer = () => {
                     return (
                       <li key={label}>
                         {external ? (
-                          <a href={href} target="_blank" rel="noreferrer" className={className}>{inner}</a>
+                          <a href={href} className={className}>{inner}</a>
                         ) : (
                           <Link to={href} className={className}>{inner}</Link>
                         )}
@@ -79,8 +79,6 @@ export const Footer = () => {
                 <a
                   key={i}
                   href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
                   className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover-lift"
                   aria-label={`Social link ${i}`}
                 >

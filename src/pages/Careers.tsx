@@ -103,7 +103,7 @@ const Careers = () => (
                   </div>
                 </div>
                 <Button asChild className="rounded-full gap-2 shrink-0">
-                  <a href={`https://tally.so/r/${r.tallyId}`} target="_blank" rel="noreferrer">
+                  <a href={`https://tally.so/r/${r.tallyId}`}>
                     Apply now <ArrowRight className="w-4 h-4" />
                   </a>
                 </Button>

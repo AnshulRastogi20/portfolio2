@@ -22,7 +22,7 @@ const Resume = () => {
             </a>
           </Button>
           <Button asChild variant="outline" size="lg" className="rounded-full gap-2">
-            <a href={resumeUrl} target="_blank" rel="noreferrer">
+            <a href={resumeUrl}>
               <ExternalLink className="w-4 h-4" /> Open in new tab
             </a>
           </Button>

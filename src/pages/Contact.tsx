@@ -66,8 +66,6 @@ const Contact = () => {
 
             <a
               href={SITE.calendly}
-              target="_blank"
-              rel="noreferrer"
               className="group flex items-center gap-4 glass-strong rounded-2xl p-5 mb-6 hover:border-primary/40 transition-all hover-lift"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">

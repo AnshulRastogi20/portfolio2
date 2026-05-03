@@ -66,10 +66,10 @@ const SocioverseShowcase = () => (
         </p>
         <div className="flex flex-wrap gap-3 mb-12">
           <Button asChild size="lg" className="rounded-full h-12 px-7 gap-2 shadow-glow">
-            <a href={`${SOCIOVERSE_URL}/signup`} target="_blank" rel="noreferrer">Start free today <ArrowRight className="w-4 h-4" /></a>
+            <a href={`${SOCIOVERSE_URL}/signup`}>Start free today <ArrowRight className="w-4 h-4" /></a>
           </Button>
           <Button asChild size="lg" variant="outline" className="rounded-full h-12 px-7 glass">
-            <a href={SOCIOVERSE_URL} target="_blank" rel="noreferrer">Visit Socioverse</a>
+            <a href={SOCIOVERSE_URL}>Visit Socioverse</a>
           </Button>
         </div>
         <p className="font-mono text-xs text-muted-foreground">No credit card required · Setup in 2 minutes · Cancel anytime</p>
@@ -238,7 +238,7 @@ const SocioverseShowcase = () => (
                 ))}
               </ul>
               <Button asChild className="w-full rounded-full mt-auto" variant={p.popular ? "default" : "outline"}>
-                <a href={`${SOCIOVERSE_URL}/signup`} target="_blank" rel="noreferrer">Get started</a>
+                <a href={`${SOCIOVERSE_URL}/signup`}>Get started</a>
               </Button>
             </div>
           </Reveal>
@@ -280,7 +280,7 @@ const SocioverseShowcase = () => (
               Join thousands of creators using Socioverse to grow faster and smarter.
             </p>
             <Button asChild size="lg" className="rounded-full h-12 px-7 gap-2 shadow-glow">
-              <a href={`${SOCIOVERSE_URL}/signup`} target="_blank" rel="noreferrer">Start free today <ArrowRight className="w-4 h-4" /></a>
+              <a href={`${SOCIOVERSE_URL}/signup`}>Start free today <ArrowRight className="w-4 h-4" /></a>
             </Button>
           </div>
         </div>
