@@ -43,7 +43,7 @@ const Courses = () => {
             Skill <span className="text-gradient-gold">courses.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Hands-on courses built around real builds. Browse below or check out <a href="https://www.bunktobrains.com" target="_blank" rel="noreferrer" className="text-primary hover:underline">BunkToBrains</a> for our full catalog.
+            Hands-on courses built around real builds. Browse below or check out <a href="https://www.bunktobrains.com" className="text-primary hover:underline">BunkToBrains</a> for our full catalog.
           </p>
         </Reveal>
       </section>
@@ -58,7 +58,7 @@ const Courses = () => {
               <p className="text-muted-foreground mb-6">
                 We're curating skill courses via BunkToBrains. Check back soon or visit our EdTech platform.
               </p>
-              <a href="https://www.bunktobrains.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-primary hover:underline font-mono text-sm">
+              <a href="https://www.bunktobrains.com" className="inline-flex items-center gap-2 text-primary hover:underline font-mono text-sm">
                 Visit BunkToBrains <ExternalLink className="w-4 h-4" />
               </a>
             </div>
@@ -68,7 +68,7 @@ const Courses = () => {
             {courses.map((c, i) => (
               <Reveal key={c.id} delay={i * 0.08}>
                 {c.external_link ? (
-                  <a href={c.external_link} target="_blank" rel="noreferrer" className="group block">
+                  <a href={c.external_link} className="group block">
                     <CourseCard course={c} />
                   </a>
                 ) : (

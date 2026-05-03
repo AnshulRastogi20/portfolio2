@@ -123,7 +123,7 @@ const BlogPost = () => {
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
             ) : (
               <>
-                <p>This essay is still in the works — the title and metadata are live, but the body is on the way.</p>
+                <p>This essay is still in the works. The title and metadata are live, but the body is on the way.</p>
                 <blockquote>"The audience you build today is the leverage you'll have tomorrow."</blockquote>
               </>
             )}
@@ -147,7 +147,7 @@ const BlogPost = () => {
                   >
                     <img
                       src={src}
-                      alt={`${post.title} — ${i + 1}`}
+                      alt={`${post.title} - ${i + 1}`}
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />

@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    /* Warm light theme — cream + terracotta + mint */
+    /* Warm light theme - cream + terracotta + mint */
     --background: 38 30% 95%;
     --foreground: 20 25% 15%;
 
@@ -50,7 +50,7 @@
   }
 
   .dark {
-    /* Premium dark — deep near-black + refined mint + gold */
+    /* Premium dark - deep near-black + refined mint + gold */
     --background: 155 20% 5%;
     --foreground: 38 30% 95%;
 

@@ -19,7 +19,7 @@ const ROLES = [
       "Ability to commit to 1 hour of focused deep work daily",
     ],
     benefits: [
-      "20% revenue share for every deal you close — for 1 year straight",
+      "20% revenue share for every deal you close, for 1 year straight",
       "Sales mentorship from the Founder: B2B prospecting, objection handling, closing",
       "Official Internship Certificate & Performance-Based LOR",
       "Founding Member Status with a real SaaS product launch",
@@ -38,11 +38,11 @@ const ROLES = [
       "Ensure visual identity remains consistent across all channels",
       "Create click-worthy thumbnails and covers",
       "Fast with Canva, CapCut, and AI Image Generators",
-      "Autonomous — no micromanaging on font choices or alignment",
+      "Autonomous, no micromanaging on font choices or alignment",
     ],
     benefits: [
       "Free access to Canva Pro, CapCut Pro, and AI Image Generators",
-      "Real software brand portfolio — not a mock project",
+      "Real software brand portfolio, not a mock project",
       "Mentorship on branding psychology and marketing hooks",
       "Official Internship Certificate & Performance-Based LOR",
       "20% passive income for referred users",
@@ -54,7 +54,7 @@ const ROLES = [
     icon: Code,
     location: "Remote · Production Experience",
     tallyId: "44J4gr",
-    desc: "You are the Guardian of the Codebase. We ship fast. Your job: catch what we miss. This requires high integrity and a hacker mindset — trying to break the app before our users do.",
+    desc: "You are the Guardian of the Codebase. We ship fast. Your job: catch what we miss. This requires high integrity and a hacker mindset, trying to break the app before our users do.",
     requirements: [
       "End-to-End Testing: daily 'Happy Path' testing",
       "Bug Smashing: identify, document, and fix UI/UX bugs",
@@ -64,7 +64,7 @@ const ROLES = [
       "Must be willing to sign an NDA",
     ],
     benefits: [
-      "Code reviews by the Founder — learn clean architecture patterns",
+      "Code reviews by the Founder. Learn clean architecture patterns",
       "Write code that ships to real users",
       "Real-world debugging: LLM hallucinations & API limits",
       "Official Internship Certificate & Performance-Based LOR",
@@ -82,7 +82,7 @@ const Careers = () => (
           Join the <span className="text-gradient">team.</span>
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
-          We're building Socioverse & Up N Running. These are not mock internships — you ship real code, close real deals, and build real brands.
+          We're building Socioverse & Up N Running. These are not mock internships. You ship real code, close real deals, and build real brands.
         </p>
       </Reveal>
     </section>
@@ -103,7 +103,7 @@ const Careers = () => (
                   </div>
                 </div>
                 <Button asChild className="rounded-full gap-2 shrink-0">
-                  <a href={`https://tally.so/r/${r.tallyId}`} target="_blank" rel="noreferrer">
+                  <a href={`https://tally.so/r/${r.tallyId}`}>
                     Apply now <ArrowRight className="w-4 h-4" />
                   </a>
                 </Button>

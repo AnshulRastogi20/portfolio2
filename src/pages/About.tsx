@@ -18,7 +18,7 @@ const About = () => (
             <span className="text-gradient">Builder.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mb-8">
-            I'm Anshul Rastogi — based in {SITE.location}. I founded <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, built <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a> — an Instagram growth engine, and co-founded <a href="https://www.bunktobrains.com" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a> — an EdTech startup with 7000+ students.
+            I'm Anshul Rastogi, based in {SITE.location}. I founded <a href="https://www.upnrunning.in" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, built <a href="https://www.socioverse.io" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>, an Instagram growth engine, and co-founded <a href="https://www.bunktobrains.com" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a>, an EdTech startup with 7000+ students.
             My north star: do work I'm proud of, with people I respect, in service of an audience I genuinely care about.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -74,7 +74,7 @@ const About = () => (
         {VENTURES.map((v, i) => {
           const external = /^https?:\/\//.test(v.url);
           const Comp: any = external ? "a" : "a";
-          const linkProps = external ? { href: v.url, target: "_blank", rel: "noreferrer" } : { href: v.url };
+          const linkProps = external ? { href: v.url } : { href: v.url };
           return (
             <Reveal key={v.name} delay={i * 0.1}>
               <Comp {...linkProps} className="group block glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">

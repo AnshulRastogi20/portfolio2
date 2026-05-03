@@ -16,11 +16,11 @@ const Services = () => (
           <span className="text-gradient">Stay Up N Running.</span>
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mb-10">
-          Powerful SaaS tools and done-for-you services that automate outreach, content, ops and reporting — so your team focuses on high-impact work.
+          Powerful SaaS tools and done-for-you services that automate outreach, content, ops and reporting, so your team focuses on high-impact work.
         </p>
         <div className="flex flex-wrap gap-3">
           <Button asChild size="lg" className="rounded-full gap-2 shadow-glow">
-            <a href={SITE.calendly} target="_blank" rel="noreferrer">
+            <a href={SITE.calendly}>
               <Calendar className="w-4 h-4" /> Book a free strategy call
             </a>
           </Button>
@@ -99,7 +99,7 @@ const Services = () => (
               Book a free 30-min strategy call. We'll map out the fastest 30-day automation wins across outreach, content, client delivery and reporting.
             </p>
             <Button asChild size="lg" className="rounded-full h-12 px-7 gap-2 shadow-glow">
-              <a href={SITE.calendly} target="_blank" rel="noreferrer">
+              <a href={SITE.calendly}>
                 <Calendar className="w-4 h-4" /> Book a call
               </a>
             </Button>

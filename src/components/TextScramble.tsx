@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const CHARS = "!<>-_\\/[]{}—=+*^?#________";
+const CHARS = "!<>-_\\/[]{}=+*^?#________";
 
 export const TextScramble = ({ phrases, interval = 2800 }: { phrases: string[]; interval?: number }) => {
   const [text, setText] = useState(phrases[0]);
