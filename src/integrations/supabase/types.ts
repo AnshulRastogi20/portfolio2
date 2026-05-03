@@ -98,6 +98,54 @@ export type Database = {
         }
         Relationships: []
       }
+      courses: {
+        Row: {
+          active: boolean
+          bullets: string[]
+          category: string | null
+          created_at: string
+          display_order: number
+          external_link: string | null
+          id: string
+          level: string | null
+          price: string | null
+          slug: string
+          summary: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          bullets?: string[]
+          category?: string | null
+          created_at?: string
+          display_order?: number
+          external_link?: string | null
+          id?: string
+          level?: string | null
+          price?: string | null
+          slug: string
+          summary?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          bullets?: string[]
+          category?: string | null
+          created_at?: string
+          display_order?: number
+          external_link?: string | null
+          id?: string
+          level?: string | null
+          price?: string | null
+          slug?: string
+          summary?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       subscribers: {
         Row: {
           created_at: string
@@ -116,6 +164,45 @@ export type Database = {
           email?: string
           id?: string
           source?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          author: string
+          created_at: string
+          display_order: number
+          featured: boolean
+          id: string
+          link: string | null
+          photo_url: string | null
+          quote: string
+          role: string | null
+          video_url: string | null
+        }
+        Insert: {
+          author: string
+          created_at?: string
+          display_order?: number
+          featured?: boolean
+          id?: string
+          link?: string | null
+          photo_url?: string | null
+          quote: string
+          role?: string | null
+          video_url?: string | null
+        }
+        Update: {
+          author?: string
+          created_at?: string
+          display_order?: number
+          featured?: boolean
+          id?: string
+          link?: string | null
+          photo_url?: string | null
+          quote?: string
+          role?: string | null
+          video_url?: string | null
         }
         Relationships: []
       }
