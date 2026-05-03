@@ -31,12 +31,12 @@ const Resume = () => {
 
       <Reveal delay={0.1}>
         <div className="glass-strong rounded-3xl overflow-hidden aspect-[1/1.4] bg-card/30">
-          <object data={resumeUrl} type="application/pdf" className="w-full h-full">
+          <iframe src={resumeUrl} className="w-full h-full border-0" title="Resume PDF">
             <div className="p-10 text-center text-muted-foreground">
               PDF preview unavailable.{" "}
               <a href={resumeUrl} className="text-primary underline">Download instead</a>.
             </div>
-          </object>
+          </iframe>
         </div>
       </Reveal>
     </section>
