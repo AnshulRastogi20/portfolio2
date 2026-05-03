@@ -49,7 +49,7 @@ const Achievements = () => {
             <Star className="w-5 h-5 text-gold fill-gold" /> Featured
           </h2>
         </Reveal>
-        <div className="flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-thin">
+        <div className="flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {featured.map((a, i) => (
             <Reveal key={a.title} delay={i * 0.08}>
               <div className="snap-start shrink-0 w-[320px] md:w-[420px] glass-strong rounded-3xl p-8 hover-lift hover:border-gold/50 transition-all">
