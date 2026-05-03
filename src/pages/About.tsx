@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import profilePhoto from "@/assets/profile.png";
 import { Reveal } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { VALUES, VENTURES, TIMELINE, SITE } from "@/lib/data";
