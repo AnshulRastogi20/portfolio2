@@ -63,6 +63,7 @@ export const SERVICES = [
     tagline: "Complete outreach-to-onboard automation",
     desc: "End-to-end pipeline that takes a cold prospect from first touch to signed proposal — without a human in the loop until the meeting starts.",
     bullets: ["Multi-channel lead gen", "Inbox management & smart routing", "Auto meeting booking", "AI proposal drafts", "Onboarding workflows"],
+    videoUrl: "https://www.youtube.com/embed/wkQnv6027gM",
   },
   {
     slug: "instagram-rag",
@@ -70,6 +71,7 @@ export const SERVICES = [
     tagline: "RAG-powered Instagram content & replies grounded in your knowledge",
     desc: "Generates on-brand captions, FAQ answers, and idea prompts using your own docs, transcripts, and past posts as context.",
     bullets: ["On-brand captions", "DM / FAQ answers", "Idea prompts from your archive", "Tone-matched to founder voice"],
+    videoUrl: "https://www.youtube.com/embed/dDf7CsJ6ilA",
   },
   {
     slug: "voice-ai-assistant",
@@ -100,7 +102,6 @@ export const SERVICES = [
     bullets: ["Performance metrics", "ROI tracking", "Optimization insights", "14× faster than manual"],
   },
 ];
-
 // Three crafts from anshulrastogi.xyz
 export const PROJECT_CATEGORIES = [
   {
