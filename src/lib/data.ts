@@ -271,7 +271,7 @@ export const NOW = {
 export const TIMELINE = [
   { year: "2019", title: "First line of code", text: "Curiosity → obsession. Started with HTML and never stopped." },
   { year: "2021", title: "First freelance project", text: "Built a website for a local business. Got paid in pizza and confidence." },
-  { year: "2022", title: "District Chess Champion", text: "Discipline from chess shaped how I approach every craft." },
+  { year: "2018", title: "District Chess Champion", text: "Discipline from chess shaped how I approach every craft." },
   { year: "2023", title: "Old portfolio shipped", text: "Launched anshulrastogi.xyz — the three-craft (web / video / design) portfolio." },
   { year: "2024", title: "Won Hack-KRMU 4.0", text: "Hackathon win that validated my builder instincts." },
   { year: "Feb 2025", title: "Co-Founded BunkToBrains", text: "EdTech startup helping students ace exams. 25+ team, 7000+ students in WhatsApp community." },
