@@ -1,29 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, ChevronDown } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "./ui/button";
 
-const links = [
+const mainLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/skills", label: "Work" },
   { to: "/achievements", label: "Awards" },
   { to: "/blog", label: "Blog" },
-  { to: "/newsletter", label: "Newsletter" },
   { to: "/services", label: "Services" },
-  { to: "/courses", label: "Courses" },
-  { to: "/shop", label: "Shop" },
-  { to: "/coaching", label: "Coaching" },
   { to: "/contact", label: "Contact" },
 ];
 
+const moreLinks = [
+  { to: "/courses", label: "Courses" },
+  { to: "/careers", label: "Careers" },
+  { to: "/newsletter", label: "Newsletter" },
+  { to: "/coaching", label: "Coaching" },
+  { to: "/resume", label: "Resume" },
+  { to: "/now", label: "Now" },
+];
+
+const allLinks = [...mainLinks, ...moreLinks];
+
 export const Nav = () => {
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggle } = useTheme();
   const loc = useLocation();
+  const moreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -31,7 +40,15 @@ export const Nav = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setOpen(false), [loc.pathname]);
+  useEffect(() => { setOpen(false); setMoreOpen(false); }, [loc.pathname]);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) setMoreOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   return (
     <>
@@ -49,7 +66,7 @@ export const Nav = () => {
             </Link>
 
             <nav className="hidden lg:flex items-center gap-1">
-              {links.slice(0, 7).map((l) => {
+              {mainLinks.map((l) => {
                 const active = loc.pathname === l.to;
                 return (
                   <Link
@@ -68,6 +85,40 @@ export const Nav = () => {
                   </Link>
                 );
               })}
+
+              {/* More dropdown */}
+              <div className="relative" ref={moreRef}>
+                <button
+                  onClick={() => setMoreOpen(!moreOpen)}
+                  className={`relative px-3 py-1.5 text-sm font-medium rounded-full transition-colors flex items-center gap-1 ${moreLinks.some(l => loc.pathname === l.to) ? "text-primary" : "text-foreground/70 hover:text-foreground"}`}
+                >
+                  More <ChevronDown className={`w-3 h-3 transition-transform ${moreOpen ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {moreOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full right-0 mt-2 w-44 glass-strong rounded-2xl p-2 shadow-elegant"
+                    >
+                      {moreLinks.map((l) => {
+                        const active = loc.pathname === l.to;
+                        return (
+                          <Link
+                            key={l.to}
+                            to={l.to}
+                            className={`block px-4 py-2.5 text-sm rounded-xl transition-colors ${active ? "text-primary bg-primary/10" : "text-foreground/70 hover:text-foreground hover:bg-secondary/50"}`}
+                          >
+                            {l.label}
+                          </Link>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </nav>
 
             <div className="flex items-center gap-2">
@@ -102,7 +153,7 @@ export const Nav = () => {
             className="fixed inset-0 z-40 lg:hidden bg-background/95 backdrop-blur-xl pt-24"
           >
             <nav className="container flex flex-col gap-1">
-              {links.map((l, i) => (
+              {allLinks.map((l, i) => (
                 <motion.div
                   key={l.to}
                   initial={{ opacity: 0, x: -20 }}
