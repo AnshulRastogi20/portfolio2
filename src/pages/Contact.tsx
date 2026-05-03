@@ -61,7 +61,7 @@ const Contact = () => {
               Let's <span className="text-gradient">talk.</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-10">
-              Got a project, question, or just want to say hi? Drop a note — or skip the form and book a 30-min strategy call directly.
+              Got a project, question, or just want to say hi? Drop a note, or skip the form and book a 30-min strategy call directly.
             </p>
 
             <a
@@ -135,7 +135,7 @@ const Contact = () => {
                 />
               </div>
               <Button type="submit" disabled={loading || sent} size="lg" className="w-full rounded-full h-12 gap-2">
-                {sent ? "✓ Sent — I'll reply soon" : loading ? "Sending..." : <>Send message <Send className="w-4 h-4" /></>}
+                {sent ? "✓ Sent. I'll reply soon" : loading ? "Sending..." : <>Send message <Send className="w-4 h-4" /></>}
               </Button>
             </form>
           </Reveal>

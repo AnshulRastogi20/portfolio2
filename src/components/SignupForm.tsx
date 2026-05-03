@@ -32,7 +32,7 @@ export const SignupForm = ({ variant = "default", context = "newsletter", ctaLab
           .insert({ email: parsed.data, source: context });
         if (error) {
           if (error.code === "23505") {
-            toast.success("You're already subscribed — thanks!");
+            toast.success("You're already subscribed. Thanks!");
           } else {
             throw error;
           }

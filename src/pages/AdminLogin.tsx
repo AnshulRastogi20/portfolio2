@@ -94,7 +94,7 @@ const AdminLogin = () => {
       });
       setBusy(false);
       if (error) return toast.error(error.message);
-      toast.success("Account created — check your email if confirmation is required.");
+      toast.success("Account created. Check your email if confirmation is required.");
     }
   };
 

@@ -16,7 +16,7 @@ const Services = () => (
           <span className="text-gradient">Stay Up N Running.</span>
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mb-10">
-          Powerful SaaS tools and done-for-you services that automate outreach, content, ops and reporting — so your team focuses on high-impact work.
+          Powerful SaaS tools and done-for-you services that automate outreach, content, ops and reporting, so your team focuses on high-impact work.
         </p>
         <div className="flex flex-wrap gap-3">
           <Button asChild size="lg" className="rounded-full gap-2 shadow-glow">

@@ -19,7 +19,7 @@ const Skills = () => {
             <span className="text-gradient">One obsession with quality.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            I work across web, video, and design — usually all three at once. Pick a category to see real projects.
+            I work across web, video, and design, usually all three at once. Pick a category to see real projects.
           </p>
         </Reveal>
       </section>

@@ -18,7 +18,7 @@ const Shop = () => {
             <span className="text-gradient-gold">for you.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mb-10">
-            Digital products, templates, and a few pieces of merch. Most are on the waitlist — drops are intentional and small.
+            Digital products, templates, and a few pieces of merch. Most are on the waitlist. Drops are intentional and small.
           </p>
 
           <div className="inline-flex glass rounded-full p-1.5 gap-1">
