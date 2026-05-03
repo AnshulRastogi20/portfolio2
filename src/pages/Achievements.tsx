@@ -53,9 +53,15 @@ const Achievements = () => {
           {featured.map((a, i) => (
             <Reveal key={a.title} delay={i * 0.08}>
               <div className="snap-start shrink-0 w-[320px] md:w-[420px] glass-strong rounded-3xl p-8 hover-lift hover:border-gold/50 transition-all">
-                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/20 to-gold/20 mb-6 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 grid-bg opacity-40" />
-                  <Award className="w-20 h-20 text-gold relative" />
+              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/20 to-gold/20 mb-6 flex items-center justify-center relative overflow-hidden">
+                  {a.imageUrl ? (
+                    <img src={a.imageUrl} alt={a.title} className="absolute inset-0 w-full h-full object-contain bg-white" />
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 grid-bg opacity-40" />
+                      <Award className="w-20 h-20 text-gold relative" />
+                    </>
+                  )}
                 </div>
                 <span className="font-mono text-xs uppercase tracking-wider text-gold">{a.category}</span>
                 <h3 className="font-display text-xl font-bold mt-2 mb-1">{a.title}</h3>
