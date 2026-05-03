@@ -48,10 +48,16 @@ const Skills = () => {
             <Reveal key={p.slug} delay={i * 0.06}>
               <div className="group glass rounded-3xl p-7 hover-lift hover:border-primary/40 transition-all">
                 <div className="aspect-[16/10] rounded-2xl bg-gradient-mesh mb-6 relative overflow-hidden">
-                  <div className="absolute inset-0 grid-bg opacity-40" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-7xl text-primary/30 font-bold">{p.title[0]}</span>
-                  </div>
+                  {p.coverUrl ? (
+                    <img src={p.coverUrl} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 grid-bg opacity-40" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="font-display text-7xl text-primary/30 font-bold">{p.title[0]}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
                 <h3 className="font-display text-2xl font-bold mb-2">{p.title}</h3>
                 <p className="text-sm text-muted-foreground mb-5">{p.desc}</p>
