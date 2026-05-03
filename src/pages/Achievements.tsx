@@ -95,6 +95,11 @@ const Achievements = () => {
           {visible.map((a, i) => (
             <Reveal key={a.title + i} delay={i * 0.04}>
               <div className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-all">
+                {a.imageUrl && (
+                  <div className="aspect-[16/10] rounded-2xl mb-5 overflow-hidden bg-white">
+                    <img src={a.imageUrl} alt={a.title} className="w-full h-full object-contain" />
+                  </div>
+                )}
                 <div className="flex items-start justify-between mb-5">
                   <span className="font-mono text-xs uppercase tracking-wider text-primary">{a.category}</span>
                   <span className="font-mono text-xs text-muted-foreground">{a.date}</span>
