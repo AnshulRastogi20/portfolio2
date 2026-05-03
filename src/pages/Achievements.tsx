@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Award, Star } from "lucide-react";
+import { Award, Star, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { Counter } from "@/components/Counter";
 import { ACHIEVEMENTS } from "@/lib/data";
