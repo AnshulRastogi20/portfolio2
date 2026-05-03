@@ -234,7 +234,7 @@ const Home = () => {
         </Reveal>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {TESTIMONIALS.map((t, i) => (
+          {testimonials.map((t, i) => (
             <Reveal key={i} delay={i * 0.08}>
               <div className="glass rounded-3xl p-8 h-full relative">
                 <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
@@ -244,9 +244,16 @@ const Home = () => {
                   ))}
                 </div>
                 <p className="text-lg leading-relaxed mb-6">"{t.quote}"</p>
-                <div className="font-mono text-xs">
-                  <div className="font-semibold">{t.author}</div>
-                  <div className="text-muted-foreground">{t.role}</div>
+                <div className="font-mono text-xs flex items-center justify-between">
+                  <div>
+                    <div className="font-semibold">{t.author}</div>
+                    <div className="text-muted-foreground">{t.role}</div>
+                  </div>
+                  {t.link && (
+                    <a href={t.link} target="_blank" rel="noreferrer" className="text-primary hover:underline text-[10px]">
+                      View review →
+                    </a>
+                  )}
                 </div>
               </div>
             </Reveal>
