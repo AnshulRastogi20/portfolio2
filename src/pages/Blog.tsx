@@ -155,6 +155,7 @@ const Blog = () => {
                     {p.tags.map((t) => (
                       <span key={t} className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">#{t}</span>
                     ))}
+                   </div>
                   </div>
                 </article>
               </Link>
