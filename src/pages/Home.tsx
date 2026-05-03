@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Star, Quote, Play } from "lucide-react";
+import { ArrowRight, Sparkles, Star, Quote, Play, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/PageTransition";
 import { TextScramble } from "@/components/TextScramble";
