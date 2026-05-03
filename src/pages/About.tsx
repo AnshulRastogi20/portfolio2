@@ -13,9 +13,9 @@ const About = () => (
         <Reveal className="lg:col-span-7">
           <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// About me</p>
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
-            Founder. <br />
-            Builder. <br />
-            <span className="text-gradient">Storyteller.</span>
+            Systems <br />
+            Architect. <br />
+            <span className="text-gradient">Builder.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mb-8">
             I'm Anshul Rastogi — based in {SITE.location}. I founded <a href="https://www.upnrunning.in" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, built <a href="https://www.socioverse.io" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a> — an Instagram growth engine, and co-founded <a href="https://www.bunktobrains.com" target="_blank" rel="noreferrer" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a> — an EdTech startup with 7000+ students.
