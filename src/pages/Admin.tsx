@@ -153,7 +153,7 @@ const WaitlistTab = () => {
   };
   useEffect(() => { load(); }, []);
   const grouped = rows.reduce<Record<string, Waitlist[]>>((acc, r) => {
-    const key = `${r.kind}:${r.slug ?? "—"}`;
+    const key = `${r.kind}:${r.slug ?? "-"}`;
     (acc[key] ??= []).push(r);
     return acc;
   }, {});
@@ -311,7 +311,7 @@ const BlogTab = () => {
         <Button onClick={() => startEdit()} className="rounded-full gap-2"><Plus className="w-4 h-4" /> New post</Button>
       </div>
 
-      {posts.length === 0 && <div className="glass-strong rounded-3xl p-10 text-center text-muted-foreground">No posts yet — write your first one.</div>}
+      {posts.length === 0 && <div className="glass-strong rounded-3xl p-10 text-center text-muted-foreground">No posts yet - write your first one.</div>}
 
       {posts.map(p => (
         <div key={p.id} className="glass-strong rounded-3xl p-6 flex items-center justify-between gap-4 flex-wrap">
@@ -614,7 +614,7 @@ const CoursesTab = () => {
         <Button onClick={() => startEdit()} className="rounded-full gap-2"><Plus className="w-4 h-4" /> Add course</Button>
       </div>
 
-      {rows.length === 0 && <div className="glass-strong rounded-3xl p-10 text-center text-muted-foreground">No courses yet — add your first one.</div>}
+      {rows.length === 0 && <div className="glass-strong rounded-3xl p-10 text-center text-muted-foreground">No courses yet - add your first one.</div>}
 
       {rows.map(c => (
         <div key={c.id} className="glass-strong rounded-3xl p-6 flex items-center justify-between gap-4 flex-wrap">
