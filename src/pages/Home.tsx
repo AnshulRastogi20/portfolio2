@@ -139,37 +139,34 @@ const Home = () => {
         </div>
       </section>
 
-      {/* BUILDING NEXT */}
+      {/* VENTURES HIGHLIGHT */}
       <section className="container py-32">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <p className="font-mono text-xs uppercase tracking-widest text-gold mb-3">// 02 — Building Next</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-gold mb-3">// 02 — Ventures</p>
             <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
-              Get on the <span className="text-gradient-gold">waitlist.</span>
+              What I'm <span className="text-gradient-gold">building.</span>
             </h2>
-            <p className="text-muted-foreground text-lg">Three things in the oven. Be first to know when they're out.</p>
+            <p className="text-muted-foreground text-lg">Three ventures, one mission — ship products people actually use.</p>
           </div>
         </Reveal>
-
         <div className="grid md:grid-cols-3 gap-6">
-          {COURSES.map((c, i) => (
-            <Reveal key={c.slug} delay={i * 0.1}>
-              <Link to={`/courses/${c.slug}`} className="block group">
+          {[
+            { name: "Up N Running", desc: "AI software company — automation products for businesses.", url: "https://www.upnrunning.in", tag: "Studio" },
+            { name: "Socioverse", desc: "AI-powered Instagram growth engine for creators.", url: "https://www.socioverse.io", tag: "SaaS" },
+            { name: "BunkToBrains", desc: "EdTech platform with 7000+ students.", url: "https://www.bunktobrains.com", tag: "EdTech" },
+          ].map((v, i) => (
+            <Reveal key={v.name} delay={i * 0.1}>
+              <a href={v.url} target="_blank" rel="noreferrer" className="block group">
                 <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs uppercase tracking-wider text-gold">Coming · {c.launchEta}</span>
-                    <span className="text-xs glass rounded-full px-3 py-1">{c.level}</span>
+                    <span className="font-mono text-xs uppercase tracking-wider text-gold">{v.tag}</span>
+                    <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform" />
                   </div>
-                  <h3 className="font-display text-2xl font-bold mb-3">{c.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-6">{c.summary}</p>
-                  <div className="flex items-center justify-between font-mono text-xs pt-6 border-t border-border/50">
-                    <span>Early-bird {c.earlyBird}</span>
-                    <span className="text-primary group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                      Join waitlist <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </div>
+                  <h3 className="font-display text-2xl font-bold mb-3">{v.name}</h3>
+                  <p className="text-muted-foreground text-sm">{v.desc}</p>
                 </div>
-              </Link>
+              </a>
             </Reveal>
           ))}
         </div>
