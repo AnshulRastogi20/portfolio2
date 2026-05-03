@@ -127,15 +127,26 @@ export const PROJECT_CATEGORIES = [
   },
 ];
 
-export const PROJECTS: { slug: string; title: string; category: string; desc: string; stack: string[]; cover: string; demoUrl?: string; githubUrl?: string }[] = [
-  { slug: "socioverse", title: "Socioverse", category: "web", desc: "AI-powered Instagram growth engine — viral script generation, DM automation, Lead Bank CRM. 100+ signups.", stack: ["React", "TypeScript", "Supabase", "Gemini", "Meta API"], cover: "social", demoUrl: "https://www.socioverse.io" },
-  { slug: "upnrunning", title: "Up N Running", category: "web", desc: "AI products studio for Indian businesses — OTO Engine, Voice AI, LinkedIn Agent and more.", stack: ["Next.js", "TypeScript", "Tailwind", "Supabase"], cover: "rocket", demoUrl: "https://www.upnrunning.in" },
-  { slug: "bunktobrains", title: "BunkToBrains", category: "web", desc: "EdTech platform with 25+ team, 7000+ student community, courses & study resources.", stack: ["Next.js", "Supabase", "Bunny.net"], cover: "edu", demoUrl: "https://www.bunktobrains.com" },
-  { slug: "oto-engine", title: "OTO Engine", category: "web", desc: "Outreach-to-onboard automation pipeline — multi-tenant SaaS with AI agents for lead scraping, email, and proposal generation.", stack: ["n8n", "Apollo.io", "Supabase", "React"], cover: "ai", demoUrl: "https://www.upnrunning.in" },
+// Cover image map for projects
+const COVER_MAP: Record<string, string> = {
+  socioverse: "/covers/socioverse.jpg",
+  upnrunning: "/covers/upnrunning.jpg",
+  bunktobrains: "/covers/bunktobrains.jpg",
+  "oto-engine": "/covers/oto-engine.jpg",
+  "instagram-rag": "/covers/instagram-rag.jpg",
+  "uptime-monitor": "/covers/uptime-monitor.jpg",
+  "waste-segregator": "/covers/waste-segregator.jpg",
+};
+
+export const PROJECTS: { slug: string; title: string; category: string; desc: string; stack: string[]; cover: string; coverUrl?: string; demoUrl?: string; githubUrl?: string }[] = [
+  { slug: "socioverse", title: "Socioverse", category: "web", desc: "AI-powered Instagram growth engine — viral script generation, DM automation, Lead Bank CRM. 100+ signups.", stack: ["React", "TypeScript", "Supabase", "Gemini", "Meta API"], cover: "social", coverUrl: COVER_MAP["socioverse"], demoUrl: "https://www.socioverse.io" },
+  { slug: "upnrunning", title: "Up N Running", category: "web", desc: "AI products studio for Indian businesses — OTO Engine, Voice AI, LinkedIn Agent and more.", stack: ["Next.js", "TypeScript", "Tailwind", "Supabase"], cover: "rocket", coverUrl: COVER_MAP["upnrunning"], demoUrl: "https://www.upnrunning.in" },
+  { slug: "bunktobrains", title: "BunkToBrains", category: "web", desc: "EdTech platform with 25+ team, 7000+ student community, courses & study resources.", stack: ["Next.js", "Supabase", "Bunny.net"], cover: "edu", coverUrl: COVER_MAP["bunktobrains"], demoUrl: "https://www.bunktobrains.com" },
+  { slug: "oto-engine", title: "OTO Engine", category: "web", desc: "Outreach-to-onboard automation pipeline — multi-tenant SaaS with AI agents for lead scraping, email, and proposal generation.", stack: ["n8n", "Apollo.io", "Supabase", "React"], cover: "ai", coverUrl: COVER_MAP["oto-engine"], demoUrl: "https://www.upnrunning.in" },
   { slug: "alveek", title: "Appointment Automation", category: "web", desc: "Multi-tenant SaaS for appointment management with WhatsApp & Email reminders, reducing no-shows for service businesses.", stack: ["React", "n8n", "Supabase", "WhatsApp API"], cover: "health" },
-  { slug: "instagram-rag", title: "Instagram RAG", category: "web", desc: "5-module n8n pipeline using multimodal AI to reverse-engineer viral videos, Pinecone RAG, and brand-aligned script generation.", stack: ["n8n", "Gemini", "Pinecone", "Apify"], cover: "rag" },
-  { slug: "uptime-monitor", title: "Decentralized Uptime Monitor", category: "web", desc: "Decentralized, incentive-driven monitoring network with WebSocket validators and Solana rewards. Turborepo monorepo.", stack: ["Next.js", "TypeScript", "Prisma", "Clerk", "Solana"], cover: "monitor", demoUrl: "https://maintenance-iota-ten.vercel.app/", githubUrl: "https://github.com/AnshulRastogi20/Website-Uptime-Check" },
-  { slug: "waste-segregator", title: "Waste Segregator", category: "web", desc: "TensorFlow-powered waste identification and segregation to promote better recycling habits.", stack: ["React", "TypeScript", "Flask", "TensorFlow", "MongoDB"], cover: "waste", demoUrl: "https://recyclopedia-xi.vercel.app/", githubUrl: "https://github.com/AnshulRastogi20/waste-segregator" },
+  { slug: "instagram-rag", title: "Instagram RAG", category: "web", desc: "5-module n8n pipeline using multimodal AI to reverse-engineer viral videos, Pinecone RAG, and brand-aligned script generation.", stack: ["n8n", "Gemini", "Pinecone", "Apify"], cover: "rag", coverUrl: COVER_MAP["instagram-rag"] },
+  { slug: "uptime-monitor", title: "Decentralized Uptime Monitor", category: "web", desc: "Decentralized, incentive-driven monitoring network with WebSocket validators and Solana rewards. Turborepo monorepo.", stack: ["Next.js", "TypeScript", "Prisma", "Clerk", "Solana"], cover: "monitor", coverUrl: COVER_MAP["uptime-monitor"], demoUrl: "https://maintenance-iota-ten.vercel.app/", githubUrl: "https://github.com/AnshulRastogi20/Website-Uptime-Check" },
+  { slug: "waste-segregator", title: "Waste Segregator", category: "web", desc: "TensorFlow-powered waste identification and segregation to promote better recycling habits.", stack: ["React", "TypeScript", "Flask", "TensorFlow", "MongoDB"], cover: "waste", coverUrl: COVER_MAP["waste-segregator"], demoUrl: "https://recyclopedia-xi.vercel.app/", githubUrl: "https://github.com/AnshulRastogi20/waste-segregator" },
   { slug: "attendance-tracker", title: "Attendance Tracker", category: "web", desc: "Interactive attendance tracking system with modern design for students.", stack: ["React", "TypeScript", "Next.js", "MongoDB", "Framer Motion"], cover: "attend", demoUrl: "https://www.attendit.tech/", githubUrl: "https://github.com/AnshulRastogi20/self-attendence-system" },
   { slug: "ama-app", title: "AMA App", category: "web", desc: "Anonymous Messaging App allowing users to send and receive honest, anonymous feedback.", stack: ["React", "TypeScript", "Next.js", "MongoDB"], cover: "ama", demoUrl: "https://maintenance-iota-ten.vercel.app/", githubUrl: "https://github.com/AnshulRastogi20/full-stack-ama-app" },
 
