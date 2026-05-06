@@ -11,14 +11,14 @@ const About = () => (
     <section className="container py-24">
       <div className="grid lg:grid-cols-12 gap-12 items-center">
         <Reveal className="lg:col-span-7">
-          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// About me</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// Perspective is Everything</p>
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
             Systems <br />
             Architect. <br />
             <span className="text-gradient">Builder.</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mb-8">
-            I'm Anshul Rastogi, based in {SITE.location}. I founded <a href="https://www.upnrunning.in" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> to ship AI products that make Indian businesses more efficient, built <a href="https://www.socioverse.io" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>, an Instagram growth engine, and co-founded <a href="https://www.bunktobrains.com" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a>, an EdTech startup with 7000+ students.
+            I'm Anshul Rastogi, 20, based in {SITE.location}. I founded <a href="https://www.upnrunning.in" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a> (₹50K MRR, solo), built <a href="https://www.socioverse.io" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a> as sole architect, and co-founded <a href="https://www.bunktobrains.com" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a> (7,000+ students). B.Tech AIML at VIPS Delhi.
             My north star: do work I'm proud of, with people I respect, in service of an audience I genuinely care about.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -46,10 +46,10 @@ const About = () => (
       <Reveal>
         <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// What I believe</p>
         <h2 className="font-display text-4xl md:text-6xl font-bold mb-14 leading-[0.95]">
-          Four things I <span className="text-gradient">live by.</span>
+          Three things I <span className="text-gradient">live by.</span>
         </h2>
       </Reveal>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid md:grid-cols-3 gap-5">
         {VALUES.map((v, i) => (
           <Reveal key={v.title} delay={i * 0.08}>
             <div className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-all">

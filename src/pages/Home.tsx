@@ -40,7 +40,7 @@ const Home = () => {
             className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 mb-8 font-mono text-xs"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            Available for one project this quarter
+            Perspective is Everything.
           </motion.div>
 
           <h1 className="font-display text-[clamp(2.75rem,9vw,7.5rem)] font-bold leading-[0.92] tracking-tighter mb-6">
@@ -59,7 +59,7 @@ const Home = () => {
               className="block"
             >
               I <span className="text-gradient">
-                <TextScramble phrases={["build AI products.", "ship Up N Running.", "scale Socioverse.", "tell stories."]} />
+                <TextScramble phrases={["build AI products.", "ship Up N Running.", "scale Socioverse.", "own every outcome.", "change perspectives."]} />
               </span>
             </motion.span>
           </h1>
@@ -70,7 +70,7 @@ const Home = () => {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Founder of <a href="https://www.upnrunning.in" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a>, builder of <a href="https://www.socioverse.io" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>, and co-founder of <a href="https://www.bunktobrains.com" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a>. I build AI products, automate the work nobody wants to do, and write about the craft of shipping.
+            Founder of <a href="https://www.upnrunning.in" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a>, sole architect of <a href="https://www.socioverse.io" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>, and co-founder of <a href="https://www.bunktobrains.com" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a>. 20 years old, three ventures, Delhi. Receipt first. Opinion second.
           </motion.p>
 
           <motion.div
@@ -109,7 +109,7 @@ const Home = () => {
       {/* MARQUEE */}
       <section className="py-12 border-y border-border/50">
         <Marquee>
-          {["TypeScript", "React", "Next.js", "OpenAI", "Tailwind", "Supabase", "LangChain", "Premiere Pro", "After Effects", "Figma", "Photoshop", "Illustrator"].map((t) => (
+          {["React", "TypeScript", "Next.js", "n8n", "Supabase", "Python", "Java", "Gemini", "Tailwind", "DaVinci Resolve", "Premiere Pro", "After Effects", "Figma", "Remotion"].map((t) => (
             <span key={t} className="font-display text-3xl md:text-5xl font-bold text-muted-foreground/50 hover:text-primary transition-colors">
               {t} <span className="text-primary/60">·</span>
             </span>
@@ -166,9 +166,9 @@ const Home = () => {
         </Reveal>
         <div className="grid md:grid-cols-3 gap-6">
           {[
-            { name: "Up N Running", desc: "AI software company, automation products for businesses.", url: "https://www.upnrunning.in", tag: "Studio" },
-            { name: "Socioverse", desc: "AI-powered Instagram growth engine for creators.", url: "https://www.socioverse.io", tag: "SaaS" },
-            { name: "BunkToBrains", desc: "EdTech platform with 7000+ students.", url: "https://www.bunktobrains.com", tag: "EdTech" },
+            { name: "Up N Running", desc: "Solo Founder. AI Automation Agency. ₹50K MRR.", url: "https://www.upnrunning.in", tag: "Studio" },
+            { name: "Socioverse", desc: "Sole Architect. Instagram AI SaaS. Emotional DNA engine.", url: "https://www.socioverse.io", tag: "SaaS" },
+            { name: "BunkToBrains", desc: "Co-Founder. EdTech. 7,000+ students. ₹2L+ revenue.", url: "https://www.bunktobrains.com", tag: "EdTech" },
           ].map((v, i) => (
             <Reveal key={v.name} delay={i * 0.1}>
               <a href={v.url} className="block group">
