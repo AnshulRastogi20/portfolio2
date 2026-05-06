@@ -4,10 +4,11 @@
 export const SITE = {
   name: "Anshul",
   fullName: "Anshul Rastogi",
-  tagline: "Systems Architect · Founder, Up N Running · Builder of Socioverse",
-  bio: "I design and implement robust, end-to-end ecosystems that solve foundational business challenges. My mission is to replace manual friction with intelligent, efficient, and automated pathways to growth.",
-  location: "India",
-  email: "upnrunning0@gmail.com",
+  tagline: "Perspective is Everything.",
+  identity: "Systems Architect · Solo Founder · Builder",
+  bio: "I build AI products that make Indian businesses more efficient. Receipt first. Opinion second. Every system I ship is anchored in proof, not promises.",
+  location: "Delhi, India",
+  email: "anshulrastogi020@gmail.com",
   calendly: "https://calendly.com/upnrunning0/30min",
   socials: {
     twitter: "https://x.com/AnshulR20",
@@ -21,35 +22,34 @@ export const SITE = {
 
 // From upnrunning.in "AI Advantage" outcome metrics
 export const STATS = [
-  { value: 50, suffix: "%+", label: "Lower manual workload" },
-  { value: 10, suffix: "x", label: "More qualified leads" },
-  { value: 60, suffix: "%", label: "Faster response time" },
-  { value: 5, suffix: "+", label: "Hrs saved/week" },
+  { value: 50, suffix: "K", label: "MRR - Up N Running" },
+  { value: 7000, suffix: "+", label: "Students - BunkToBrains" },
+  { value: 3, suffix: "", label: "Client systems live" },
+  { value: 1000, suffix: "+", label: "Students under CDC ops" },
 ];
 
 export const VALUES = [
-  { title: "Depth Over Hacks", desc: "Real understanding compounds. Shortcuts decay.", icon: "🪨" },
-  { title: "Authenticity", desc: "I share what I actually use, build, and believe.", icon: "✶" },
-  { title: "Value-First", desc: "Teach, ship, give. Money follows trust.", icon: "◈" },
-  { title: "Offer-Centric", desc: "Every word maps to a clear next step for you.", icon: "→" },
+  { title: "Honesty", desc: "Tell the truth - to yourself and to others - especially when it's harsh. The lie is always more expensive than the moment of discomfort.", icon: "✦" },
+  { title: "Ownership", desc: "Everything in your life is led by you. Every outcome - good, bad, lucky, unfair - you own it. The moment you outsource the cause, you outsource the cure.", icon: "◉" },
+  { title: "Change", desc: "Change is the only constant. To become your future self, you have to let go of who you currently are. Get attached to who you're becoming, not who you were.", icon: "↻" },
 ];
 
 export const VENTURES = [
   {
     name: "Up N Running",
-    desc: "AI products & DFY services that automate outreach, content, ops and reporting for founders.",
+    desc: "Solo Founder. AI Automation Agency delivering productized services. ₹50K MRR in 6 months.",
     tag: "Studio",
     url: "https://www.upnrunning.in",
   },
   {
     name: "Socioverse",
-    desc: "AI-powered Instagram growth engine: competitor reel analysis, script generation, DM automation, and a built-in Lead Bank CRM.",
+    desc: "Sole Architect. Instagram AI SaaS with Emotional DNA engine. Launching Jan 2026.",
     tag: "SaaS",
     url: "https://www.socioverse.io",
   },
   {
     name: "BunkToBrains",
-    desc: "EdTech startup with a 25+ member team and 7,000+ students in the WhatsApp community. Helping students ace semester exams with notes, courses, and community.",
+    desc: "Co-Founder (~40%). EdTech with 7,000+ students, ₹2L+ revenue, and a team of 25+.",
     tag: "EdTech",
     url: "https://www.bunktobrains.com",
   },
@@ -273,17 +273,17 @@ export const NOW = {
 };
 
 export const TIMELINE = [
-  { year: "2019", title: "First line of code", text: "Curiosity → obsession. Started with HTML and never stopped." },
-  { year: "2021", title: "First freelance project", text: "Built a website for a local business. Got paid in pizza and confidence." },
-  { year: "2018", title: "District Chess Champion", text: "Discipline from chess shaped how I approach every craft." },
-  { year: "2023", title: "Old portfolio shipped", text: "Launched anshulrastogi.xyz, the three-craft (web / video / design) portfolio." },
-  { year: "2024", title: "Won Hack-KRMU 4.0", text: "Hackathon win that validated my builder instincts." },
-  { year: "Feb 2025", title: "Co-Founded BunkToBrains", text: "EdTech startup helping students ace exams. 25+ team, 7000+ students in WhatsApp community." },
-  { year: "Jun 2025", title: "Founded Up N Running", text: "Started the AI software company, shipping automation products for businesses." },
-  { year: "Jun 2025", title: "OTO Engine Launched", text: "Flagship outreach automation system goes live. Lead gen to proposal in one pipeline." },
-  { year: "Jul 2025", title: "LinkedIn Agent & Voice Agent", text: "Expanded automation suite with LinkedIn prospecting and Voice AI tools." },
-  { year: "Aug 2025", title: "Instagram RAG Launched", text: "Revolutionized content creation with Retrieval-Augmented Generation for Instagram." },
-  { year: "Jan 2026", title: "Launched Socioverse", text: "AI-powered Instagram growth engine. 100+ signups and growing." },
+  { year: "2018", title: "District Chess Champion", text: "Strategic foresight, pattern recognition, and resource management. Skills now applied to systems architecture." },
+  { year: "2021-23", title: "The JEE Wake-Up", text: "CBSE 94%. Should've cleared JEE. Didn't - because I lied to myself about the work I was putting in. That failure became the foundation of self-honesty." },
+  { year: "2023", title: "Joined VIPS AIML", text: "B.Tech AI/ML at VIPS Delhi. Started the DSA grind - 4-5 months of daily coding after college." },
+  { year: "Early 2024", title: "The Pivot", text: "Did the math. Two days on a LeetCode problem for a 10-12 LPA job? Not worth it. Decided to build on my own terms." },
+  { year: "2023-24", title: "DJ KC Studios Era", text: "~10 months editing for a story-driven YouTube channel. First real money. Picked up other clients on the side." },
+  { year: "Feb 2024", title: "Won Hack-KRMU 4.0", text: "Built a waste segregator web app in 2 days. Hackathon win that validated builder instincts." },
+  { year: "Jan 2025", title: "VP, CDC at VIPS", text: "Career Development Cell. Placement ops for 1,000+ students." },
+  { year: "May 2025", title: "Co-Founded BunkToBrains", text: "EdTech startup. 7,000+ students, ₹2L+ revenue, team of 25+ in 6 months." },
+  { year: "Jul 2025", title: "Founded Up N Running", text: "Solo founder. AI Automation Agency. ₹50K MRR within 6 months. Three clients delivered." },
+  { year: "Late 2025", title: "Started Socioverse", text: "Sole architect. Instagram AI SaaS with Emotional DNA engine." },
+  { year: "Jan 2026", title: "Launched Socioverse", text: "AI-powered Instagram growth engine goes live. 100+ signups and growing." },
 ];
 
 // FAQ for the Socioverse product page
