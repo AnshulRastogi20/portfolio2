@@ -1,27 +1,69 @@
-## Plan
 
-### 1. Remove all em dashes (—)
+# Update Website to Match Brand Deck
 
-Replace every `—` across the codebase with alternatives like `:`, `,`, `.`, or `-` depending on context. Key files affected:
+After comparing your "Sight of Anshul" brand deck with the current website, here are the key mismatches and proposed updates:
 
-- `src/lib/data.ts` (~30 instances) - project descriptions, testimonials, timeline, FAQ
-- `src/pages/Home.tsx` - section headers and venture descriptions
-- `src/pages/About.tsx` - bio text
-- `src/pages/Contact.tsx` - form copy
-- `src/pages/Skills.tsx`, `src/pages/Shop.tsx`, `src/pages/Careers.tsx`, `src/pages/BlogPost.tsx`, `src/pages/ProductDetail.tsx`, `src/pages/Services.tsx`
-- `src/index.css` - CSS comments
-- `src/components/TextScramble.tsx` - scramble character set
-- `src/components/SignupForm.tsx`, `src/pages/AdminLogin.tsx`
+## 1. Update Core Brand Data (`src/lib/data.ts`)
 
-### 2. Make all cards open within the website (no external redirects)
+**Tagline**: Add "Perspective is Everything" as the brand tagline.
+Currently: `"Systems Architect · Founder, Up N Running · Builder of Socioverse"`
+Brand deck: Should incorporate "Perspective is Everything"
 
-Currently, project cards, testimonial cards, venture links, and achievement cards open external URLs in new tabs. Changes:
+**Location**: Change from `"India"` to `"Delhi, India"`
 
-- **Project cards** (`src/pages/Skills.tsx`, `src/pages/Home.tsx`): Replace `<a href={demoUrl} target="_blank">` with internal routing using `<Link to={/projects/${slug}}>` or render project details inline
-- **Testimonial cards** (`src/pages/Home.tsx`): Remove `target="_blank"` from card links and `window.open` from video buttons - instead open links within the same tab or show content in a modal
-- **Venture cards** (`src/pages/Home.tsx`): Change external venture URLs to same-tab navigation (`window.location.href` or remove target)
-- **Achievement cards** (`src/pages/Achievements.tsx`): Remove `target="_blank"` so links open in the same tab
-- **About page** (`src/pages/About.tsx`): Change venture links to open in same tab
-- **GitHub links** (`src/pages/Skills.tsx`): Open in same tab instead of `window.open(..., '_blank')`
+**Email**: Change from `upnrunning0@gmail.com` to `anshulrastogi020@gmail.com` (personal brand email from deck)
 
-All `target="_blank"` / `target="n"` attributes and `window.open(..., '_blank')` calls on cards will be changed to open in the current tab (same window navigation).
+**Stats**: Replace current generic stats with real receipts from the brand deck:
+- ₹50K MRR (Up N Running, 6 months solo)
+- 7,000+ Students (BunkToBrains)
+- 3 Client systems live in production
+- 1,000+ Students under CDC ops at VIPS
+
+## 2. Replace Values Section
+
+Current (4 values): Depth Over Hacks, Authenticity, Value-First, Offer-Centric
+Brand deck (3 values): **Honesty**, **Ownership**, **Change** - with the descriptions from the deck.
+
+Update `VALUES` array in `data.ts` and the About page heading ("Three things I live by" instead of "Four things I live by").
+
+## 3. Rewrite Timeline with Brand Deck Story
+
+Replace current timeline entries with the real chronological story from the brand deck:
+- 2018: District Chess Champion
+- 2021-2023: JEE wake-up, CBSE 94%
+- 2023: Joined VIPS AIML, DSA grind
+- Early 2024: Pivot from DSA to building
+- Oct 2023 - Oct 2024: DJ KC Studios era
+- Jan 2025: VP CDC at VIPS
+- May 2025: Co-founded BunkToBrains
+- Jul 2025: Founded Up N Running (₹50K MRR)
+- Late 2025: Started building Socioverse
+
+## 4. Update Hero Section & Bio
+
+- Add "Perspective is Everything" as a subtle tagline
+- Update the text scramble phrases to include brand-aligned language
+- Update bio text to match brand deck tone: "Receipt first. Opinion second."
+
+## 5. Add VP CDC VIPS Role
+
+Currently missing from achievements. Add: "Vice President, Career Development Cell" with "Placement ops for 1,000+ students" - update both `ACHIEVEMENTS` array and relevant page mentions.
+
+## 6. Update Marquee Tech Stack
+
+Add missing tools from brand deck: `n8n`, `Python`, `Java`, `Gemini`, `DaVinci Resolve`, `Remotion`. Remove any that don't match.
+
+## 7. Update Venture Descriptions
+
+Align venture card descriptions with brand deck:
+- Up N Running: "Solo Founder, AI Automation Agency, productized services, ₹50K MRR"
+- Socioverse: "Sole Architect, Instagram AI SaaS, Emotional DNA engine"
+- BunkToBrains: "Co-Founder (~40%), EdTech, 7,000+ students, ₹2L+ revenue"
+
+---
+
+### Files to Edit
+- `src/lib/data.ts` (main data updates)
+- `src/pages/Home.tsx` (hero, stats, marquee)
+- `src/pages/About.tsx` (values heading, bio text)
+- `index.html` (meta description update)
