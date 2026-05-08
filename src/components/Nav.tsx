@@ -10,6 +10,7 @@ const mainLinks = [
   { to: "/about", label: "About" },
   { to: "/skills", label: "Work" },
   { to: "/achievements", label: "Awards" },
+  { to: "/reviews", label: "Reviews" },
   { to: "/blog", label: "Blog" },
   { to: "/services", label: "Services" },
   { to: "/contact", label: "Contact" },
