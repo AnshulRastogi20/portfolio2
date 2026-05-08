@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, Calendar, Clock, ExternalLink } from "lucide-react";
+import { Search, Calendar, Clock, ExternalLink, Link2 } from "lucide-react";
+import { toast } from "sonner";
 import { Reveal } from "@/components/PageTransition";
 import { Input } from "@/components/ui/input";
 import { SignupForm } from "@/components/SignupForm";
@@ -137,32 +138,46 @@ const Blog = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
-              <Link to={`/blog/${p.slug}`} className="group block">
-                <article className="glass rounded-3xl overflow-hidden h-full hover-lift hover:border-primary/40 transition-all">
-                  {p.coverUrl && (
-                    <div className="aspect-[16/9] overflow-hidden">
-                      <img src={p.coverUrl} alt={p.title} loading="lazy" className="w-full h-full object-cover" />
+              <div className="group relative h-full">
+                <button
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    const url = `${window.location.origin}/blog/${p.slug}`;
+                    try { await navigator.clipboard.writeText(url); toast.success("Link copied"); }
+                    catch { toast.error("Could not copy"); }
+                  }}
+                  aria-label="Copy link"
+                  className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 hover:border-primary/40 hover:text-primary transition"
+                >
+                  <Link2 className="w-3.5 h-3.5" />
+                </button>
+                <Link to={`/blog/${p.slug}`} className="block h-full">
+                  <article className="glass rounded-3xl overflow-hidden h-full hover-lift hover:border-primary/40 transition-all">
+                    {p.coverUrl && (
+                      <div className="aspect-[16/9] overflow-hidden">
+                        <img src={p.coverUrl} alt={p.title} loading="lazy" className="w-full h-full object-cover" />
+                      </div>
+                    )}
+                    <div className="p-7">
+                      <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground mb-5">
+                        <span className="text-primary">{p.category}</span>
+                        <span>·</span>
+                        <span>{p.readTime}</span>
+                      </div>
+                      <h3 className="font-display text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">{p.title}</h3>
+                      <p className="text-sm text-muted-foreground line-clamp-3 mb-5">{p.excerpt}</p>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        {p.tags.map((t) => (
+                          <span key={t} className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">#{t}</span>
+                        ))}
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 text-xs text-primary mt-4 font-mono">
+                        <ExternalLink className="w-3 h-3" /> Read post
+                      </span>
                     </div>
-                  )}
-                  <div className="p-7">
-                  <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground mb-5">
-                    <span className="text-primary">{p.category}</span>
-                    <span>·</span>
-                    <span>{p.readTime}</span>
-                  </div>
-                  <h3 className="font-display text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground line-clamp-3 mb-5">{p.excerpt}</p>
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    {p.tags.map((t) => (
-                      <span key={t} className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">#{t}</span>
-                    ))}
-                   </div>
-                   <span className="inline-flex items-center gap-1.5 text-xs text-primary mt-4 font-mono">
-                     <ExternalLink className="w-3 h-3" /> Read post
-                   </span>
-                  </div>
-                </article>
-              </Link>
+                  </article>
+                </Link>
+              </div>
             </Reveal>
           ))}
         </div>
