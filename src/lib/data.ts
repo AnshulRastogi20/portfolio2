@@ -255,12 +255,12 @@ export const COACHING = [
 
 // Static testimonials kept as fallback - live data comes from Supabase
 export const TESTIMONIALS = [
-  { quote: "Socioverse looks quite cool.", author: "Ankur Warikoo", role: "Entrepreneur, Content Creator & Author · 3M+ followers" },
-  { quote: "Socioverse is sick.", author: "Mradul Sharma", role: "Founder, Akima Films" },
-  { quote: "He exceeded every expectation and delivered work that was more polished, disciplined, and thoughtful than many senior developers I have worked with.", author: "Norton Wong", role: "Founder, Alveek AI & Flow" },
-  { quote: "I told him what my vision was and he made it into a reality within 24 hours. His speed and explanations are insane.", author: "Rohit Iyyer", role: "Founder, Clients Forge" },
-  { quote: "Anshul is fully immersed in the project. Once we sit down, it's all in or nothing, no middle ground.", author: "Karan Bhadauria", role: "Founder, DJKC Studios" },
-  { quote: "Anshul is exceptionally talented at understanding the project demand and quickly delivering it.", author: "Utkarsh Bhatia", role: "Founder, DJKC Studios" },
+  { slug: "ankur-warikoo", quote: "Socioverse looks quite cool.", author: "Ankur Warikoo", role: "Entrepreneur, Content Creator & Author · 3M+ followers" },
+  { slug: "mradul-sharma", quote: "Socioverse is sick.", author: "Mradul Sharma", role: "Founder, Akima Films" },
+  { slug: "norton-wong", quote: "He exceeded every expectation and delivered work that was more polished, disciplined, and thoughtful than many senior developers I have worked with.", author: "Norton Wong", role: "Founder, Alveek AI & Flow" },
+  { slug: "rohit-iyyer", quote: "I told him what my vision was and he made it into a reality within 24 hours. His speed and explanations are insane.", author: "Rohit Iyyer", role: "Founder, Clients Forge" },
+  { slug: "karan-bhadauria", quote: "Anshul is fully immersed in the project. Once we sit down, it's all in or nothing, no middle ground.", author: "Karan Bhadauria", role: "Founder, DJKC Studios" },
+  { slug: "utkarsh-bhatia", quote: "Anshul is exceptionally talented at understanding the project demand and quickly delivering it.", author: "Utkarsh Bhatia", role: "Founder, DJKC Studios" },
 ];
 
 export const NOW = {
