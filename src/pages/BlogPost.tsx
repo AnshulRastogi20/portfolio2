@@ -58,22 +58,22 @@ const BlogPost = () => {
     })();
   }, [slug]);
 
+  useEffect(() => {
+    if (post?.title) document.title = `${post.title} - Anshul`;
+  }, [post?.title]);
+
   if (!loaded) return <section className="container py-32 text-center text-muted-foreground">Loading...</section>;
 
   if (!post) {
     return (
       <section className="container py-32 text-center">
         <h1 className="font-display text-4xl mb-4">Post not found</h1>
-        <Link to="/blog" className="text-primary">← Back to blog</Link>
+        <Link to="/blog" className="text-primary">Back to blog</Link>
       </section>
     );
   }
 
   const gallery = (post.images ?? []).filter(Boolean);
-
-  useEffect(() => {
-    if (post?.title) document.title = `${post.title} - Anshul`;
-  }, [post?.title]);
 
   const sharePost = async () => {
     const url = `${window.location.origin}/blog/${post.slug}`;
