@@ -27,6 +27,8 @@ import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 import Careers from "./pages/Careers";
+import Reviews from "./pages/Reviews";
+import ReviewDetail from "./pages/ReviewDetail";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +60,8 @@ const App = () => (
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/resume" element={<Resume />} />
                 <Route path="/careers" element={<Careers />} />
+                <Route path="/reviews" element={<Reviews />} />
+                <Route path="/reviews/:id" element={<ReviewDetail />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />
