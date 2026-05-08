@@ -27,6 +27,8 @@ import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 import Careers from "./pages/Careers";
+import Reviews from "./pages/Reviews";
+import ReviewDetail from "./pages/ReviewDetail";
 
 const queryClient = new QueryClient();
 
