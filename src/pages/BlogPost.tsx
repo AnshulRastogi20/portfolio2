@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, X } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, X, Share2 } from "lucide-react";
+import { toast } from "sonner";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Reveal } from "@/components/PageTransition";
@@ -57,26 +58,44 @@ const BlogPost = () => {
     })();
   }, [slug]);
 
+  useEffect(() => {
+    if (post?.title) document.title = `${post.title} - Anshul`;
+  }, [post?.title]);
+
   if (!loaded) return <section className="container py-32 text-center text-muted-foreground">Loading...</section>;
 
   if (!post) {
     return (
       <section className="container py-32 text-center">
         <h1 className="font-display text-4xl mb-4">Post not found</h1>
-        <Link to="/blog" className="text-primary">← Back to blog</Link>
+        <Link to="/blog" className="text-primary">Back to blog</Link>
       </section>
     );
   }
 
   const gallery = (post.images ?? []).filter(Boolean);
 
+  const sharePost = async () => {
+    const url = `${window.location.origin}/blog/${post.slug}`;
+    if (navigator.share) {
+      try { await navigator.share({ title: post.title, text: post.excerpt, url }); return; } catch {}
+    }
+    try { await navigator.clipboard.writeText(url); toast.success("Link copied"); }
+    catch { toast.error("Could not copy link"); }
+  };
+
   return (
     <>
       <article className="container max-w-3xl py-16">
         <Reveal>
-          <Link to="/blog" className="font-mono text-xs inline-flex items-center gap-2 mb-10 hover:text-primary transition">
-            <ArrowLeft className="w-3 h-3" /> All posts
-          </Link>
+          <div className="flex items-center justify-between mb-10">
+            <Link to="/blog" className="font-mono text-xs inline-flex items-center gap-2 hover:text-primary transition">
+              <ArrowLeft className="w-3 h-3" /> All posts
+            </Link>
+            <button onClick={sharePost} className="font-mono text-xs inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 hover:border-primary/40 hover:text-primary transition">
+              <Share2 className="w-3 h-3" /> Copy link
+            </button>
+          </div>
           <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-muted-foreground mb-6">
             <span className="text-primary">{post.category}</span>
             <span className="flex items-center gap-1.5"><Calendar className="w-3 h-3" /> {post.date}</span>

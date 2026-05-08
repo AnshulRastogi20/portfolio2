@@ -160,7 +160,7 @@ export const ACHIEVEMENTS: { title: string; category: string; issuer: string; da
   { title: "Data Structures & Algorithms using Java", category: "Certifications", issuer: "NPTEL · IIT Kharagpur", date: "Jul-Oct 2024", featured: true, description: "Elite certification, 75% consolidated score. 12-week course. Roll: NPTEL24CS96S453601284.", imageUrl: "/certificates/dsa.png", tags: ["Java", "Algorithms", "Data Structures"] },
   { title: "Programming in Java", category: "Certifications", issuer: "NPTEL · IIT Kharagpur", date: "Jul-Oct 2024", featured: true, description: "48% consolidated score. 12-week course. Roll: NPTEL24CS105S653600878.", imageUrl: "/certificates/java.png", tags: ["Java", "Programming", "OOP"] },
   { title: "Former District Chess Champion", category: "Recognition", issuer: "District Sports Association", date: "2018", featured: false, description: "Strategic foresight, pattern recognition, and resource management. Skills now applied to systems architecture." },
-  { title: "Vice President, Career Development Cell", category: "Recognition", issuer: "VIPS Technical Campus", date: "Jan 2025 – Present", featured: false, description: "Leading career development initiatives and mentorship programs." },
+  { title: "Vice President, Career Development Cell", category: "Recognition", issuer: "VIPS Technical Campus", date: "Jan 2025 - Present", featured: false, description: "Leading career development initiatives and mentorship programs." },
 ];
 
 export const BLOG_POSTS = [
