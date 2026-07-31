@@ -5,6 +5,7 @@ import { Reveal } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { TESTIMONIALS } from "@/lib/data";
 import { supabase } from "@/integrations/supabase/client";
+import { useLiveFetch } from "@/hooks/useLiveFetch";
 import { toast } from "sonner";
 
 type Review = {
@@ -39,38 +40,32 @@ const ReviewDetail = () => {
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
+  useLiveFetch(async (isActive) => {
     if (!id) return;
-    let cancelled = false;
-    (async () => {
-      // try DB first (uuid)
-      const isUuid = /^[0-9a-f]{8}-/i.test(id);
-      if (isUuid) {
-        const { data } = await supabase
-          .from("testimonials")
-          .select("id, quote, author, role, link, photo_url, video_url")
-          .eq("id", id)
-          .maybeSingle();
-        if (!cancelled && data) {
-          setReview(data as Review);
-          setLoading(false);
-          return;
-        }
-      }
-      // fallback to static slug
-      const t = TESTIMONIALS.find((x) => x.slug === id);
-      if (!cancelled) {
-        if (t) {
-          setReview({ id: t.slug, quote: t.quote, author: t.author, role: t.role, link: null, photo_url: null, video_url: null });
-        } else {
-          navigate("/reviews", { replace: true });
-        }
+    // try DB first (uuid)
+    const isUuid = /^[0-9a-f]{8}-/i.test(id);
+    if (isUuid) {
+      const { data } = await supabase
+        .from("testimonials")
+        .select("id, quote, author, role, link, photo_url, video_url")
+        .eq("id", id)
+        .maybeSingle();
+      if (!isActive()) return;
+      if (data) {
+        setReview(data as Review);
         setLoading(false);
+        return;
       }
-    })();
-    return () => {
-      cancelled = true;
-    };
+    }
+    // fallback to static slug
+    const t = TESTIMONIALS.find((x) => x.slug === id);
+    if (!isActive()) return;
+    if (t) {
+      setReview({ id: t.slug, quote: t.quote, author: t.author, role: t.role, link: null, photo_url: null, video_url: null });
+    } else {
+      navigate("/reviews", { replace: true });
+    }
+    setLoading(false);
   }, [id, navigate]);
 
   useEffect(() => {

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Clock, ArrowRight, Check, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useLiveFetch } from "@/hooks/useLiveFetch";
 
 type Course = {
   id: string;
@@ -22,17 +23,16 @@ const Courses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    supabase
+  useLiveFetch(async (isActive) => {
+    const { data } = await supabase
       .from("courses")
       .select("*")
       .eq("active", true)
-      .order("display_order")
-      .then(({ data }) => {
-        setCourses((data as Course[]) ?? []);
-        setLoading(false);
-      });
-  }, []);
+      .order("display_order");
+    if (!isActive()) return;
+    setCourses((data as Course[]) ?? []);
+    setLoading(false);
+  });
 
   return (
     <>

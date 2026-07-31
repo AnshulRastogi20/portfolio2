@@ -8,6 +8,7 @@ import { Reveal } from "@/components/PageTransition";
 import { SignupForm } from "@/components/SignupForm";
 import { BLOG_POSTS } from "@/lib/data";
 import { supabase } from "@/integrations/supabase/client";
+import { useLiveFetch } from "@/hooks/useLiveFetch";
 
 type Post = {
   slug: string; title: string; excerpt: string; content?: string;
@@ -22,40 +23,40 @@ const BlogPost = () => {
   const [loaded, setLoaded] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      const { data } = await supabase
+  useLiveFetch(async (isActive) => {
+    const { data } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("slug", slug!)
+      .eq("published", true)
+      .maybeSingle();
+    if (!isActive()) return;
+    if (data) {
+      setPost({
+        slug: data.slug, title: data.title, excerpt: data.excerpt ?? "",
+        content: data.content, date: data.published_at?.slice(0, 10) ?? "",
+        readTime: data.read_time ?? "", category: data.category ?? "",
+        tags: data.tags ?? [], cover: (data as any).cover_url ?? null,
+        images: (data as any).images ?? [],
+      });
+      const { data: more } = await supabase
         .from("blog_posts")
-        .select("*")
-        .eq("slug", slug!)
+        .select("slug,title,excerpt,published_at,read_time,category,tags")
         .eq("published", true)
-        .maybeSingle();
-      if (data) {
-        setPost({
-          slug: data.slug, title: data.title, excerpt: data.excerpt ?? "",
-          content: data.content, date: data.published_at?.slice(0, 10) ?? "",
-          readTime: data.read_time ?? "", category: data.category ?? "",
-          tags: data.tags ?? [], cover: (data as any).cover_url ?? null,
-          images: (data as any).images ?? [],
-        });
-        const { data: more } = await supabase
-          .from("blog_posts")
-          .select("slug,title,excerpt,published_at,read_time,category,tags")
-          .eq("published", true)
-          .neq("slug", slug!)
-          .limit(3);
-        setRelated((more ?? []).map((p: any) => ({
-          slug: p.slug, title: p.title, excerpt: p.excerpt ?? "",
-          date: p.published_at?.slice(0, 10) ?? "", readTime: p.read_time ?? "",
-          category: p.category ?? "", tags: p.tags ?? [],
-        })));
-      } else {
-        const seed = BLOG_POSTS.find((p) => p.slug === slug);
-        if (seed) setPost(seed as Post);
-        setRelated(BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 3) as Post[]);
-      }
-      setLoaded(true);
-    })();
+        .neq("slug", slug!)
+        .limit(3);
+      if (!isActive()) return;
+      setRelated((more ?? []).map((p: any) => ({
+        slug: p.slug, title: p.title, excerpt: p.excerpt ?? "",
+        date: p.published_at?.slice(0, 10) ?? "", readTime: p.read_time ?? "",
+        category: p.category ?? "", tags: p.tags ?? [],
+      })));
+    } else {
+      const seed = BLOG_POSTS.find((p) => p.slug === slug);
+      if (seed) setPost(seed as Post);
+      setRelated(BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 3) as Post[]);
+    }
+    setLoaded(true);
   }, [slug]);
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import { Quote, Star, Play, Link2, Check, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { TESTIMONIALS } from "@/lib/data";
 import { supabase } from "@/integrations/supabase/client";
+import { useLiveFetch } from "@/hooks/useLiveFetch";
 import { toast } from "sonner";
 
 type Review = {
@@ -36,14 +37,15 @@ const Reviews = () => {
 
   useEffect(() => {
     document.title = "Reviews · Anshul";
-    supabase
+  }, []);
+
+  useLiveFetch(async (isActive) => {
+    const { data } = await supabase
       .from("testimonials")
       .select("id, quote, author, role, link, photo_url, video_url, featured")
-      .order("display_order")
-      .then(({ data }) => {
-        if (data && data.length > 0) setReviews(data as Review[]);
-      });
-  }, []);
+      .order("display_order");
+    if (isActive() && data && data.length > 0) setReviews(data as Review[]);
+  });
 
   const visible = filter === "featured" ? reviews.filter((r) => r.featured) : reviews;
 

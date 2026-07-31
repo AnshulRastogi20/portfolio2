@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Calendar, Clock, ExternalLink, Link2 } from "lucide-react";
 import { toast } from "sonner";
@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { SignupForm } from "@/components/SignupForm";
 import { BLOG_POSTS } from "@/lib/data";
 import { supabase } from "@/integrations/supabase/client";
+import { useLiveFetch } from "@/hooks/useLiveFetch";
 
 type Post = {
   slug: string; title: string; excerpt: string;
@@ -19,15 +20,15 @@ const Blog = () => {
   const [tag, setTag] = useState<string | null>(null);
   const [posts, setPosts] = useState<Post[]>(BLOG_POSTS as Post[]);
 
-  useEffect(() => {
-    (async () => {
-      const { data, error } = await supabase
-        .from("blog_posts")
-        .select("slug,title,excerpt,published_at,read_time,category,tags,featured,cover_url")
-        .eq("published", true)
-        .order("published_at", { ascending: false });
-      if (!error && data && data.length > 0) {
-        setPosts(data.map((p: any) => ({
+  useLiveFetch(async (isActive) => {
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("slug,title,excerpt,published_at,read_time,category,tags,featured,cover_url")
+      .eq("published", true)
+      .order("published_at", { ascending: false });
+    if (isActive() && !error && data && data.length > 0) {
+      setPosts(
+        data.map((p: any) => ({
           slug: p.slug,
           title: p.title,
           excerpt: p.excerpt ?? "",
@@ -37,10 +38,10 @@ const Blog = () => {
           tags: p.tags ?? [],
           featured: !!p.featured,
           coverUrl: p.cover_url ?? undefined,
-        })));
-      }
-    })();
-  }, []);
+        })),
+      );
+    }
+  });
 
   const allTags = Array.from(new Set(posts.flatMap((p) => p.tags)));
   const featured = posts.find((p) => p.featured);

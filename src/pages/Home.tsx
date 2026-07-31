@@ -9,20 +9,19 @@ import { Marquee } from "@/components/Marquee";
 import { SignupForm } from "@/components/SignupForm";
 import { STATS, BLOG_POSTS, PROJECT_CATEGORIES, TESTIMONIALS } from "@/lib/data";
 import { supabase } from "@/integrations/supabase/client";
-import { useEffect, useState } from "react";
+import { useLiveFetch } from "@/hooks/useLiveFetch";
+import { useState } from "react";
 
 const Home = () => {
   const [dbTestimonials, setDbTestimonials] = useState<{ id: string; quote: string; author: string; role: string | null; link: string | null; photo_url: string | null; video_url: string | null }[]>([]);
 
-  useEffect(() => {
-    supabase
+  useLiveFetch(async (isActive) => {
+    const { data } = await supabase
       .from("testimonials")
       .select("id, quote, author, role, link, photo_url, video_url")
-      .order("display_order")
-      .then(({ data }) => {
-        if (data && data.length > 0) setDbTestimonials(data);
-      });
-  }, []);
+      .order("display_order");
+    if (isActive() && data && data.length > 0) setDbTestimonials(data);
+  });
 
   const testimonials = dbTestimonials.length > 0
     ? dbTestimonials
