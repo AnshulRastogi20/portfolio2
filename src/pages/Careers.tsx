@@ -91,7 +91,7 @@ const Careers = () => (
       <div className="grid gap-8">
         {ROLES.map((r, i) => (
           <Reveal key={r.title} delay={i * 0.1}>
-            <div className="glass-strong rounded-3xl p-8 md:p-10 hover:border-primary/40 transition-all">
+            <div className="glass-strong rounded-3xl p-8 md:p-10 hover:border-primary/40 transition-colors">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">

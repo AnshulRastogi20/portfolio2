@@ -107,7 +107,7 @@ const ReviewDetail = () => {
 
           <div className="flex items-center gap-4 mb-8">
             {review.photo_url ? (
-              <img src={review.photo_url} alt={review.author} className="w-16 h-16 rounded-full object-cover ring-2 ring-primary/30" />
+              <img loading="lazy" decoding="async" src={review.photo_url} alt={review.author} className="w-16 h-16 rounded-full object-cover ring-2 ring-primary/30" />
             ) : (
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center font-display text-xl font-bold text-primary">
                 {review.author.charAt(0)}

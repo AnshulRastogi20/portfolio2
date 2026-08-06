@@ -19,4 +19,18 @@ export default defineConfig(({ mode }) => ({
     },
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime", "@tanstack/react-query", "@tanstack/query-core"],
   },
+  build: {
+    // Split the long-lived vendor code out of the app bundle so a content
+    // change doesn't force a re-download of React and friends.
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom", "react-router-dom"],
+          motion: ["framer-motion"],
+          supabase: ["@supabase/supabase-js"],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 700,
+  },
 }));

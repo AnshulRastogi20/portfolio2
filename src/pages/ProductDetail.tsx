@@ -128,7 +128,7 @@ const SocioverseShowcase = () => (
       <div className="grid md:grid-cols-2 gap-6">
         {SOCIOVERSE_MODULES.map((m, i) => (
           <Reveal key={m.title} delay={i * 0.06}>
-            <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-all">
+            <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-colors">
               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
                 <m.Icon className="w-5 h-5 text-primary" />
               </div>

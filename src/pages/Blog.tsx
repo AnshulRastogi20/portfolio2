@@ -103,11 +103,11 @@ const Blog = () => {
         <section className="container py-12">
           <Reveal>
             <Link to={`/blog/${featured.slug}`} className="block group">
-              <article className="glass-strong rounded-[2rem] overflow-hidden hover:border-primary/40 transition-all">
+              <article className="glass-strong rounded-[2rem] overflow-hidden hover:border-primary/40 transition-colors">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="aspect-[4/3] md:aspect-auto bg-gradient-mesh relative overflow-hidden">
                     {featured.coverUrl ? (
-                      <img src={featured.coverUrl} alt={featured.title} className="absolute inset-0 w-full h-full object-cover" />
+                      <img loading="lazy" decoding="async" src={featured.coverUrl} alt={featured.title} className="absolute inset-0 w-full h-full object-cover" />
                     ) : (
                       <>
                         <div className="absolute inset-0 grid-bg opacity-40" />
@@ -153,7 +153,7 @@ const Blog = () => {
                   <Link2 className="w-3.5 h-3.5" />
                 </button>
                 <Link to={`/blog/${p.slug}`} className="block h-full">
-                  <article className="glass rounded-3xl overflow-hidden h-full hover-lift hover:border-primary/40 transition-all">
+                  <article className="glass rounded-3xl overflow-hidden h-full hover-lift hover:border-primary/40 transition-colors">
                     {p.coverUrl && (
                       <div className="aspect-[16/9] overflow-hidden">
                         <img src={p.coverUrl} alt={p.title} loading="lazy" className="w-full h-full object-cover" />

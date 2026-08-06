@@ -6,31 +6,43 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/hooks/useAuth";
 import { Layout } from "@/components/Layout";
+import { Page } from "@/lib/routes";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Skills from "./pages/Skills";
-import Achievements from "./pages/Achievements";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import Newsletter from "./pages/Newsletter";
-import Courses from "./pages/Courses";
-import CourseDetail from "./pages/CourseDetail";
-import Shop from "./pages/Shop";
-import ProductDetail from "./pages/ProductDetail";
-import Coaching from "./pages/Coaching";
-import Services from "./pages/Services";
-import Now from "./pages/Now";
-import Uses from "./pages/Uses";
-import Contact from "./pages/Contact";
-import Resume from "./pages/Resume";
-import Admin from "./pages/Admin";
-import AdminLogin from "./pages/AdminLogin";
-import NotFound from "./pages/NotFound";
-import Careers from "./pages/Careers";
-import Reviews from "./pages/Reviews";
-import ReviewDetail from "./pages/ReviewDetail";
 
-const queryClient = new QueryClient();
+const {
+  "/about": About,
+  "/skills": Skills,
+  "/achievements": Achievements,
+  "/blog": Blog,
+  "/blog/:slug": BlogPost,
+  "/newsletter": Newsletter,
+  "/courses": Courses,
+  "/courses/:slug": CourseDetail,
+  "/shop": Shop,
+  "/shop/:slug": ProductDetail,
+  "/coaching": Coaching,
+  "/services": Services,
+  "/now": Now,
+  "/uses": Uses,
+  "/contact": Contact,
+  "/resume": Resume,
+  "/careers": Careers,
+  "/reviews": Reviews,
+  "/reviews/:id": ReviewDetail,
+  "/admin/login": AdminLogin,
+  "/admin": Admin,
+  "*": NotFound,
+} = Page;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60_000,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

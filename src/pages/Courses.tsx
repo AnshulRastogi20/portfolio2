@@ -86,7 +86,7 @@ const Courses = () => {
 };
 
 const CourseCard = ({ course: c }: { course: Course }) => (
-  <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">
+  <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-colors">
     <div className="flex items-center justify-between mb-6">
       {c.category && (
         <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-gold">
@@ -110,7 +110,7 @@ const CourseCard = ({ course: c }: { course: Course }) => (
     <div className="flex items-center justify-between font-mono text-xs pt-6 border-t border-border/50">
       {c.price && <span className="text-gold">{c.price}</span>}
       {c.external_link && (
-        <span className="text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+        <span className="text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-colors">
           View course <ExternalLink className="w-3 h-3" />
         </span>
       )}

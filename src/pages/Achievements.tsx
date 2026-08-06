@@ -52,10 +52,10 @@ const Achievements = () => {
         <div className="flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {featured.map((a, i) => (
             <Reveal key={a.title} delay={i * 0.08}>
-              <a href={a.link || undefined} className={`snap-start shrink-0 w-[320px] md:w-[420px] glass-strong rounded-3xl p-8 hover-lift hover:border-gold/50 transition-all block ${a.link ? "cursor-pointer" : ""}`}>
+              <a href={a.link || undefined} className={`snap-start shrink-0 w-[320px] md:w-[420px] glass-strong rounded-3xl p-8 hover-lift hover:border-gold/50 transition-colors block ${a.link ? "cursor-pointer" : ""}`}>
               <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/20 to-gold/20 mb-6 flex items-center justify-center relative overflow-hidden">
                   {a.imageUrl ? (
-                    <img src={a.imageUrl} alt={a.title} className="absolute inset-0 w-full h-full object-contain bg-white" />
+                    <img loading="lazy" decoding="async" src={a.imageUrl} alt={a.title} className="absolute inset-0 w-full h-full object-contain bg-white" />
                   ) : (
                     <>
                       <div className="absolute inset-0 grid-bg opacity-40" />
@@ -85,7 +85,7 @@ const Achievements = () => {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-5 h-10 rounded-full text-sm font-medium transition-all ${filter === f ? "bg-primary text-primary-foreground" : "glass hover:border-primary/40"}`}
+              className={`px-5 h-10 rounded-full text-sm font-medium transition-colors ${filter === f ? "bg-primary text-primary-foreground" : "glass hover:border-primary/40"}`}
             >
               {f}
             </button>
@@ -94,10 +94,10 @@ const Achievements = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {visible.map((a, i) => (
             <Reveal key={a.title + i} delay={i * 0.04}>
-              <a href={a.link || undefined} className={`glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-all block ${a.link ? "cursor-pointer" : ""}`}>
+              <a href={a.link || undefined} className={`glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-colors block ${a.link ? "cursor-pointer" : ""}`}>
                 {a.imageUrl && (
                   <div className="aspect-[16/10] rounded-2xl mb-5 overflow-hidden bg-white">
-                    <img src={a.imageUrl} alt={a.title} className="w-full h-full object-contain" />
+                    <img loading="lazy" decoding="async" src={a.imageUrl} alt={a.title} className="w-full h-full object-contain" />
                   </div>
                 )}
                 <div className="flex items-start justify-between mb-5">

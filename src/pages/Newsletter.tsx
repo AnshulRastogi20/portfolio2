@@ -70,7 +70,7 @@ const Newsletter = () => (
           { icon: Zap, title: "Quick wins", desc: "A 5-minute idea you can apply today." },
         ].map((b, i) => (
           <Reveal key={b.title} delay={i * 0.08}>
-            <div className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-all">
+            <div className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-colors">
               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
                 <b.icon className="w-5 h-5 text-primary" />
               </div>
@@ -92,7 +92,7 @@ const Newsletter = () => (
       <div className="space-y-3 max-w-3xl">
         {BLOG_POSTS.map((p, i) => (
           <Reveal key={p.slug} delay={i * 0.04}>
-            <a href={`/blog/${p.slug}`} className="group block glass rounded-2xl p-5 hover:border-primary/40 transition-all">
+            <a href={`/blog/${p.slug}`} className="group block glass rounded-2xl p-5 hover:border-primary/40 transition-colors">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <div className="font-mono text-xs text-muted-foreground mb-1">#{(48 - i).toString().padStart(3, "0")} · {p.date}</div>

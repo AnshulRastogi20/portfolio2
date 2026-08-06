@@ -47,7 +47,7 @@ export const Footer = () => {
                     const inner = (
                       <>
                         {label}
-                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all" />
+                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-colors" />
                       </>
                     );
                     return (
@@ -79,7 +79,7 @@ export const Footer = () => {
                 <a
                   key={i}
                   href={s.href}
-                  className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover-lift"
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors hover-lift"
                   aria-label={`Social link ${i}`}
                 >
                   <s.Icon className="w-4 h-4" />
@@ -88,7 +88,7 @@ export const Footer = () => {
                 <Link
                   key={i}
                   to={s.href}
-                  className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover-lift"
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors hover-lift"
                   aria-label={`Social link ${i}`}
                 >
                   <s.Icon className="w-4 h-4" />

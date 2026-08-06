@@ -31,7 +31,7 @@ const Skills = () => {
             <Reveal key={c.slug} delay={i * 0.08}>
               <button
                 onClick={() => setActive(c.slug)}
-                className={`w-full text-left glass rounded-3xl p-7 transition-all hover-lift ${active === c.slug ? "border-primary bg-primary/10" : "hover:border-primary/30"}`}
+                className={`w-full text-left glass rounded-3xl p-7 transition-colors hover-lift ${active === c.slug ? "border-primary bg-primary/10" : "hover:border-primary/30"}`}
               >
                 <div className="font-display text-5xl text-primary/50 mb-4">{c.icon}</div>
                 <h3 className="font-display text-xl font-bold mb-1">{c.title}</h3>
@@ -46,7 +46,7 @@ const Skills = () => {
         <div className="grid md:grid-cols-2 gap-5">
           {filtered.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
-              <a href={p.demoUrl || p.githubUrl || undefined} className="group glass rounded-3xl p-7 hover-lift hover:border-primary/40 transition-all block cursor-pointer">
+              <a href={p.demoUrl || p.githubUrl || undefined} className="group glass rounded-3xl p-7 hover-lift hover:border-primary/40 transition-colors block cursor-pointer">
                 <div className="aspect-[16/10] rounded-2xl bg-gradient-mesh mb-6 relative overflow-hidden">
                   {p.coverUrl ? (
                     <img src={p.coverUrl} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
@@ -107,7 +107,7 @@ const Skills = () => {
                         <span className="text-primary">{s.level}%</span>
                       </div>
                       <div className="h-1.5 rounded-full bg-secondary overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-primary to-gold rounded-full transition-all duration-1000" style={{ width: `${s.level}%` }} />
+                        <div className="h-full bg-gradient-to-r from-primary to-gold rounded-full transition-colors duration-1000" style={{ width: `${s.level}%` }} />
                       </div>
                     </div>
                   ))}

@@ -138,8 +138,8 @@ const Home = () => {
           {PROJECT_CATEGORIES.map((c, i) => (
             <Reveal key={c.slug} delay={i * 0.1}>
               <Link to="/skills" className="group block">
-                <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-all relative overflow-hidden">
-                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all" />
+                <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-colors relative overflow-hidden">
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors" />
                   <div className="font-display text-6xl text-primary/40 mb-6 group-hover:text-primary transition-colors">{c.icon}</div>
                   <h3 className="font-display text-2xl font-bold mb-2">{c.title}</h3>
                   <p className="text-muted-foreground mb-6">{c.desc}</p>
@@ -173,7 +173,7 @@ const Home = () => {
           ].map((v, i) => (
             <Reveal key={v.name} delay={i * 0.1}>
               <a href={v.url} className="block group">
-                <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">
+                <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-colors">
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-xs uppercase tracking-wider text-gold">{v.tag}</span>
                     <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform" />
@@ -205,7 +205,7 @@ const Home = () => {
           {BLOG_POSTS.slice(0, 3).map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.08}>
               <Link to={`/blog/${p.slug}`} className="group block">
-                <article className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-all">
+                <article className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-colors">
                   <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground mb-5">
                     <span className="text-primary">{p.category}</span>
                     <span>·</span>
@@ -213,7 +213,7 @@ const Home = () => {
                   </div>
                   <h3 className="font-display text-xl font-bold mb-3 group-hover:text-primary transition-colors">{p.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-3 mb-6">{p.excerpt}</p>
-                  <span className="font-mono text-xs inline-flex items-center gap-1.5 text-primary group-hover:gap-2 transition-all">
+                  <span className="font-mono text-xs inline-flex items-center gap-1.5 text-primary group-hover:gap-2 transition-colors">
                     <ExternalLink className="w-3 h-3" /> Read post <ArrowRight className="w-3 h-3" />
                   </span>
                 </article>
@@ -239,7 +239,7 @@ const Home = () => {
             <Reveal key={t.id ?? i} delay={i * 0.08}>
               <Link
                 to={`/reviews/${t.id}`}
-                className="glass rounded-3xl p-8 h-full relative block hover-lift hover:border-primary/40 transition-all cursor-pointer"
+                className="glass rounded-3xl p-8 h-full relative block hover-lift hover:border-primary/40 transition-colors cursor-pointer"
               >
                 <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
                 <div className="flex gap-0.5 mb-4">
@@ -251,7 +251,7 @@ const Home = () => {
                 <div className="font-mono text-xs flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     {t.photo_url && (
-                      <img src={t.photo_url} alt={t.author} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20" />
+                      <img loading="lazy" decoding="async" src={t.photo_url} alt={t.author} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20" />
                     )}
                     <div>
                       <div className="font-semibold">{t.author}</div>

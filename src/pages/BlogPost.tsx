@@ -107,7 +107,7 @@ const BlogPost = () => {
 
           <div className="aspect-[16/9] rounded-3xl bg-gradient-mesh relative overflow-hidden mb-12">
             {post.cover ? (
-              <img src={post.cover} alt={post.title} className="absolute inset-0 w-full h-full object-cover" />
+              <img loading="lazy" decoding="async" src={post.cover} alt={post.title} className="absolute inset-0 w-full h-full object-cover" />
             ) : (
               <>
                 <div className="absolute inset-0 grid-bg opacity-40" />
@@ -169,6 +169,7 @@ const BlogPost = () => {
                       src={src}
                       alt={`${post.title} - ${i + 1}`}
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </button>
@@ -196,7 +197,7 @@ const BlogPost = () => {
         <div className="grid md:grid-cols-3 gap-6">
           {related.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
-              <Link to={`/blog/${p.slug}`} className="group block glass rounded-3xl p-7 hover-lift hover:border-primary/40 transition-all h-full">
+              <Link to={`/blog/${p.slug}`} className="group block glass rounded-3xl p-7 hover-lift hover:border-primary/40 transition-colors h-full">
                 <div className="font-mono text-xs text-primary mb-4">{p.category}</div>
                 <h3 className="font-display text-lg font-bold mb-2 group-hover:text-primary transition-colors">{p.title}</h3>
                 <p className="text-sm text-muted-foreground line-clamp-2">{p.excerpt}</p>
@@ -219,7 +220,7 @@ const BlogPost = () => {
           >
             <X className="w-5 h-5" />
           </button>
-          <img
+          <img loading="lazy" decoding="async"
             src={lightbox}
             alt="Gallery"
             className="max-w-full max-h-full object-contain rounded-2xl"

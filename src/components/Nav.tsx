@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Moon, Sun, ChevronDown } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "./ui/button";
+import { prefetchRoute } from "@/lib/routes";
 
 const mainLinks = [
   { to: "/", label: "Home" },
@@ -36,8 +37,18 @@ export const Nav = () => {
   const moreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    // Passive + rAF-coalesced: a non-passive scroll listener lets this block
+    // the scroll itself, and it used to fire setState on every wheel event.
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -57,10 +68,15 @@ export const Nav = () => {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "py-3" : "py-5"}`}
+        className={`fixed top-0 inset-x-0 z-50 ${scrolled ? "py-3" : "py-5"}`}
+        style={{ transition: "padding 300ms cubic-bezier(0.22, 1, 0.36, 1)" }}
       >
         <div className="container">
-          <div className={`flex items-center justify-between rounded-full px-5 py-2.5 transition-all ${scrolled ? "glass-strong shadow-elegant" : "glass"}`}>
+          {/* The nav is the one element that genuinely floats over moving
+              content, so it keeps the blur - at a fixed radius. Transitioning
+              between two blur strengths re-blurred the bar for 500ms on every
+              scroll start. */}
+          <div className={`flex items-center justify-between rounded-full px-5 py-2.5 glass-blur transition-colors duration-300 ${scrolled ? "glass-strong shadow-elegant" : "glass"}`}>
             <Link to="/" className="font-display text-xl font-bold tracking-tight">
               <span className="text-gradient">Anshul</span>
               <span className="text-foreground/70">.</span>
@@ -73,6 +89,8 @@ export const Nav = () => {
                   <Link
                     key={l.to}
                     to={l.to}
+                    onMouseEnter={() => prefetchRoute(l.to)}
+                    onFocus={() => prefetchRoute(l.to)}
                     className={`relative px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${active ? "text-primary" : "text-foreground/70 hover:text-foreground"}`}
                   >
                     {active && (
@@ -110,6 +128,8 @@ export const Nav = () => {
                           <Link
                             key={l.to}
                             to={l.to}
+                            onMouseEnter={() => prefetchRoute(l.to)}
+                            onFocus={() => prefetchRoute(l.to)}
                             className={`block px-4 py-2.5 text-sm rounded-xl transition-colors ${active ? "text-primary bg-primary/10" : "text-foreground/70 hover:text-foreground hover:bg-secondary/50"}`}
                           >
                             {l.label}

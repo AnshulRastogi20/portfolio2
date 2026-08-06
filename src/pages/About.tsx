@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import profilePhoto from "@/assets/profile.png";
+import profilePhoto from "@/assets/profile.webp";
 import { Reveal } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { VALUES, VENTURES, TIMELINE, SITE } from "@/lib/data";
@@ -34,7 +34,7 @@ const About = () => (
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-gold/30 blur-3xl rounded-full" />
             <div className="relative aspect-square rounded-[2rem] glass-strong overflow-hidden">
-              <img src={profilePhoto} alt="Anshul Rastogi" className="absolute inset-0 w-full h-full object-cover" />
+              <img src={profilePhoto} alt="Anshul Rastogi" decoding="async" fetchPriority="high" width={800} height={800} className="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         </Reveal>
@@ -52,7 +52,7 @@ const About = () => (
       <div className="grid md:grid-cols-3 gap-5">
         {VALUES.map((v, i) => (
           <Reveal key={v.title} delay={i * 0.08}>
-            <div className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-all">
+            <div className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-colors">
               <div className="font-display text-5xl text-primary mb-5">{v.icon}</div>
               <h3 className="font-display text-xl font-bold mb-2">{v.title}</h3>
               <p className="text-sm text-muted-foreground">{v.desc}</p>
@@ -77,7 +77,7 @@ const About = () => (
           const linkProps = external ? { href: v.url } : { href: v.url };
           return (
             <Reveal key={v.name} delay={i * 0.1}>
-              <Comp {...linkProps} className="group block glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-all">
+              <Comp {...linkProps} className="group block glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-colors">
                 <div className="flex items-start justify-between mb-6">
                   <span className="font-mono text-xs uppercase tracking-wider text-gold glass rounded-full px-3 py-1">{v.tag}</span>
                   <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform" />

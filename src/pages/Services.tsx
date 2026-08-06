@@ -54,7 +54,7 @@ const Services = () => (
       <div className="grid md:grid-cols-2 gap-6">
         {SERVICES.map((s, i) => (
           <Reveal key={s.slug} delay={i * 0.06}>
-            <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-all flex flex-col">
+            <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-colors flex flex-col">
               <div className="flex items-start justify-between mb-5">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-gold glass rounded-full px-3 py-1">Service</span>
               </div>

@@ -95,7 +95,7 @@ const Reviews = () => {
             <Reveal key={r.id} delay={i * 0.06}>
               <Link
                 to={`/reviews/${r.id}`}
-                className="glass rounded-3xl p-8 h-full relative block hover-lift hover:border-primary/40 transition-all cursor-pointer"
+                className="glass rounded-3xl p-8 h-full relative block hover-lift hover:border-primary/40 transition-colors cursor-pointer"
               >
                 <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
                 <div className="flex gap-0.5 mb-4">
@@ -107,7 +107,7 @@ const Reviews = () => {
                 <div className="font-mono text-xs flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
                     {r.photo_url && (
-                      <img src={r.photo_url} alt={r.author} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20" />
+                      <img loading="lazy" decoding="async" src={r.photo_url} alt={r.author} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20" />
                     )}
                     <div className="min-w-0">
                       <div className="font-semibold truncate">{r.author}</div>

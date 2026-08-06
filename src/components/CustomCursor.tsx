@@ -10,33 +10,62 @@ export const CustomCursor = () => {
   const hovering = useRef(false);
 
   useEffect(() => {
+    // Touch / pen devices never render the cursor, so don't run a loop for it.
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
     let raf = 0;
+    const scale = { dot: 1, ring: 1 };
+
     const animate = () => {
-      ring.current.x += (target.current.x - ring.current.x) * 0.18;
-      ring.current.y += (target.current.y - ring.current.y) * 0.18;
+      const dx = target.current.x - ring.current.x;
+      const dy = target.current.y - ring.current.y;
+      ring.current.x += dx * 0.18;
+      ring.current.y += dy * 0.18;
+
+      const wantDot = hovering.current ? 0 : 1;
+      const wantRing = hovering.current ? 1.6 : 1;
+      scale.dot += (wantDot - scale.dot) * 0.2;
+      scale.ring += (wantRing - scale.ring) * 0.2;
+
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${target.current.x}px, ${target.current.y}px) translate(-50%,-50%) scale(${hovering.current ? 0 : 1})`;
+        dotRef.current.style.transform = `translate(${target.current.x}px, ${target.current.y}px) translate(-50%,-50%) scale(${scale.dot})`;
       }
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${ring.current.x}px, ${ring.current.y}px) translate(-50%,-50%) scale(${hovering.current ? 1.6 : 1})`;
+        ringRef.current.style.transform = `translate(${ring.current.x}px, ${ring.current.y}px) translate(-50%,-50%) scale(${scale.ring})`;
       }
-      raf = requestAnimationFrame(animate);
+
+      // Park the loop once everything has settled. It used to run at 60fps
+      // forever, even on an idle page with the cursor sitting still.
+      const settled =
+        Math.abs(dx) < 0.1 &&
+        Math.abs(dy) < 0.1 &&
+        Math.abs(wantDot - scale.dot) < 0.01 &&
+        Math.abs(wantRing - scale.ring) < 0.01;
+      raf = settled ? 0 : requestAnimationFrame(animate);
     };
-    raf = requestAnimationFrame(animate);
+
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(animate);
+    };
 
     const onMove = (e: MouseEvent) => {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
+      wake();
     };
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
-      hovering.current = !!t.closest("a, button, [role='button']");
+      const next = !!t.closest("a, button, [role='button']");
+      if (next !== hovering.current) {
+        hovering.current = next;
+        wake();
+      }
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseover", onOver, { passive: true });
     return () => {
-      cancelAnimationFrame(raf);
+      if (raf) cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseover", onOver);
     };

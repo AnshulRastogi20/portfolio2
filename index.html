@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!-- Fonts were @imported from inside index.css, which serialises them:
+         the browser had to download the CSS before it even discovered the
+         font requests. Preconnecting and requesting them here overlaps both. -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&f[]=satoshi@900,700,500,400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
     <title>Anshul Rastogi - Systems Architect & Founder | Perspective is Everything</title>
     <meta name="description" content="20-year-old Systems Architect & Founder from Delhi. Building Up N Running (₹50K MRR), Socioverse, and BunkToBrains (7000+ students). Receipt first. Opinion second." />
     <meta name="author" content="Anshul Rastogi" />
@@ -11,11 +26,11 @@
     <meta property="og:title" content="Anshul Rastogi - Perspective is Everything" />
     <meta property="og:description" content="20-year-old builder from Delhi. Three ventures, real receipts. Founder of Up N Running, Socioverse & BunkToBrains." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content="/og-image.jpg" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@AnshulR20" />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image" content="/og-image.jpg" />
 
     <link rel="canonical" href="https://www.anshulrastogi.xyz" />
   </head>

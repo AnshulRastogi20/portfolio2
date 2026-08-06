@@ -26,7 +26,7 @@ const Shop = () => {
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className={`px-5 h-10 rounded-full text-sm font-medium transition-all capitalize ${tab === t ? "bg-primary text-primary-foreground" : "hover:bg-secondary"}`}
+                className={`px-5 h-10 rounded-full text-sm font-medium transition-colors capitalize ${tab === t ? "bg-primary text-primary-foreground" : "hover:bg-secondary"}`}
               >
                 {t}
               </button>
@@ -40,7 +40,7 @@ const Shop = () => {
           {filtered.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
               <Link to={`/shop/${p.slug}`} className="group block">
-                <div className="glass rounded-3xl overflow-hidden hover-lift hover:border-gold/50 transition-all h-full flex flex-col">
+                <div className="glass rounded-3xl overflow-hidden hover-lift hover:border-gold/50 transition-colors h-full flex flex-col">
                   <div className="aspect-square bg-gradient-mesh relative overflow-hidden">
                     <div className="absolute inset-0 grid-bg opacity-40" />
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -56,7 +56,7 @@ const Shop = () => {
                     <p className="text-sm text-muted-foreground mb-5 flex-1">{p.desc}</p>
                     <div className="flex items-center justify-between font-mono text-xs">
                       <span className="text-gold font-bold">{p.price}</span>
-                      <span className="text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                      <span className="text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-colors">
                         Notify me <ArrowRight className="w-3 h-3" />
                       </span>
                     </div>
