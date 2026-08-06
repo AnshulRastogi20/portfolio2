@@ -1,0 +1,76 @@
+name: Keep Supabase awake
+
+# Supabase pauses free-tier projects after 7 days with no API activity. That
+# is what took ddpubhkgcbcwncyeebzc offline and made the whole site silently
+# fall back to the static data in src/lib/data.ts.
+#
+# This pings the REST API every 3 days, so the project never gets close to
+# the 7-day window even if one run fails.
+#
+# "*/3" on day-of-month fires on the 1st, 4th, 7th ... 28th, 31st. The gap is
+# never more than 3 days, including across month boundaries.
+on:
+  schedule:
+    - cron: "0 6 */3 * *" # 06:00 UTC = 11:30 IST
+  workflow_dispatch: # lets you trigger a run by hand from the Actions tab
+
+concurrency:
+  group: keep-supabase-awake
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Query Supabase
+        env:
+          SUPABASE_URL: https://ddpubhkgcbcwncyeebzc.supabase.co
+          # This is the publishable ("anon") key. It is not a secret - it is
+          # compiled into the browser bundle and served to every visitor, and
+          # RLS is what actually protects the data. Set a repository secret
+          # named SUPABASE_PUBLISHABLE_KEY to override it without editing this
+          # file; if the secret is unset the literal below is used, so the
+          # workflow works with no setup.
+          SUPABASE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkcHViaGtnY2Jjd25jeWVlYnpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NjkwMjYsImV4cCI6MjA5MzA0NTAyNn0.MLYo1fvxUR2vVmhz5-c2kzfgESHhNq2RZ7lw_yDCpnU' }}
+        run: |
+          set -euo pipefail
+
+          # A real table read, not just a health endpoint - it has to touch
+          # Postgres for Supabase to count it as activity.
+          status=$(curl -sS -o /tmp/body.json -w '%{http_code}' \
+            --max-time 30 --retry 3 --retry-delay 20 --retry-all-errors \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}" \
+            "${SUPABASE_URL}/rest/v1/testimonials?select=id&limit=1")
+
+          echo "HTTP ${status} at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "Response: $(head -c 200 /tmp/body.json)"
+
+          if [ "${status}" != "200" ]; then
+            echo "::error::Supabase ping failed with HTTP ${status}. The project may be paused - check https://supabase.com/dashboard/project/ddpubhkgcbcwncyeebzc"
+            exit 1
+          fi
+
+          echo "Project is awake."
+
+      # GitHub disables scheduled workflows after 60 days with no repository
+      # activity, and a scheduled run does not itself count as activity. If you
+      # expect to go quiet on this repo for that long, make the schedule
+      # self-sustaining by adding all three of the following:
+      #
+      #   1. `permissions: { contents: write }` at the job level
+      #   2. `- uses: actions/checkout@v4` as the first step
+      #   3. this step, last:
+      #
+      #      - name: Heartbeat commit
+      #        run: |
+      #          git config user.name "github-actions[bot]"
+      #          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      #          date -u '+%Y-%m-%dT%H:%M:%SZ' > .github/last-ping.txt
+      #          git add .github/last-ping.txt
+      #          git commit -m "chore: supabase keepalive heartbeat" || exit 0
+      #          git push
+      #
+      # Cost: one commit every 3 days. Otherwise just re-enable the workflow
+      # from the Actions tab if GitHub ever emails you that it was disabled.
