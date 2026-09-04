@@ -8,7 +8,7 @@ const Resume = () => {
   return (
     <section className="container py-20 max-w-4xl">
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// CV</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-brand mb-4">// CV</p>
         <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
           The <span className="text-gradient">resume.</span>
         </h1>
@@ -34,7 +34,7 @@ const Resume = () => {
           <iframe src={resumeUrl} className="w-full h-full border-0" title="Resume PDF">
             <div className="p-10 text-center text-muted-foreground">
               PDF preview unavailable.{" "}
-              <a href={resumeUrl} className="text-primary underline">Download instead</a>.
+              <a href={resumeUrl} className="text-brand underline">Download instead</a>.
             </div>
           </iframe>
         </div>

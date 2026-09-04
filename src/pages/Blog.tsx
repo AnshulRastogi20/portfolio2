@@ -55,7 +55,7 @@ const Blog = () => {
     <>
       <section className="container py-20">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// The Journal</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-brand mb-4">// The Journal</p>
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6 max-w-4xl">
             Notes from <br />
             <span className="text-gradient">the workbench.</span>
@@ -120,11 +120,11 @@ const Blog = () => {
                   </div>
                   <div className="p-10 md:p-12 flex flex-col justify-center">
                     <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground mb-5">
-                      <span className="text-primary">{featured.category}</span>
+                      <span className="text-brand">{featured.category}</span>
                       <span className="flex items-center gap-1.5"><Calendar className="w-3 h-3" /> {featured.date}</span>
                       <span className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> {featured.readTime}</span>
                     </div>
-                    <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 group-hover:text-primary transition-colors">{featured.title}</h2>
+                    <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 group-hover:text-brand transition-colors">{featured.title}</h2>
                     <p className="text-muted-foreground">{featured.excerpt}</p>
                   </div>
                 </div>
@@ -148,7 +148,7 @@ const Blog = () => {
                     catch { toast.error("Could not copy"); }
                   }}
                   aria-label="Copy link"
-                  className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 hover:border-primary/40 hover:text-primary transition"
+                  className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 hover:border-primary/40 hover:text-brand transition"
                 >
                   <Link2 className="w-3.5 h-3.5" />
                 </button>
@@ -161,18 +161,18 @@ const Blog = () => {
                     )}
                     <div className="p-7">
                       <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground mb-5">
-                        <span className="text-primary">{p.category}</span>
+                        <span className="text-brand">{p.category}</span>
                         <span>·</span>
                         <span>{p.readTime}</span>
                       </div>
-                      <h3 className="font-display text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">{p.title}</h3>
+                      <h3 className="font-display text-xl font-bold mb-3 group-hover:text-brand transition-colors leading-tight">{p.title}</h3>
                       <p className="text-sm text-muted-foreground line-clamp-3 mb-5">{p.excerpt}</p>
                       <div className="flex items-center gap-1.5 flex-wrap">
                         {p.tags.map((t) => (
                           <span key={t} className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">#{t}</span>
                         ))}
                       </div>
-                      <span className="inline-flex items-center gap-1.5 text-xs text-primary mt-4 font-mono">
+                      <span className="inline-flex items-center gap-1.5 text-xs text-brand mt-4 font-mono">
                         <ExternalLink className="w-3 h-3" /> Read post
                       </span>
                     </div>

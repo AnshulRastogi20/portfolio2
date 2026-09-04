@@ -77,7 +77,7 @@ const Careers = () => (
   <>
     <section className="container py-20">
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// Careers</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-brand mb-4">// Careers</p>
         <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6 max-w-4xl">
           Join the <span className="text-gradient">team.</span>
         </h1>
@@ -95,7 +95,7 @@ const Careers = () => (
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                    <r.icon className="w-6 h-6 text-primary" />
+                    <r.icon className="w-6 h-6 text-brand" />
                   </div>
                   <div>
                     <h2 className="font-display text-2xl font-bold">{r.title}</h2>
@@ -113,11 +113,11 @@ const Careers = () => (
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="font-mono text-xs uppercase tracking-wider text-primary mb-3">What you'll do</h3>
+                  <h3 className="font-mono text-xs uppercase tracking-wider text-brand mb-3">What you'll do</h3>
                   <ul className="space-y-2">
                     {r.requirements.map((req, j) => (
                       <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
-                        <span className="text-primary mt-1">→</span> {req}
+                        <span className="text-brand mt-1">→</span> {req}
                       </li>
                     ))}
                   </ul>

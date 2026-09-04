@@ -12,7 +12,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Cabinet Grotesk', 'Satoshi', 'system-ui', 'sans-serif'],
+        display: ['Clash Display', 'Satoshi', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
@@ -34,6 +34,12 @@ export default {
         gold: {
           DEFAULT: "hsl(var(--gold))",
           foreground: "hsl(var(--gold-foreground))",
+        },
+        // Amber that is safe to set type in on the current surface. Use this,
+        // not `primary`, for any amber text - see the note in index.css.
+        brand: {
+          DEFAULT: "hsl(var(--brand-text))",
+          soft: "hsl(var(--brand-text-2))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",

@@ -41,6 +41,15 @@ if (!window.requestAnimationFrame) {
   });
 }
 
+// jsdom implements neither, and a component that calls scrollIntoView in an
+// effect would otherwise throw and unmount the tree under test.
+if (!Element.prototype.scrollIntoView) {
+  Object.defineProperty(Element.prototype, "scrollIntoView", {
+    writable: true,
+    value: () => {},
+  });
+}
+
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string) => ({

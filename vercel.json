@@ -1,5 +1,69 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "comment": [
+    "sightofanshul.com is canonical. Every other channel already says",
+    "'sightofanshul' - the Instagram handle, the brand deck, the logo files - so",
+    "the name someone types after watching a video should match the name they",
+    "just saw. anshulrastogi.com and the older .xyz redirect to it.",
+    "",
+    "301 and not 308: the spec asks for a 301, and Vercel's `permanent: true`",
+    "emits a 308, so the status code is set explicitly.",
+    "",
+    "The redirect is the point. Serving the same pages on both hosts is",
+    "duplicate content and splits the SEO signal between two names.",
+    "",
+    "Add every host below to this project in the Vercel dashboard, and take the",
+    "apex A record or nameserver values from that dashboard rather than from any",
+    "IP written down here - they change and a hardcoded one goes stale silently."
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "anshulrastogi.com" }],
+      "destination": "https://sightofanshul.com/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.anshulrastogi.com" }],
+      "destination": "https://sightofanshul.com/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "anshulrastogi.xyz" }],
+      "destination": "https://sightofanshul.com/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.anshulrastogi.xyz" }],
+      "destination": "https://sightofanshul.com/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.sightofanshul.com" }],
+      "destination": "https://sightofanshul.com/:path*",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/downloads/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/brand/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

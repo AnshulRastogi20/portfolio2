@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Mail, MapPin, Clock, Send, Calendar } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
+import { Mail, MapPin, Clock, Send, Download } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -56,32 +56,35 @@ const Contact = () => {
       <div className="grid lg:grid-cols-12 gap-12">
         <div className="lg:col-span-5">
           <Reveal>
-            <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// Get in touch</p>
-            <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
+            <p className="font-mono text-xs uppercase tracking-widest text-brand mb-4">// Get in touch</p>
+            <h1 className="font-display text-5xl md:text-7xl font-semibold leading-[0.95] mb-6">
               Let's <span className="text-gradient">talk.</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-10">
-              Got a project, question, or just want to say hi? Drop a note, or skip the form and book a 30-min strategy call directly.
+              A question about the course, something in the workbook that did not work, or
+              just hello - this reaches me. Fair warning on one thing: Up N Running is not
+              taking new clients right now, so if you are here about agency work, I am
+              probably not the answer this month.
             </p>
 
-            <a
-              href={SITE.calendly}
+            <Link
+              to="/workbook"
               className="group flex items-center gap-4 glass-strong rounded-2xl p-5 mb-6 hover:border-primary/40 transition-colors hover-lift"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                <Calendar className="w-5 h-5 text-primary" />
+                <Download className="w-5 h-5 text-brand" />
               </div>
               <div className="flex-1">
-                <div className="font-display text-lg font-bold">Book a free strategy call</div>
-                <div className="font-mono text-xs text-muted-foreground">30 min · Up N Running founder</div>
+                <div className="font-display text-lg font-semibold">Get the free workbook</div>
+                <div className="font-mono text-xs text-muted-foreground">15 sections · no catch</div>
               </div>
-              <span className="font-mono text-xs text-primary group-hover:translate-x-1 transition-transform">→</span>
-            </a>
+              <span className="font-mono text-xs text-brand group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
 
             <div className="space-y-5">
               <InfoRow icon={Mail} label="Email" value={SITE.email} />
               <InfoRow icon={MapPin} label="Based in" value={SITE.location} />
-              <InfoRow icon={Clock} label="Response time" value="Within 48 hours" />
+              <InfoRow icon={Clock} label="Usually replies in" value="A couple of days" />
             </div>
           </Reveal>
         </div>
@@ -146,7 +149,7 @@ const Contact = () => {
 const InfoRow = ({ icon: Icon, label, value }: { icon: any; label: string; value: string }) => (
   <div className="flex items-center gap-4 glass rounded-2xl p-4">
     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-      <Icon className="w-4 h-4 text-primary" />
+      <Icon className="w-4 h-4 text-brand" />
     </div>
     <div>
       <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>

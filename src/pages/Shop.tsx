@@ -5,24 +5,29 @@ import { Reveal } from "@/components/PageTransition";
 import { PRODUCTS } from "@/lib/data";
 
 const Shop = () => {
-  const [tab, setTab] = useState<"all" | "digital" | "merch">("all");
+  const [tab, setTab] = useState<"all" | "saas" | "service">("all");
   const filtered = tab === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.type === tab);
 
   return (
     <>
       <section className="container py-20">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-gold mb-4">// The Shop</p>
-          <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6 max-w-4xl">
-            Things I made <br />
-            <span className="text-gradient-gold">for you.</span>
+          <p className="font-mono text-xs uppercase tracking-widest text-gold mb-4">// What I've shipped</p>
+          <h1 className="font-display text-5xl md:text-7xl font-semibold leading-[0.95] mb-6 max-w-4xl">
+            Things I <br />
+            <span className="text-gradient-gold">shipped.</span>
           </h1>
+          {/* This used to promise "digital products, templates, and a few pieces
+              of merch". None of those exist - the list underneath is the SaaS
+              and the systems built at Up N Running, so that is what it says. */}
           <p className="text-lg text-muted-foreground max-w-2xl mb-10">
-            Digital products, templates, and a few pieces of merch. Most are on the waitlist. Drops are intentional and small.
+            One SaaS that is live, and the systems Up N Running built for clients between
+            June 2025 and June 2026. There is no store here and nothing on this page is for
+            sale - the agency is not taking new clients right now.
           </p>
 
           <div className="inline-flex glass rounded-full p-1.5 gap-1">
-            {(["all", "digital", "merch"] as const).map((t) => (
+            {(["all", "saas", "service"] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -56,7 +61,7 @@ const Shop = () => {
                     <p className="text-sm text-muted-foreground mb-5 flex-1">{p.desc}</p>
                     <div className="flex items-center justify-between font-mono text-xs">
                       <span className="text-gold font-bold">{p.price}</span>
-                      <span className="text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-colors">
+                      <span className="text-brand inline-flex items-center gap-1 group-hover:gap-2 transition-colors">
                         Notify me <ArrowRight className="w-3 h-3" />
                       </span>
                     </div>

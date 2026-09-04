@@ -251,9 +251,112 @@ export type Database = {
         }
         Relationships: []
       }
+      workbook_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: number
+          path: string | null
+          referrer: string | null
+          utm: Json
+          visitor_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: never
+          path?: string | null
+          referrer?: string | null
+          utm?: Json
+          visitor_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: never
+          path?: string | null
+          referrer?: string | null
+          utm?: Json
+          visitor_id?: string | null
+        }
+        Relationships: []
+      }
+      workbook_signups: {
+        Row: {
+          consent_token: string | null
+          consent_version: string
+          consent_wording: string
+          created_at: string
+          email: string | null
+          reconciled_at: string | null
+          socioverse_order_id: string | null
+          first_name: string | null
+          id: string
+          ip: unknown
+          marketing_consent: boolean
+          referrer: string | null
+          source: string
+          user_agent: string | null
+          utm: Json
+        }
+        Insert: {
+          consent_token?: string | null
+          consent_version?: string
+          consent_wording: string
+          created_at?: string
+          email?: string | null
+          reconciled_at?: string | null
+          socioverse_order_id?: string | null
+          first_name?: string | null
+          id?: string
+          ip?: unknown
+          marketing_consent?: boolean
+          referrer?: string | null
+          source?: string
+          user_agent?: string | null
+          utm?: Json
+        }
+        Update: {
+          consent_token?: string | null
+          consent_version?: string
+          consent_wording?: string
+          created_at?: string
+          email?: string | null
+          reconciled_at?: string | null
+          socioverse_order_id?: string | null
+          first_name?: string | null
+          id?: string
+          ip?: unknown
+          marketing_consent?: boolean
+          referrer?: string | null
+          source?: string
+          user_agent?: string | null
+          utm?: Json
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      workbook_unreconciled_consent: {
+        Row: {
+          consent_token: string | null
+          created_at: string | null
+          id: string | null
+          ip: unknown
+          marketing_consent: boolean | null
+        }
+        Relationships: []
+      }
+      workbook_funnel: {
+        Row: {
+          day: string | null
+          form_views: number | null
+          page_views: number | null
+          submit_rate_pct: number | null
+          submits: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_role: {

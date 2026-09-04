@@ -1,20 +1,23 @@
 import { Link } from "react-router-dom";
-import { Github, Linkedin, Twitter, Youtube, Mail, ArrowUpRight } from "lucide-react";
+import { Github, Instagram, Linkedin, Twitter, Youtube, Mail, ArrowUpRight } from "lucide-react";
 import { SignupForm } from "./SignupForm";
+import { Wordmark } from "./Brand";
+import { SITE } from "@/lib/data";
 
 const cols: { title: string; links: [string, string][] }[] = [
-  { title: "Site", links: [["/", "Home"], ["/about", "About"], ["/skills", "Work"], ["/achievements", "Awards"]] },
-  { title: "Audience", links: [["/blog", "Blog"], ["/newsletter", "Newsletter"], ["/now", "Now"], ["/resume", "Resume"]] },
-  { title: "Offers", links: [["/services", "Services"], ["/courses", "Courses"], ["/careers", "Careers"], ["/coaching", "Coaching"]] },
-  { title: "Ventures", links: [["https://www.upnrunning.in", "Up N Running"], ["https://www.socioverse.io", "Socioverse"], ["https://www.bunktobrains.com", "BunkToBrains"], ["/contact", "Contact"]] },
+  { title: "The course", links: [["/workbook", "Free workbook"], [SITE.socials.youtube, "The lectures"], ["/coaching", "One to one"], ["/newsletter", "Newsletter"]] },
+  { title: "Site", links: [["/", "Home"], ["/about", "About"], ["/skills", "Work"], ["/blog", "Blog"]] },
+  { title: "More", links: [["/achievements", "Awards"], ["/reviews", "Reviews"], ["/now", "Now"], ["/resume", "Resume"]] },
+  { title: "Built", links: [[SITE.socials.socioverse, "Socioverse"], [SITE.socials.upnrunning, "Up N Running"], ["/services", "The systems"], ["/contact", "Contact"]] },
 ];
 
 const socials = [
-  { Icon: Twitter, href: "https://x.com/AnshulR20" },
-  { Icon: Github, href: "https://github.com/AnshulRastogi20" },
-  { Icon: Linkedin, href: "https://www.linkedin.com/in/anshulrastogi20" },
-  { Icon: Youtube, href: "https://youtube.com/@sightofanshul" },
-  { Icon: Mail, href: "/contact" },
+  { Icon: Youtube, href: SITE.socials.youtube, label: "YouTube" },
+  { Icon: Instagram, href: SITE.socials.instagram, label: "Instagram" },
+  { Icon: Twitter, href: SITE.socials.twitter, label: "X" },
+  { Icon: Github, href: SITE.socials.github, label: "GitHub" },
+  { Icon: Linkedin, href: SITE.socials.linkedin, label: "LinkedIn" },
+  { Icon: Mail, href: "/contact", label: "Email" },
 ];
 
 export const Footer = () => {
@@ -24,12 +27,16 @@ export const Footer = () => {
       <div className="container py-20 relative">
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-5">
-            <h3 className="font-display text-4xl md:text-5xl font-bold leading-[0.95] mb-4">
-              Build with me. <br />
-              <span className="text-gradient">Get the newsletter.</span>
+            <div className="mb-6">
+              <Wordmark className="max-w-[200px]" />
+            </div>
+            <h3 className="font-display text-3xl md:text-4xl font-semibold leading-[0.95] mb-4">
+              One email a week. <br />
+              <span className="text-gradient">Fridays.</span>
             </h3>
             <p className="text-muted-foreground mb-6 max-w-md">
-              Weekly notes on AI, building products, and the messy reality of shipping. No fluff.
+              What I'm building and what broke. It's a new list, so you would be early.
+              Unsubscribe in one click, any time.
             </p>
             <div className="max-w-md">
               <SignupForm context="footer" ctaLabel="Join" />
@@ -43,7 +50,7 @@ export const Footer = () => {
                 <ul className="space-y-2.5">
                   {c.links.map(([href, label]) => {
                     const external = /^https?:\/\//.test(href);
-                    const className = "group inline-flex items-center gap-1 text-sm hover:text-primary transition-colors";
+                    const className = "group inline-flex items-center gap-1 text-sm hover:text-brand transition-colors";
                     const inner = (
                       <>
                         {label}
@@ -67,10 +74,12 @@ export const Footer = () => {
         </div>
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-8 border-t border-border/50">
-          <div className="flex items-center gap-3 text-sm text-muted-foreground">
-            <span className="font-mono text-xs">© {new Date().getFullYear()} ANSHUL.</span>
+          <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+            <span className="font-mono text-xs">© {new Date().getFullYear()} {SITE.fullName}</span>
             <span className="opacity-50">·</span>
-            <span>Crafted with intention.</span>
+            <Link to="/privacy" className="text-sm hover:text-brand transition-colors">Privacy</Link>
+            <span className="opacity-50">·</span>
+            <Link to="/unsubscribe" className="text-sm hover:text-brand transition-colors">Unsubscribe</Link>
           </div>
           <div className="flex gap-2">
             {socials.map((s, i) => {
@@ -80,7 +89,7 @@ export const Footer = () => {
                   key={i}
                   href={s.href}
                   className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors hover-lift"
-                  aria-label={`Social link ${i}`}
+                  aria-label={s.label}
                 >
                   <s.Icon className="w-4 h-4" />
                 </a>
@@ -89,7 +98,7 @@ export const Footer = () => {
                   key={i}
                   to={s.href}
                   className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors hover-lift"
-                  aria-label={`Social link ${i}`}
+                  aria-label={s.label}
                 >
                   <s.Icon className="w-4 h-4" />
                 </Link>

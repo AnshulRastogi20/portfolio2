@@ -12,3 +12,8 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Admin is behind auth anyway, but there is no reason to spend crawl budget on it.
+Disallow: /admin
+
+Host: sightofanshul.com

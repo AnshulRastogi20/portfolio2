@@ -1,17 +1,25 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Star, Quote, Play, ExternalLink } from "lucide-react";
+import { ArrowRight, Quote, Play, ExternalLink, Youtube, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/PageTransition";
 import { TextScramble } from "@/components/TextScramble";
 import { Counter } from "@/components/Counter";
 import { Marquee } from "@/components/Marquee";
-import { SignupForm } from "@/components/SignupForm";
-import { STATS, BLOG_POSTS, PROJECT_CATEGORIES, TESTIMONIALS } from "@/lib/data";
+import { EyeMark } from "@/components/Brand";
+import { COURSE, STATS, RECEIPTS, BLOG_POSTS, PROJECT_CATEGORIES, TESTIMONIALS, SITE } from "@/lib/data";
 import { supabase } from "@/integrations/supabase/client";
 import { useLiveFetch } from "@/hooks/useLiveFetch";
 import { useState } from "react";
 
+/**
+ * The site sits in the middle of one funnel: YouTube -> the workbook -> here ->
+ * the newsletter. Its single job is the newsletter, and the workbook is the
+ * reason anyone arrives (BRAND-BRIEF §8). So the top of this page points at
+ * /workbook and everything else is proof, arranged in the order the brief's
+ * §9 table asks for: do not waste my time -> he is twenty? -> these are real ->
+ * genuinely free -> obviously, I want the next one.
+ */
 const Home = () => {
   const [dbTestimonials, setDbTestimonials] = useState<{ id: string; quote: string; author: string; role: string | null; link: string | null; photo_url: string | null; video_url: string | null }[]>([]);
 
@@ -30,7 +38,7 @@ const Home = () => {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-[88vh] flex items-center">
+      <section className="relative min-h-[86vh] flex items-center">
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="absolute inset-0 grid-bg opacity-60" />
         <div className="container relative z-10 text-center">
@@ -40,11 +48,11 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 mb-8 font-mono text-xs"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            Perspective is Everything.
+            <EyeMark className="h-3.5 w-auto" />
+            Perspective is everything.
           </motion.div>
 
-          <h1 className="font-display text-[clamp(2.75rem,9vw,7.5rem)] font-bold leading-[0.92] tracking-tighter mb-6">
+          <h1 className="font-display text-[clamp(2.75rem,9vw,7.5rem)] font-semibold leading-[0.92] tracking-tighter mb-6">
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -60,7 +68,7 @@ const Home = () => {
               className="block"
             >
               I <span className="text-gradient">
-                <TextScramble phrases={["build AI products.", "ship Up N Running.", "scale Socioverse.", "own every outcome.", "change perspectives."]} />
+                <TextScramble phrases={["build AI systems.", "show how they work.", "ship, and break things.", "am twenty years old."]} />
               </span>
             </motion.span>
           </h1>
@@ -71,7 +79,10 @@ const Home = () => {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Founder of <a href="https://www.upnrunning.in" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Up N Running</a>, sole architect of <a href="https://www.socioverse.io" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">Socioverse</a>, and co-founder of <a href="https://www.bunktobrains.com" className="text-foreground underline decoration-primary/50 underline-offset-4 hover:text-primary">BunkToBrains</a>. 20 years old, three ventures, Delhi. Receipt first. Opinion second.
+            I build AI systems and then show people exactly how they work. I am 20,
+            I am in Delhi, and my whole course is going out free on YouTube. If you
+            have not started with AI yet, this is a fine place to start - you are not
+            behind, and nothing here is written to make you feel like you are.
           </motion.p>
 
           <motion.div
@@ -81,14 +92,14 @@ const Home = () => {
             className="flex flex-wrap items-center justify-center gap-3 mb-14"
           >
             <Button asChild size="lg" className="rounded-full h-12 px-7 gap-2 shadow-glow">
-              <Link to="/skills">View my work <ArrowRight className="w-4 h-4" /></Link>
+              <Link to="/workbook"><Download className="w-4 h-4" /> Get the free workbook</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="rounded-full h-12 px-7 gap-2 glass">
-              <Link to="/newsletter"><Sparkles className="w-4 h-4" /> Join the newsletter</Link>
+              <a href={COURSE.playlist}><Youtube className="w-4 h-4" /> Watch the course</a>
             </Button>
           </motion.div>
 
-          {/* Stats */}
+          {/* Countables only, and only checkable ones. See STATS in lib/data.ts. */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -97,7 +108,7 @@ const Home = () => {
           >
             {STATS.map((s) => (
               <div key={s.label} className="glass rounded-2xl p-5">
-                <div className="font-display text-3xl md:text-4xl font-bold text-gradient">
+                <div className="font-display text-3xl md:text-4xl font-semibold text-gradient">
                   <Counter to={s.value} suffix={s.suffix} />
                 </div>
                 <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-1">{s.label}</div>
@@ -110,25 +121,100 @@ const Home = () => {
       {/* MARQUEE */}
       <section className="py-12 border-y border-border/50">
         <Marquee>
-          {["React", "TypeScript", "Next.js", "n8n", "Supabase", "Python", "Java", "Gemini", "Tailwind", "DaVinci Resolve", "Premiere Pro", "After Effects", "Figma", "Remotion"].map((t) => (
-            <span key={t} className="font-display text-3xl md:text-5xl font-bold text-muted-foreground/50 hover:text-primary transition-colors">
-              {t} <span className="text-primary/60">·</span>
+          {["React", "TypeScript", "Next.js", "n8n", "Supabase", "Claude", "Python", "Gemini", "Tailwind", "DaVinci Resolve", "Premiere Pro", "After Effects", "Figma", "Remotion"].map((t) => (
+            <span key={t} className="font-display text-3xl md:text-5xl font-semibold text-muted-foreground/50 hover:text-brand transition-colors">
+              {t} <span className="text-brand/60">·</span>
             </span>
           ))}
         </Marquee>
       </section>
 
-      {/* PROJECTS */}
+      {/* THE COURSE - the reason most people are here */}
+      <section className="container py-32">
+        <Reveal>
+          <div className="glass-strong rounded-[2rem] p-10 md:p-16 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-mesh opacity-50" />
+            <div className="relative grid lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-7">
+                <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// 01 - The course</p>
+                <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.95] mb-6">
+                  {COURSE.lectures} lectures. <br />
+                  <span className="text-gradient">Free, and I mean free.</span>
+                </h2>
+                <p className="text-muted-foreground text-lg mb-4">{COURSE.blurb}</p>
+                <p className="text-muted-foreground mb-8">
+                  {COURSE.cadence}, from {COURSE.window}. There is a workbook that goes with it -
+                  one PDF, one section per lecture, with every prompt and command in a form you
+                  can copy instead of squinting at a video. That is what the email box is for,
+                  and it is the only thing it is for.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild size="lg" className="rounded-full gap-2">
+                    <Link to="/workbook"><Download className="w-4 h-4" /> Get the workbook</Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="rounded-full gap-2 glass">
+                    <a href={COURSE.playlist}><Youtube className="w-4 h-4" /> The playlist</a>
+                  </Button>
+                </div>
+              </div>
+              <div className="lg:col-span-5">
+                <ul className="space-y-3">
+                  {[
+                    `${COURSE.recorded} lectures recorded, ${COURSE.lectures} in the workbook`,
+                    `${COURSE.runtime} of material, in plain language`,
+                    "Real jobs as the examples, not abstractions",
+                    "No paywall, no premium tier, no upsell",
+                  ].map((line) => (
+                    <li key={line} className="flex items-start gap-3 glass rounded-2xl p-4">
+                      <EyeMark className="h-4 w-auto mt-0.5 shrink-0" />
+                      <span className="text-sm">{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* RECEIPTS - dated, checkable, failures included */}
+      <section className="container py-32">
+        <Reveal>
+          <div className="max-w-3xl mb-14">
+            <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// 02 - Receipts</p>
+            <h2 className="font-display text-5xl md:text-7xl font-semibold leading-[0.95] mb-6">
+              What I've actually <span className="text-gradient">done.</span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Dated, and the ones that did not work are in here too. I think the wins only
+              mean anything if the losses are on the same page.
+            </p>
+          </div>
+        </Reveal>
+        <div className="grid md:grid-cols-2 gap-5">
+          {RECEIPTS.map((r, i) => (
+            <Reveal key={r.title} delay={i * 0.06}>
+              <div className="glass rounded-3xl p-7 h-full hover-lift hover:border-primary/40 transition-colors">
+                <div className="font-mono text-xs uppercase tracking-wider text-brand mb-3">{r.date}</div>
+                <h3 className="font-display text-xl font-semibold mb-2">{r.title}</h3>
+                <p className="text-sm text-muted-foreground">{r.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* WORK */}
       <section className="container py-32">
         <Reveal>
           <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 01 - Selected Work</p>
-              <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95]">
+              <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// 03 - Selected work</p>
+              <h2 className="font-display text-5xl md:text-7xl font-semibold leading-[0.95]">
                 Things I've <span className="text-gradient">built.</span>
               </h2>
             </div>
-            <Link to="/skills" className="group inline-flex items-center gap-2 font-mono text-sm hover:text-primary transition-colors">
+            <Link to="/skills" className="group inline-flex items-center gap-2 font-mono text-sm hover:text-brand transition-colors">
               All work <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -140,48 +226,14 @@ const Home = () => {
               <Link to="/skills" className="group block">
                 <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-colors relative overflow-hidden">
                   <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors" />
-                  <div className="font-display text-6xl text-primary/40 mb-6 group-hover:text-primary transition-colors">{c.icon}</div>
-                  <h3 className="font-display text-2xl font-bold mb-2">{c.title}</h3>
+                  <div className="font-display text-6xl text-primary/50 mb-6 group-hover:text-brand transition-colors">{c.icon}</div>
+                  <h3 className="font-display text-2xl font-semibold mb-2">{c.title}</h3>
                   <p className="text-muted-foreground mb-6">{c.desc}</p>
-                  <div className="flex items-center justify-between font-mono text-xs">
-                    <span className="text-muted-foreground">{c.count} projects</span>
+                  <div className="flex items-center justify-end font-mono text-xs">
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* VENTURES HIGHLIGHT */}
-      <section className="container py-32">
-        <Reveal>
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <p className="font-mono text-xs uppercase tracking-widest text-gold mb-3">// 02 - Ventures</p>
-            <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
-              What I'm <span className="text-gradient-gold">building.</span>
-            </h2>
-            <p className="text-muted-foreground text-lg">Three ventures, one mission: ship products people actually use.</p>
-          </div>
-        </Reveal>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { name: "Up N Running", desc: "Solo Founder. AI Automation Agency. ₹50K MRR.", url: "https://www.upnrunning.in", tag: "Studio" },
-            { name: "Socioverse", desc: "Sole Architect. Instagram AI SaaS. Emotional DNA engine.", url: "https://www.socioverse.io", tag: "SaaS" },
-            { name: "BunkToBrains", desc: "Co-Founder. EdTech. 7,000+ students. ₹2L+ revenue.", url: "https://www.bunktobrains.com", tag: "EdTech" },
-          ].map((v, i) => (
-            <Reveal key={v.name} delay={i * 0.1}>
-              <a href={v.url} className="block group">
-                <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-gold/50 transition-colors">
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs uppercase tracking-wider text-gold">{v.tag}</span>
-                    <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform" />
-                  </div>
-                  <h3 className="font-display text-2xl font-bold mb-3">{v.name}</h3>
-                  <p className="text-muted-foreground text-sm">{v.desc}</p>
-                </div>
-              </a>
             </Reveal>
           ))}
         </div>
@@ -192,10 +244,10 @@ const Home = () => {
         <Reveal>
           <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 03 - From the journal</p>
-              <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95]">Latest writing.</h2>
+              <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// 04 - Writing</p>
+              <h2 className="font-display text-5xl md:text-7xl font-semibold leading-[0.95]">Latest writing.</h2>
             </div>
-            <Link to="/blog" className="group inline-flex items-center gap-2 font-mono text-sm hover:text-primary transition-colors">
+            <Link to="/blog" className="group inline-flex items-center gap-2 font-mono text-sm hover:text-brand transition-colors">
               All posts <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -207,13 +259,13 @@ const Home = () => {
               <Link to={`/blog/${p.slug}`} className="group block">
                 <article className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-colors">
                   <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground mb-5">
-                    <span className="text-primary">{p.category}</span>
+                    <span className="text-brand">{p.category}</span>
                     <span>·</span>
                     <span>{p.readTime}</span>
                   </div>
-                  <h3 className="font-display text-xl font-bold mb-3 group-hover:text-primary transition-colors">{p.title}</h3>
+                  <h3 className="font-display text-xl font-semibold mb-3 group-hover:text-brand transition-colors">{p.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-3 mb-6">{p.excerpt}</p>
-                  <span className="font-mono text-xs inline-flex items-center gap-1.5 text-primary group-hover:gap-2 transition-colors">
+                  <span className="font-mono text-xs inline-flex items-center gap-1.5 text-brand group-hover:gap-2 transition-colors">
                     <ExternalLink className="w-3 h-3" /> Read post <ArrowRight className="w-3 h-3" />
                   </span>
                 </article>
@@ -223,13 +275,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* WHAT PEOPLE SAID - quotes only. No stars: nobody ever gave a rating. */}
       <section className="container py-32">
         <Reveal>
           <div className="text-center mb-14">
-            <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 04 - Kind words</p>
-            <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95]">
-              People I've <span className="text-gradient">helped.</span>
+            <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// 05 - What people said</p>
+            <h2 className="font-display text-5xl md:text-7xl font-semibold leading-[0.95]">
+              People I've <span className="text-gradient">worked with.</span>
             </h2>
           </div>
         </Reveal>
@@ -242,11 +294,6 @@ const Home = () => {
                 className="glass rounded-3xl p-8 h-full relative block hover-lift hover:border-primary/40 transition-colors cursor-pointer"
               >
                 <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, k) => (
-                    <Star key={k} className="w-4 h-4 fill-gold text-gold" />
-                  ))}
-                </div>
                 <p className="text-lg leading-relaxed mb-6">"{t.quote}"</p>
                 <div className="font-mono text-xs flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -260,11 +307,11 @@ const Home = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     {t.video_url && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/15 text-gold text-[11px] font-semibold">
-                        <Play className="w-3.5 h-3.5 fill-gold" /> Video
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/15 text-brand text-[11px] font-semibold">
+                        <Play className="w-3.5 h-3.5" /> Video
                       </span>
                     )}
-                    <span className="inline-flex items-center gap-1 text-primary text-[11px]">
+                    <span className="inline-flex items-center gap-1 text-brand text-[11px]">
                       Open <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
@@ -276,28 +323,34 @@ const Home = () => {
 
         <div className="text-center mt-10">
           <Button asChild variant="outline" size="lg" className="rounded-full gap-2 glass">
-            <Link to="/reviews">See all reviews <ArrowRight className="w-4 h-4" /></Link>
+            <Link to="/reviews">Read them all <ArrowRight className="w-4 h-4" /></Link>
           </Button>
         </div>
       </section>
 
-      {/* FINAL NEWSLETTER CTA */}
+      {/* FINAL CTA - the site's single job */}
       <section className="container pb-32">
         <Reveal>
           <div className="relative rounded-[2rem] overflow-hidden p-12 md:p-20 text-center glass-strong">
             <div className="absolute inset-0 bg-gradient-mesh opacity-60" />
             <div className="absolute inset-0 grid-bg opacity-30" />
             <div className="relative">
-              <Sparkles className="w-10 h-10 mx-auto mb-6 text-gold" />
-              <h2 className="font-display text-4xl md:text-6xl font-bold leading-[0.95] mb-6">
-                One letter. <br />
-                <span className="text-gradient">Every Sunday.</span>
+              <EyeMark className="h-10 w-auto mx-auto mb-6" />
+              <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.95] mb-6">
+                Get the workbook. <br />
+                <span className="text-gradient">Then decide.</span>
               </h2>
               <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-10">
-                Notes on AI, building products, and thinking clearly. No fluff, no spam. Unsubscribe anytime.
+                One PDF, all {COURSE.lectures} sections, free. If you also want an email from me
+                once a week about what I am building and what broke, there is a box for that -
+                separate, optional, and off by default.
               </p>
-              <SignupForm variant="hero" />
-              <p className="font-mono text-xs text-muted-foreground mt-5">Join 1,240+ builders. Free forever.</p>
+              <Button asChild size="lg" className="rounded-full h-12 px-8 gap-2 shadow-glow">
+                <Link to="/workbook"><Download className="w-4 h-4" /> Get the workbook</Link>
+              </Button>
+              <p className="font-mono text-xs text-muted-foreground mt-5">
+                {SITE.canonical.replace("https://", "")}/workbook
+              </p>
             </div>
           </div>
         </Reveal>

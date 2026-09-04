@@ -15,7 +15,7 @@ const Achievements = () => {
     <>
       <section className="container py-20">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">// Achievements</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-brand mb-4">// Achievements</p>
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6 max-w-4xl">
             Certificates, awards, <br />
             <span className="text-gradient">and proof of work.</span>
@@ -68,7 +68,7 @@ const Achievements = () => {
                 <p className="text-sm text-muted-foreground">{a.issuer} · {a.date}</p>
                 {a.description && <p className="text-xs text-muted-foreground mt-2">{a.description}</p>}
                 {a.link && (
-                  <span className="inline-flex items-center gap-1.5 text-xs text-primary mt-3">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-brand mt-3">
                     <ExternalLink className="w-3 h-3" /> View
                   </span>
                 )}
@@ -101,14 +101,14 @@ const Achievements = () => {
                   </div>
                 )}
                 <div className="flex items-start justify-between mb-5">
-                  <span className="font-mono text-xs uppercase tracking-wider text-primary">{a.category}</span>
+                  <span className="font-mono text-xs uppercase tracking-wider text-brand">{a.category}</span>
                   <span className="font-mono text-xs text-muted-foreground">{a.date}</span>
                 </div>
                 <h3 className="font-display text-lg font-bold mb-2 leading-tight">{a.title}</h3>
                 <p className="text-sm text-muted-foreground">{a.issuer}</p>
                 {a.description && <p className="text-xs text-muted-foreground mt-2">{a.description}</p>}
                 {a.link && (
-                  <span className="inline-flex items-center gap-1.5 text-xs text-primary mt-3">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-brand mt-3">
                     <ExternalLink className="w-3 h-3" /> View
                   </span>
                 )}

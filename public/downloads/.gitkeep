@@ -1,0 +1,11 @@
+Nothing lives here any more, and that is deliberate.
+
+The AI Sight workbook PDF is uploaded to Socioverse Planets secure storage,
+attached to the zero-price DOWNLOAD product. Planets creates the order from the
+billing email and sends the file - so the PDF is never served from this domain
+and never sits in this repo.
+
+This directory is kept only so the /downloads/ path still resolves if the file is
+ever hosted here instead. See docs/workbook-endpoint.md.
+
+Producing the PDF is handoff 01 in Socials/ai-sight-free-release/.

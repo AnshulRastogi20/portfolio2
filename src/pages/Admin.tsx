@@ -58,7 +58,7 @@ const Admin = () => {
       <Reveal>
         <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-primary mb-2">// Dashboard</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-brand mb-2">// Dashboard</p>
             <h1 className="font-display text-4xl md:text-5xl font-bold">Mission control.</h1>
             <p className="text-muted-foreground mt-2 text-sm font-mono">{user.email}</p>
           </div>
@@ -229,7 +229,7 @@ const ContactTab = () => {
                 {!r.read_at && <Badge className="text-[10px]">NEW</Badge>}
                 {r.topic && <Badge variant="secondary" className="text-[10px]">{r.topic}</Badge>}
               </div>
-              <a href={`mailto:${r.email}`} className="text-sm text-primary font-mono">{r.email}</a>
+              <a href={`mailto:${r.email}`} className="text-sm text-brand font-mono">{r.email}</a>
               <p className="text-xs text-muted-foreground font-mono mt-1">{new Date(r.created_at).toLocaleString()}</p>
             </div>
             <div className="flex gap-1">
@@ -478,7 +478,7 @@ const TestimonialsTab = () => {
               </div>
               {t.role && <p className="text-xs text-muted-foreground">{t.role}</p>}
               <p className="text-sm mt-2 line-clamp-2">"{t.quote}"</p>
-              {t.link && <a href={t.link} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline mt-1 inline-flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Review link</a>}
+              {t.link && <a href={t.link} target="_blank" rel="noreferrer" className="text-xs text-brand hover:underline mt-1 inline-flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Review link</a>}
             </div>
           </div>
           <div className="flex gap-2 shrink-0">
@@ -528,7 +528,7 @@ const TestimonialsTab = () => {
                 </div>
                 <div>
                   <Label className="text-xs font-mono uppercase tracking-wider mb-2 block">Video</Label>
-                  {editing.video_url && <a href={editing.video_url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline mb-2 block">View video</a>}
+                  {editing.video_url && <a href={editing.video_url} target="_blank" rel="noreferrer" className="text-xs text-brand hover:underline mb-2 block">View video</a>}
                   <Input type="file" accept="video/*" onChange={e => e.target.files?.[0] && uploadFile(e.target.files[0], "video_url")} className="h-11 rounded-2xl bg-card/60" disabled={uploading} />
                 </div>
               </div>
@@ -627,7 +627,7 @@ const CoursesTab = () => {
             <h3 className="font-display text-lg font-bold truncate">{c.title}</h3>
             <div className="flex items-center gap-3 mt-1">
               {c.price && <span className="text-xs text-gold font-mono">{c.price}</span>}
-              {c.external_link && <a href={c.external_link} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline inline-flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Link</a>}
+              {c.external_link && <a href={c.external_link} target="_blank" rel="noreferrer" className="text-xs text-brand hover:underline inline-flex items-center gap-1"><ExternalLink className="w-3 h-3" /> Link</a>}
             </div>
           </div>
           <div className="flex gap-2">

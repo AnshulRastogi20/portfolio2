@@ -16,6 +16,9 @@ const {
   "/blog": Blog,
   "/blog/:slug": BlogPost,
   "/newsletter": Newsletter,
+  "/workbook": Workbook,
+  "/privacy": Privacy,
+  "/unsubscribe": Unsubscribe,
   "/courses": Courses,
   "/courses/:slug": CourseDetail,
   "/shop": Shop,
@@ -61,6 +64,9 @@ const App = () => (
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/newsletter" element={<Newsletter />} />
+                <Route path="/workbook" element={<Workbook />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/unsubscribe" element={<Unsubscribe />} />
                 <Route path="/courses" element={<Courses />} />
                 <Route path="/courses/:slug" element={<CourseDetail />} />
                 <Route path="/shop" element={<Shop />} />

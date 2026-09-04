@@ -102,7 +102,7 @@ const AdminLogin = () => {
     <section className="container max-w-md py-24">
       <Reveal>
         <div className="glass-strong rounded-3xl p-10">
-          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// Admin</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// Admin</p>
           <h1 className="font-display text-4xl font-bold mb-2">
             {mode === "signin" ? "Welcome back" : "Create admin"}
           </h1>
@@ -140,7 +140,7 @@ const AdminLogin = () => {
 
           <button
             onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-            className="mt-6 w-full text-center text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="mt-6 w-full text-center text-sm text-muted-foreground hover:text-brand transition-colors"
           >
             {mode === "signin" ? "Need an account? Create one" : "Have an account? Sign in"}
           </button>

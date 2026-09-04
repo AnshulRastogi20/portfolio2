@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Quote, Star, Play, Link2, Check, ArrowRight } from "lucide-react";
+import { Quote, Play, Link2, Check, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { TESTIMONIALS } from "@/lib/data";
 import { supabase } from "@/integrations/supabase/client";
@@ -64,7 +64,7 @@ const Reviews = () => {
       <section className="container pt-10 pb-16">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
-            <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// Kind words</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// Kind words</p>
             <h1 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
               People I've <span className="text-gradient">helped.</span>
             </h1>
@@ -98,11 +98,9 @@ const Reviews = () => {
                 className="glass rounded-3xl p-8 h-full relative block hover-lift hover:border-primary/40 transition-colors cursor-pointer"
               >
                 <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, k) => (
-                    <Star key={k} className="w-4 h-4 fill-gold text-gold" />
-                  ))}
-                </div>
+                {/* No star row. Nobody ever gave a rating, so drawing five of
+                    them is inventing social proof - the exact thing a
+                    fabricated "4.8/5 from 150 reviews" had to be removed for. */}
                 <p className="text-lg leading-relaxed mb-6 line-clamp-5">"{r.quote}"</p>
                 <div className="font-mono text-xs flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
@@ -117,7 +115,7 @@ const Reviews = () => {
                   <div className="flex items-center gap-2 shrink-0">
                     {r.video_url && (
                       <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gold/15 text-gold text-[11px] font-semibold">
-                        <Play className="w-3 h-3 fill-gold" /> Video
+                        <Play className="w-3 h-3" /> Video
                       </span>
                     )}
                     <button
@@ -125,9 +123,9 @@ const Reviews = () => {
                       aria-label="Copy share link"
                       className="p-2 rounded-full hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground"
                     >
-                      {copiedId === r.id ? <Check className="w-3.5 h-3.5 text-primary" /> : <Link2 className="w-3.5 h-3.5" />}
+                      {copiedId === r.id ? <Check className="w-3.5 h-3.5 text-brand" /> : <Link2 className="w-3.5 h-3.5" />}
                     </button>
-                    <span className="inline-flex items-center gap-1 text-primary text-[11px]">
+                    <span className="inline-flex items-center gap-1 text-brand text-[11px]">
                       Open <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>

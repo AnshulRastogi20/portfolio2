@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ShoppingBag, Sparkles, MessageSquare, BarChart3, Users, Check, Star, Quote, ArrowRight } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Sparkles, MessageSquare, BarChart3, Users, Check, Quote, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { SignupForm } from "@/components/SignupForm";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ const SOCIOVERSE_PROBLEMS = [
 const SOCIOVERSE_MODULES = [
   { Icon: Sparkles, title: "AI Content Studio", desc: "Scrape competitor reels, analyze viral hooks, and generate ready-to-shoot scripts in your brand voice.", bullets: ["Competitor Tracking & Scraping", "AI-Powered Hook Analysis", "Script Generation in Your Voice", "Idea Pipeline Management"] },
   { Icon: MessageSquare, title: "DM Automation", desc: "Set up keyword triggers, follow gates, and smart sequences that auto-reply to comments and capture leads.", bullets: ["Comment & Story Triggers", "Follow Gate with Lead Capture", "Smart Multi-Step Sequences", "Schedule & Publish Reels"] },
-  { Icon: BarChart3, title: "Analytics & Insights", desc: "Track follower growth, engagement, and automation ROI with beautiful dashboards.", bullets: ["Follower Growth Tracking", "Engagement Rate Analytics", "Automation ROI Dashboard", "Content Performance Insights"] },
+  { Icon: BarChart3, title: "Analytics & Insights", desc: "Shows what your account actually did - followers, engagement, and which automations fired.", bullets: ["Follower tracking", "Engagement analytics", "Automation activity", "Content performance"] },
   { Icon: Users, title: "Lead Bank CRM", desc: "Capture, nurture, and convert your Instagram audience with a built-in CRM, email capture, and DM sequences.", bullets: ["Lead Funnel Tracking", "Email Capture", "DM Sequences", "Conversion Analytics"] },
 ];
 
@@ -27,11 +27,19 @@ const SOCIOVERSE_STEPS = [
   { n: "04", t: "Automate", d: "Set up DM automations that turn commenters into leads." },
 ];
 
-const SOCIOVERSE_STATS = [
-  { value: "3×", label: "Faster Content" },
-  { value: "50%", label: "Higher Engagement" },
-  { value: "10×", label: "More Leads" },
-  { value: "5hrs", label: "Saved Weekly" },
+/**
+ * Where the product actually is, in place of the outcome metrics that used to
+ * sit here - "3x faster content", "50% higher engagement", "10x more leads",
+ * "5hrs saved weekly". Nobody measured any of those. Socioverse has real users
+ * and no paying subscribers, so a results grid is the one thing it cannot
+ * honestly show, and inventing one on the page of a builder whose whole pitch
+ * is receipts would undo the pitch.
+ */
+const SOCIOVERSE_STATE = [
+  { title: "It is live", desc: "Built solo, shipped, running today with real users on it." },
+  { title: "Nobody pays for it yet", desc: "Zero paying subscribers. The product risk is retired; the willingness to pay is not." },
+  { title: "Official Meta APIs", desc: "DMs, comments and publishing go through the documented APIs, not around them." },
+  { title: "Free for 30 days", desc: "No card. That is the current way in, and it is the honest one." },
 ];
 
 const SOCIOVERSE_AUDIENCE = [
@@ -98,7 +106,7 @@ const SocioverseShowcase = () => (
     {/* PROBLEMS */}
     <section>
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// The pain</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// The pain</p>
         <h2 className="font-display text-4xl md:text-6xl font-bold mb-4 leading-[0.95]">
           Problems creators face <span className="text-gradient">every day.</span>
         </h2>
@@ -120,7 +128,7 @@ const SocioverseShowcase = () => (
     {/* MODULES */}
     <section>
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// What's inside</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// What's inside</p>
         <h2 className="font-display text-4xl md:text-6xl font-bold mb-14 leading-[0.95]">
           Everything you need to <span className="text-gradient">grow on Instagram.</span>
         </h2>
@@ -130,14 +138,14 @@ const SocioverseShowcase = () => (
           <Reveal key={m.title} delay={i * 0.06}>
             <div className="glass rounded-3xl p-8 h-full hover-lift hover:border-primary/40 transition-colors">
               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
-                <m.Icon className="w-5 h-5 text-primary" />
+                <m.Icon className="w-5 h-5 text-brand" />
               </div>
               <h3 className="font-display text-2xl font-bold mb-3">{m.title}</h3>
               <p className="text-sm text-muted-foreground mb-5">{m.desc}</p>
               <ul className="space-y-2">
                 {m.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-2 text-sm">
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                    <Check className="w-4 h-4 text-brand shrink-0 mt-0.5" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -151,7 +159,7 @@ const SocioverseShowcase = () => (
     {/* HOW IT WORKS */}
     <section>
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// 4 simple steps</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// 4 simple steps</p>
         <h2 className="font-display text-4xl md:text-6xl font-bold mb-14 leading-[0.95]">
           How Socioverse <span className="text-gradient">works.</span>
         </h2>
@@ -160,7 +168,7 @@ const SocioverseShowcase = () => (
         {SOCIOVERSE_STEPS.map((s, i) => (
           <Reveal key={s.n} delay={i * 0.06}>
             <div className="glass rounded-3xl p-7 h-full">
-              <div className="font-mono text-xs text-primary mb-4">{s.n}</div>
+              <div className="font-mono text-xs text-brand mb-4">{s.n}</div>
               <h3 className="font-display text-lg font-bold mb-2">{s.t}</h3>
               <p className="text-sm text-muted-foreground">{s.d}</p>
             </div>
@@ -169,18 +177,21 @@ const SocioverseShowcase = () => (
       </div>
     </section>
 
-    {/* RESULTS */}
+    {/* WHERE IT IS - not a results grid. See SOCIOVERSE_STATE above. */}
     <section>
       <Reveal>
-        <h2 className="font-display text-4xl md:text-6xl font-bold mb-12 leading-[0.95] text-center">
-          Real <span className="text-gradient">growth.</span>
+        <h2 className="font-display text-4xl md:text-6xl font-semibold mb-4 leading-[0.95] text-center">
+          Where it <span className="text-gradient">actually is.</span>
         </h2>
+        <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
+          I would rather tell you this than show you a wall of numbers I made up.
+        </p>
       </Reveal>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        {SOCIOVERSE_STATS.map((s) => (
-          <div key={s.label} className="glass rounded-2xl p-6 text-center">
-            <div className="font-display text-4xl md:text-5xl font-bold text-gradient">{s.value}</div>
-            <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-2">{s.label}</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        {SOCIOVERSE_STATE.map((s) => (
+          <div key={s.title} className="glass rounded-2xl p-6">
+            <div className="font-display text-lg font-semibold mb-1.5">{s.title}</div>
+            <div className="text-sm text-muted-foreground">{s.desc}</div>
           </div>
         ))}
       </div>
@@ -189,7 +200,7 @@ const SocioverseShowcase = () => (
     {/* AUDIENCE */}
     <section>
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// Built for you</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// Built for you</p>
         <h2 className="font-display text-4xl md:text-6xl font-bold mb-14 leading-[0.95]">
           Who is Socioverse <span className="text-gradient">for?</span>
         </h2>
@@ -209,7 +220,7 @@ const SocioverseShowcase = () => (
     {/* PRICING */}
     <section>
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3 text-center">// Simple pricing</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3 text-center">// Simple pricing</p>
         <h2 className="font-display text-4xl md:text-6xl font-bold mb-3 leading-[0.95] text-center">
           Choose your <span className="text-gradient">plan.</span>
         </h2>
@@ -219,9 +230,12 @@ const SocioverseShowcase = () => (
         {SOCIOVERSE_PRICING.map((p, i) => (
           <Reveal key={p.name} delay={i * 0.05}>
             <div className={`relative glass rounded-3xl p-7 h-full flex flex-col ${p.popular ? "border-primary bg-primary/5" : ""}`}>
+              {/* No "Most popular" badge: that is a claim about what other
+                  customers chose, and there are no paying customers to have
+                  chosen anything. The tier is highlighted, not endorsed. */}
               {p.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 bg-primary text-primary-foreground rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-widest">
-                  <Star className="w-3 h-3 fill-current" /> Most popular
+                  Best fit for most
                 </div>
               )}
               <h3 className="font-display text-xl font-bold mb-1">{p.name}</h3>
@@ -232,7 +246,7 @@ const SocioverseShowcase = () => (
               <ul className="space-y-2 mb-8">
                 {p.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-2 text-sm">
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                    <Check className="w-4 h-4 text-brand shrink-0 mt-0.5" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -249,7 +263,7 @@ const SocioverseShowcase = () => (
     {/* FAQ */}
     <section className="max-w-3xl mx-auto">
       <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">// FAQ</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-brand mb-3">// FAQ</p>
         <h2 className="font-display text-4xl md:text-6xl font-bold mb-12 leading-[0.95]">
           Frequently asked <span className="text-gradient">questions.</span>
         </h2>
@@ -259,7 +273,7 @@ const SocioverseShowcase = () => (
           <details className="glass rounded-2xl p-6 mb-3 group">
             <summary className="font-display text-lg font-bold cursor-pointer list-none flex items-center justify-between">
               {f.q}
-              <span className="text-primary text-2xl transition-transform group-open:rotate-45">+</span>
+              <span className="text-brand text-2xl transition-transform group-open:rotate-45">+</span>
             </summary>
             <p className="text-sm text-muted-foreground mt-4">{f.a}</p>
           </details>
@@ -297,7 +311,7 @@ const ProductDetail = () => {
   if (slug === "socioverse") {
     return (
       <section className="container py-16">
-        <Link to="/shop" className="font-mono text-xs inline-flex items-center gap-2 mb-10 hover:text-primary transition">
+        <Link to="/shop" className="font-mono text-xs inline-flex items-center gap-2 mb-10 hover:text-brand transition">
           <ArrowLeft className="w-3 h-3" /> Back to shop
         </Link>
         <SocioverseShowcase />
@@ -308,7 +322,7 @@ const ProductDetail = () => {
   return (
     <section className="container py-16">
       <Reveal>
-        <Link to="/shop" className="font-mono text-xs inline-flex items-center gap-2 mb-10 hover:text-primary transition">
+        <Link to="/shop" className="font-mono text-xs inline-flex items-center gap-2 mb-10 hover:text-brand transition">
           <ArrowLeft className="w-3 h-3" /> Back to shop
         </Link>
         <div className="grid lg:grid-cols-2 gap-12">

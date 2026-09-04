@@ -5,25 +5,35 @@ import { Menu, X, Moon, Sun, ChevronDown } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "./ui/button";
 import { prefetchRoute } from "@/lib/routes";
+import { Lockup } from "./Brand";
 
+/**
+ * The site's single job is the newsletter, and the workbook is what gets people
+ * to it (BRAND-BRIEF §8). So the bar carries five things and a button, and the
+ * button is the workbook - not "Let's talk", which pointed at an agency that is
+ * not taking new clients.
+ *
+ * Everything else still exists and is still reachable, it just does not get to
+ * compete with the one thing this page is for.
+ */
 const mainLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/skills", label: "Work" },
-  { to: "/achievements", label: "Awards" },
-  { to: "/reviews", label: "Reviews" },
   { to: "/blog", label: "Blog" },
-  { to: "/services", label: "Services" },
-  { to: "/contact", label: "Contact" },
+  { to: "/newsletter", label: "Newsletter" },
 ];
 
 const moreLinks = [
+  { to: "/achievements", label: "Awards" },
+  { to: "/reviews", label: "Reviews" },
+  { to: "/services", label: "What I built" },
+  { to: "/coaching", label: "One to one" },
   { to: "/courses", label: "Courses" },
-  { to: "/careers", label: "Careers" },
-  { to: "/newsletter", label: "Newsletter" },
-  { to: "/coaching", label: "Coaching" },
-  { to: "/resume", label: "Resume" },
   { to: "/now", label: "Now" },
+  { to: "/resume", label: "Resume" },
+  { to: "/careers", label: "Careers" },
+  { to: "/contact", label: "Contact" },
 ];
 
 const allLinks = [...mainLinks, ...moreLinks];
@@ -77,9 +87,8 @@ export const Nav = () => {
               between two blur strengths re-blurred the bar for 500ms on every
               scroll start. */}
           <div className={`flex items-center justify-between rounded-full px-5 py-2.5 glass-blur transition-colors duration-300 ${scrolled ? "glass-strong shadow-elegant" : "glass"}`}>
-            <Link to="/" className="font-display text-xl font-bold tracking-tight">
-              <span className="text-gradient">Anshul</span>
-              <span className="text-foreground/70">.</span>
+            <Link to="/" aria-label="Sight of Anshul, home" className="shrink-0">
+              <Lockup className="text-lg" />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-1">
@@ -91,7 +100,7 @@ export const Nav = () => {
                     to={l.to}
                     onMouseEnter={() => prefetchRoute(l.to)}
                     onFocus={() => prefetchRoute(l.to)}
-                    className={`relative px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${active ? "text-primary" : "text-foreground/70 hover:text-foreground"}`}
+                    className={`relative px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${active ? "text-brand" : "text-foreground/70 hover:text-foreground"}`}
                   >
                     {active && (
                       <motion.span
@@ -109,7 +118,7 @@ export const Nav = () => {
               <div className="relative" ref={moreRef}>
                 <button
                   onClick={() => setMoreOpen(!moreOpen)}
-                  className={`relative px-3 py-1.5 text-sm font-medium rounded-full transition-colors flex items-center gap-1 ${moreLinks.some(l => loc.pathname === l.to) ? "text-primary" : "text-foreground/70 hover:text-foreground"}`}
+                  className={`relative px-3 py-1.5 text-sm font-medium rounded-full transition-colors flex items-center gap-1 ${moreLinks.some(l => loc.pathname === l.to) ? "text-brand" : "text-foreground/70 hover:text-foreground"}`}
                 >
                   More <ChevronDown className={`w-3 h-3 transition-transform ${moreOpen ? "rotate-180" : ""}`} />
                 </button>
@@ -120,7 +129,7 @@ export const Nav = () => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full right-0 mt-2 w-44 glass-strong rounded-2xl p-2 shadow-elegant"
+                      className="absolute top-full right-0 mt-2 w-48 glass-strong rounded-2xl p-2 shadow-elegant"
                     >
                       {moreLinks.map((l) => {
                         const active = loc.pathname === l.to;
@@ -130,7 +139,7 @@ export const Nav = () => {
                             to={l.to}
                             onMouseEnter={() => prefetchRoute(l.to)}
                             onFocus={() => prefetchRoute(l.to)}
-                            className={`block px-4 py-2.5 text-sm rounded-xl transition-colors ${active ? "text-primary bg-primary/10" : "text-foreground/70 hover:text-foreground hover:bg-secondary/50"}`}
+                            className={`block px-4 py-2.5 text-sm rounded-xl transition-colors ${active ? "text-brand bg-primary/10" : "text-foreground/70 hover:text-foreground hover:bg-secondary/50"}`}
                           >
                             {l.label}
                           </Link>
@@ -151,7 +160,7 @@ export const Nav = () => {
                 {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
               <Button asChild size="sm" className="hidden sm:inline-flex rounded-full">
-                <Link to="/contact">Let's talk</Link>
+                <Link to="/workbook">Free workbook</Link>
               </Button>
               <button
                 onClick={() => setOpen(!open)}
@@ -183,7 +192,7 @@ export const Nav = () => {
                 >
                   <Link
                     to={l.to}
-                    className="block py-4 font-display text-3xl font-bold border-b border-border/50 hover:text-primary transition-colors"
+                    className="block py-4 font-display text-3xl font-semibold border-b border-border/50 hover:text-brand transition-colors"
                   >
                     {l.label}
                   </Link>

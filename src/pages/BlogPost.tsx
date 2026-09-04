@@ -69,7 +69,7 @@ const BlogPost = () => {
     return (
       <section className="container py-32 text-center">
         <h1 className="font-display text-4xl mb-4">Post not found</h1>
-        <Link to="/blog" className="text-primary">Back to blog</Link>
+        <Link to="/blog" className="text-brand">Back to blog</Link>
       </section>
     );
   }
@@ -90,15 +90,15 @@ const BlogPost = () => {
       <article className="container max-w-3xl py-16">
         <Reveal>
           <div className="flex items-center justify-between mb-10">
-            <Link to="/blog" className="font-mono text-xs inline-flex items-center gap-2 hover:text-primary transition">
+            <Link to="/blog" className="font-mono text-xs inline-flex items-center gap-2 hover:text-brand transition">
               <ArrowLeft className="w-3 h-3" /> All posts
             </Link>
-            <button onClick={sharePost} className="font-mono text-xs inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 hover:border-primary/40 hover:text-primary transition">
+            <button onClick={sharePost} className="font-mono text-xs inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 hover:border-primary/40 hover:text-brand transition">
               <Share2 className="w-3 h-3" /> Copy link
             </button>
           </div>
           <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-muted-foreground mb-6">
-            <span className="text-primary">{post.category}</span>
+            <span className="text-brand">{post.category}</span>
             <span className="flex items-center gap-1.5"><Calendar className="w-3 h-3" /> {post.date}</span>
             <span className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> {post.readTime}</span>
           </div>
@@ -132,7 +132,7 @@ const BlogPost = () => {
             [&_h2]:font-display [&_h2]:text-2xl md:[&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-4
             [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-8 [&_h3]:mb-3
             [&_p]:my-5
-            [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4
+            [&_a]:text-brand [&_a]:underline [&_a]:underline-offset-4
             [&_strong]:text-foreground
             [&_ul]:my-5 [&_ul]:pl-6 [&_ul]:list-disc [&_ul>li]:my-2
             [&_ol]:my-5 [&_ol]:pl-6 [&_ol]:list-decimal [&_ol>li]:my-2
@@ -198,8 +198,8 @@ const BlogPost = () => {
           {related.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
               <Link to={`/blog/${p.slug}`} className="group block glass rounded-3xl p-7 hover-lift hover:border-primary/40 transition-colors h-full">
-                <div className="font-mono text-xs text-primary mb-4">{p.category}</div>
-                <h3 className="font-display text-lg font-bold mb-2 group-hover:text-primary transition-colors">{p.title}</h3>
+                <div className="font-mono text-xs text-brand mb-4">{p.category}</div>
+                <h3 className="font-display text-lg font-bold mb-2 group-hover:text-brand transition-colors">{p.title}</h3>
                 <p className="text-sm text-muted-foreground line-clamp-2">{p.excerpt}</p>
               </Link>
             </Reveal>

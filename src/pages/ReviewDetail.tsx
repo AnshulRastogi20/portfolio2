@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Quote, Star, Link2, Check, ExternalLink } from "lucide-react";
+import { ArrowLeft, Quote, Link2, Check, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { TESTIMONIALS } from "@/lib/data";
@@ -96,9 +96,6 @@ const ReviewDetail = () => {
           <Quote className="absolute top-8 right-8 w-16 h-16 text-primary/15" />
 
           <div className="flex gap-0.5 mb-6">
-            {Array.from({ length: 5 }).map((_, k) => (
-              <Star key={k} className="w-5 h-5 fill-gold text-gold" />
-            ))}
           </div>
 
           <blockquote className="font-display text-3xl md:text-4xl font-bold leading-tight mb-10">
@@ -109,7 +106,7 @@ const ReviewDetail = () => {
             {review.photo_url ? (
               <img loading="lazy" decoding="async" src={review.photo_url} alt={review.author} className="w-16 h-16 rounded-full object-cover ring-2 ring-primary/30" />
             ) : (
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center font-display text-xl font-bold text-primary">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center font-display text-xl font-bold text-brand">
                 {review.author.charAt(0)}
               </div>
             )}

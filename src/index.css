@@ -5,89 +5,122 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   Sight of Anshul - the amber system.
+   Settled 2026-08-17, recorded in Assets/brand/sightofanshul/BRAND-BRIEF.md §10.
+   Do not reopen it.
+
+     Ink         #16181C   ->  220 12% 10%
+     Amber       #F5B642   ->   39 90% 61%
+     Deep amber  #8A5A00   ->   39 100% 27%
+     Paper       #F6F7F5   ->   90 11% 96%
+     Border      #DCDFD9   ->   90  9% 86%
+
+   The palette is deliberately shared with the AI Sight course, so the personal
+   brand and the course read as one system.
+
+   Amber at 61% lightness is a surface and a button colour, not body text: on
+   paper it clears about 1.9:1, which fails everything. So `--brand-text` is a
+   separate token - deep amber on paper, full amber on plate - and every piece
+   of amber *type* goes through it. The PorcelainBlue / Anton system is retired.
+--------------------------------------------------------------------------- */
+
 @layer base {
   :root {
-    /* Warm light theme - cream + terracotta + mint */
-    --background: 38 30% 95%;
-    --foreground: 20 25% 15%;
+    /* Paper */
+    --background: 90 11% 96%;
+    --foreground: 220 12% 10%;
 
-    --card: 38 35% 97%;
-    --card-foreground: 20 25% 15%;
+    --card: 90 14% 98%;
+    --card-foreground: 220 12% 10%;
 
-    --popover: 38 35% 97%;
-    --popover-foreground: 20 25% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 12% 10%;
 
-    --primary: 152 45% 55%;
-    --primary-foreground: 20 25% 12%;
-    --primary-glow: 152 60% 70%;
+    /* Amber. Ink sits on top of it, which is the high-contrast pairing. */
+    --primary: 39 90% 61%;
+    --primary-foreground: 220 12% 10%;
+    --primary-glow: 39 95% 72%;
 
-    --secondary: 38 25% 88%;
-    --secondary-foreground: 20 25% 15%;
+    --secondary: 90 10% 91%;
+    --secondary-foreground: 220 12% 10%;
 
-    --muted: 38 20% 90%;
-    --muted-foreground: 20 15% 40%;
+    --muted: 90 10% 92%;
+    --muted-foreground: 220 8% 38%;
 
-    --accent: 18 55% 58%;
-    --accent-foreground: 38 35% 97%;
+    /* Deep amber - the readable amber, for type and rules on paper. */
+    --accent: 39 100% 27%;
+    --accent-foreground: 90 11% 96%;
 
-    --gold: 38 50% 65%;
-    --gold-foreground: 20 25% 12%;
+    --gold: 39 100% 30%;
+    --gold-foreground: 90 11% 96%;
 
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 38 35% 97%;
+    /* Amber that is safe to set type in, on this surface. */
+    --brand-text: 39 100% 30%;
+    --brand-text-2: 39 82% 42%;
 
-    --border: 38 20% 82%;
-    --input: 38 20% 85%;
-    --ring: 152 45% 55%;
+    --destructive: 0 65% 44%;
+    --destructive-foreground: 90 11% 96%;
+
+    --border: 90 9% 86%;
+    --input: 90 9% 84%;
+    --ring: 39 90% 61%;
 
     --radius: 1rem;
 
-    --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%, hsl(152 60% 70% / 0.15), transparent 60%), radial-gradient(ellipse 60% 50% at 80% 100%, hsl(18 55% 58% / 0.12), transparent 60%);
-    --gradient-mesh: linear-gradient(135deg, hsl(152 45% 55% / 0.08), hsl(18 55% 58% / 0.08));
-    --gradient-gold: linear-gradient(135deg, hsl(38 50% 65%), hsl(38 60% 75%));
-    --shadow-elegant: 0 20px 60px -20px hsl(20 25% 15% / 0.15);
-    --shadow-glow: 0 0 80px hsl(152 60% 70% / 0.3);
+    --gradient-hero:
+      radial-gradient(ellipse 80% 60% at 50% 0%, hsl(39 90% 61% / 0.20), transparent 62%),
+      radial-gradient(ellipse 60% 50% at 82% 100%, hsl(39 100% 27% / 0.08), transparent 60%);
+    --gradient-mesh: linear-gradient(135deg, hsl(39 90% 61% / 0.12), hsl(39 100% 27% / 0.06));
+    --gradient-gold: linear-gradient(135deg, hsl(39 100% 30%), hsl(39 82% 45%));
+    --shadow-elegant: 0 20px 60px -20px hsl(220 12% 10% / 0.16);
+    --shadow-glow: 0 0 80px hsl(39 90% 61% / 0.35);
   }
 
   .dark {
-    /* Premium dark - deep near-black + refined mint + gold */
-    --background: 155 20% 5%;
-    --foreground: 38 30% 95%;
+    /* Plate. Ink, pushed a little further down so cards can sit at ink. */
+    --background: 220 13% 7%;
+    --foreground: 90 11% 96%;
 
-    --card: 155 18% 8%;
-    --card-foreground: 38 30% 95%;
+    --card: 220 12% 11%;
+    --card-foreground: 90 11% 96%;
 
-    --popover: 155 20% 6%;
-    --popover-foreground: 38 30% 95%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 90 11% 96%;
 
-    --primary: 152 55% 70%;
-    --primary-foreground: 155 25% 8%;
-    --primary-glow: 152 70% 80%;
+    --primary: 39 90% 61%;
+    --primary-foreground: 220 12% 10%;
+    --primary-glow: 39 95% 74%;
 
-    --secondary: 155 15% 12%;
-    --secondary-foreground: 38 30% 95%;
+    --secondary: 220 11% 14%;
+    --secondary-foreground: 90 11% 96%;
 
-    --muted: 155 12% 15%;
-    --muted-foreground: 155 10% 60%;
+    --muted: 220 10% 15%;
+    --muted-foreground: 90 6% 64%;
 
-    --accent: 38 50% 65%;
-    --accent-foreground: 155 25% 8%;
+    --accent: 39 90% 61%;
+    --accent-foreground: 220 12% 10%;
 
-    --gold: 38 55% 70%;
-    --gold-foreground: 155 25% 8%;
+    --gold: 39 90% 61%;
+    --gold-foreground: 220 12% 10%;
+
+    --brand-text: 39 90% 61%;
+    --brand-text-2: 39 95% 76%;
 
     --destructive: 0 70% 55%;
-    --destructive-foreground: 38 30% 95%;
+    --destructive-foreground: 90 11% 96%;
 
-    --border: 155 15% 15%;
-    --input: 155 15% 14%;
-    --ring: 152 55% 70%;
+    --border: 220 10% 18%;
+    --input: 220 10% 17%;
+    --ring: 39 90% 61%;
 
-    --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%, hsl(152 70% 50% / 0.18), transparent 60%), radial-gradient(ellipse 60% 50% at 80% 100%, hsl(38 60% 55% / 0.12), transparent 60%);
-    --gradient-mesh: linear-gradient(135deg, hsl(152 55% 30% / 0.15), hsl(38 50% 40% / 0.1));
-    --gradient-gold: linear-gradient(135deg, hsl(38 55% 70%), hsl(38 70% 80%));
-    --shadow-elegant: 0 20px 60px -20px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 80px hsl(152 70% 50% / 0.25);
+    --gradient-hero:
+      radial-gradient(ellipse 80% 60% at 50% 0%, hsl(39 90% 55% / 0.18), transparent 62%),
+      radial-gradient(ellipse 60% 50% at 82% 100%, hsl(39 80% 40% / 0.10), transparent 60%);
+    --gradient-mesh: linear-gradient(135deg, hsl(39 80% 45% / 0.14), hsl(39 60% 30% / 0.10));
+    --gradient-gold: linear-gradient(135deg, hsl(39 90% 61%), hsl(39 95% 76%));
+    --shadow-elegant: 0 20px 60px -20px hsl(0 0% 0% / 0.55);
+    --shadow-glow: 0 0 80px hsl(39 90% 55% / 0.22);
   }
 }
 
@@ -109,13 +142,13 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cabinet Grotesk', 'Satoshi', system-ui, sans-serif;
-    font-weight: 700;
+    font-family: 'Clash Display', 'Satoshi', system-ui, sans-serif;
+    font-weight: 600;
     letter-spacing: -0.02em;
   }
 
   .font-display {
-    font-family: 'Cabinet Grotesk', 'Satoshi', system-ui, sans-serif;
+    font-family: 'Clash Display', 'Satoshi', system-ui, sans-serif;
   }
 
   .font-mono {
@@ -156,8 +189,11 @@
     @apply backdrop-blur-xl;
   }
 
+  /* Goes through --brand-text, not --primary: raw amber type on paper is
+     unreadable, and "nobody leaves this site feeling stupid" starts with
+     being able to read it. */
   .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold)));
+    background: linear-gradient(135deg, hsl(var(--brand-text)), hsl(var(--brand-text-2)));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -170,10 +206,15 @@
     -webkit-text-fill-color: transparent;
   }
 
+  /* Amber type, flat. Same readability contract as .text-gradient. */
+  .text-brand {
+    color: hsl(var(--brand-text));
+  }
+
   .grid-bg {
     background-image:
-      linear-gradient(hsl(var(--border) / 0.4) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.4) 1px, transparent 1px);
+      linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black, transparent);
   }
