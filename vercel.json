@@ -1,52 +1,19 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "comment": [
-    "sightofanshul.com is canonical. Every other channel already says",
-    "'sightofanshul' - the Instagram handle, the brand deck, the logo files - so",
-    "the name someone types after watching a video should match the name they",
-    "just saw. anshulrastogi.com and the older .xyz redirect to it.",
+    "THE anshulrastogi.com -> sightofanshul.com REDIRECTS ARE DELIBERATELY NOT",
+    "HERE YET. Do not add them back until sightofanshul.com is attached to this",
+    "Vercel project and serving the site. The exact rules, and the order to",
+    "enable them in, are in docs/workbook-endpoint.md.",
     "",
-    "301 and not 308: the spec asks for a 301, and Vercel's `permanent: true`",
-    "emits a 308, so the status code is set explicitly.",
+    "Why: a `source: '/:path*'` host redirect matches EVERY path, assets",
+    "included. Shipped while sightofanshul.com was still on registrar parking,",
+    "it 301'd /assets/index-*.js and the stylesheet to a host that served",
+    "nothing. The cached HTML still loaded, so the site returned 200 and",
+    "rendered a blank white page - which looks like a JS crash and is not one.",
     "",
-    "The redirect is the point. Serving the same pages on both hosts is",
-    "duplicate content and splits the SEO signal between two names.",
-    "",
-    "Add every host below to this project in the Vercel dashboard, and take the",
-    "apex A record or nameserver values from that dashboard rather than from any",
-    "IP written down here - they change and a hardcoded one goes stale silently."
-  ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "anshulrastogi.com" }],
-      "destination": "https://sightofanshul.com/:path*",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.anshulrastogi.com" }],
-      "destination": "https://sightofanshul.com/:path*",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "anshulrastogi.xyz" }],
-      "destination": "https://sightofanshul.com/:path*",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.anshulrastogi.xyz" }],
-      "destination": "https://sightofanshul.com/:path*",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.sightofanshul.com" }],
-      "destination": "https://sightofanshul.com/:path*",
-      "statusCode": 301
-    }
+    "sightofanshul.com is still the intended canonical domain. The redirect is",
+    "correct; shipping it before the target existed was not."
   ],
   "headers": [
     {

@@ -138,11 +138,51 @@ that reason, but check it on a real phone before the announcement.
   (`b67b61a3-9ae2-45d4-9481-43f74b8add12`) as Supabase function secrets. Unset, consent is
   still recorded and the response says the lead was not synced.
 
-### 6. DNS
+### 6. DNS and the domain redirects - read this before re-adding them
 
-`vercel.json` carries the 301s - 301 explicitly, not Vercel's `permanent: true`, which emits
-a 308. They fire once the hosts are attached to the project. Make **sightofanshul.com**
-primary and take the apex record values from the Vercel dashboard, never from a doc.
+**The redirects are not in `vercel.json` right now, on purpose.** They were, and they took
+the live site down for as long as it took to notice.
+
+What happened: a redirect written as `source: "/:path*"` with a host condition matches
+**every path, assets included**. `sightofanshul.com` was still on registrar parking
+(162.255.119.77), so `/assets/index-*.js` and the stylesheet both 301'd to a host that
+served nothing. The HTML was still in the edge cache, so the site answered 200 and rendered
+a blank white page - which looks exactly like a JS crash and is not one.
+
+The rules are correct. Shipping them before the target existed was the mistake. So the order
+matters:
+
+1. Add `sightofanshul.com` and `www.sightofanshul.com` to this Vercel project and make
+   **sightofanshul.com** primary. Take the apex A record or nameserver values from the
+   Vercel dashboard, never from a doc - they change and a stale one fails silently.
+2. **Confirm it actually serves before going further:** `curl -I https://sightofanshul.com`
+   must return 200 from `Server: Vercel`. If it returns nothing, or anything from another
+   server, stop here.
+3. Only then add the redirects back to `vercel.json`, one host per rule, 301 explicitly
+   (Vercel's `permanent: true` emits a 308):
+
+   ```json
+   "redirects": [
+     { "source": "/:path*", "has": [{ "type": "host", "value": "anshulrastogi.com" }],
+       "destination": "https://sightofanshul.com/:path*", "statusCode": 301 },
+     { "source": "/:path*", "has": [{ "type": "host", "value": "www.anshulrastogi.com" }],
+       "destination": "https://sightofanshul.com/:path*", "statusCode": 301 },
+     { "source": "/:path*", "has": [{ "type": "host", "value": "anshulrastogi.xyz" }],
+       "destination": "https://sightofanshul.com/:path*", "statusCode": 301 },
+     { "source": "/:path*", "has": [{ "type": "host", "value": "www.anshulrastogi.xyz" }],
+       "destination": "https://sightofanshul.com/:path*", "statusCode": 301 },
+     { "source": "/:path*", "has": [{ "type": "host", "value": "www.sightofanshul.com" }],
+       "destination": "https://sightofanshul.com/:path*", "statusCode": 301 }
+   ]
+   ```
+4. After deploying, check an **asset** and not just the homepage - the homepage can answer
+   from cache while every asset underneath it is redirecting:
+
+   ```
+   curl -I https://www.anshulrastogi.com/assets/  ->  expect 301 to sightofanshul.com
+   curl -I https://sightofanshul.com             ->  expect 200
+   ```
+   Then load the site in a browser and confirm it renders, not just that it returns 200.
 
 ---
 
@@ -153,7 +193,7 @@ primary and take the apex record values from the Vercel dashboard, never from a 
 - [x] Consent record stores wording + UTC timestamp + IP
 - [x] Privacy policy linked, and accurate to what the code does
 - [x] Capture and send are the same system, decision recorded here with the reason
-- [x] Redirect config written, 301 not 308
+- [x] Redirect rules written and documented, 301 not 308 - **held back until sightofanshul.com serves, see (6)**
 - [ ] Download shown AND the email arrives inside a minute - **needs (1) and (2)**
 - [ ] PDF URL stable and public - **needs the PDF, handoff 01**
 - [ ] Both domains resolve; anshulrastogi.com 301s to sightofanshul.com - **needs DNS**
