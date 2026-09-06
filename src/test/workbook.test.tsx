@@ -135,10 +135,19 @@ describe("the workbook consent gate", () => {
       expect(el).not.toBeNull();
       return el!;
     });
-    expect(frame).toHaveAttribute("src", "https://socioverse.io/anshulrastogi/workbook");
+    // ?embed=1 is not cosmetic. That route answers with `frame-ancestors *` and
+    // posts its height back; the plain storefront route sends
+    // `X-Frame-Options: SAMEORIGIN` and the browser refuses to render it here.
+    expect(frame).toHaveAttribute(
+      "src",
+      "https://socioverse.io/anshulrastogi/workbook?embed=1",
+    );
     // A frame can be blocked by the browser or by Planets' own frame policy, so
-    // there is always a way through that does not depend on it rendering.
-    expect(screen.getByRole("link", { name: /open it in a new tab/i })).toBeInTheDocument();
+    // there is always a way through that does not depend on it rendering. That
+    // link opens the real page, not the stripped embed.
+    const escape = screen.getByRole("link", { name: /open it in a new tab/i });
+    expect(escape).toBeInTheDocument();
+    expect(escape).toHaveAttribute("href", "https://socioverse.io/anshulrastogi/workbook");
   });
 
   it("still hands over when recording the consent fails", async () => {

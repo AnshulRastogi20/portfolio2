@@ -66,28 +66,28 @@ export const COURSE = {
 };
 
 /**
- * The workbook: the one lead magnet in the whole plan, one email gate, one PDF.
- *
- * The URL goes into 15 video descriptions and cannot change afterwards. Override
- * with VITE_WORKBOOK_PDF_URL if the file moves to Bunny CDN - do that in the
- * hosting env, not by editing this default, so the fallback stays stable.
- */
-/**
  * The workbook: the one lead capture in the whole plan.
  *
- * Delivery and capture both live in Socioverse Planets now. The workbook is a
- * zero-price DOWNLOAD product there; its checkout collects the billing email,
- * and that email IS the lead. The site does not run a form of its own, which is
- * why there is no sync between two contact databases to own.
+ * Delivery and capture both live in Socioverse Planets. The workbook is the
+ * zero-price `file` product `ai-sight-workbook` on the anshulrastogi storefront;
+ * its checkout collects the billing email and Planets fulfils the order the
+ * moment it is placed, with no payment rail in the way.
  *
- * `planetsUrl` is the product's public URL. It is the one value that has to be
- * filled in before /workbook works, and it goes into 15 video descriptions by
- * way of this page, so set it once and leave it. Override per environment with
- * VITE_WORKBOOK_PLANETS_URL rather than editing the default.
+ * `planetsUrl` is the product's public page. The default is the live product
+ * rather than an empty string on purpose: this URL goes into 15 video
+ * descriptions and must not depend on a hosting env var being remembered.
+ * VITE_WORKBOOK_PLANETS_URL still overrides it if the product ever moves.
+ *
+ * The `?embed=1` variant is what goes in the iframe - that route answers with
+ * `Content-Security-Policy: frame-ancestors *` and posts its own height back,
+ * where the storefront routes send `X-Frame-Options: SAMEORIGIN` and would be
+ * refused. See Workbook.tsx for the height handshake.
  */
 export const WORKBOOK = {
   sections: 15,
-  planetsUrl: import.meta.env.VITE_WORKBOOK_PLANETS_URL ?? "",
+  planetsUrl:
+    import.meta.env.VITE_WORKBOOK_PLANETS_URL ??
+    "https://www.socioverse.io/d/anshulrastogi/ai-sight-workbook",
   contents: [
     "One section per lecture, all 15",
     "The one idea from each lecture, written down",

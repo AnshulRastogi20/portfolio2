@@ -311,6 +311,40 @@ const Workbook = () => {
  */
 const Checkout = () => {
   const url = WORKBOOK.planetsUrl;
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  const [height, setHeight] = useState(720);
+
+  /**
+   * Planets posts its rendered height back so the frame is not a fixed box with
+   * its own scrollbar. Two guards, both load-bearing: the origin has to be the
+   * Socioverse one, and the message has to come from THIS frame - any page on
+   * the site can postMessage at us, and without the source check one of them
+   * could drive the height of the checkout.
+   *
+   * If the message never arrives the initial 720 stands, which is the height
+   * Socioverse's own embed snippet ships as its default.
+   */
+  useEffect(() => {
+    if (!url) return;
+    let expected: string;
+    try {
+      expected = new URL(url).origin;
+    } catch {
+      return;
+    }
+
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== expected) return;
+      if (e.source !== frameRef.current?.contentWindow) return;
+      const data = e.data as { type?: string; height?: unknown } | null;
+      if (!data || data.type !== "socioverse:embed-height") return;
+      const next = Number(data.height);
+      if (Number.isFinite(next) && next > 200) setHeight(next);
+    };
+
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [url]);
 
   if (!url) {
     return (
@@ -327,6 +361,10 @@ const Checkout = () => {
     );
   }
 
+  // The storefront page is what the "new tab" link should open; only the frame
+  // wants ?embed=1, which strips the site chrome and starts the height handshake.
+  const embedUrl = url.includes("?") ? `${url}&embed=1` : `${url}?embed=1`;
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
@@ -341,9 +379,12 @@ const Checkout = () => {
 
       <div className="rounded-2xl overflow-hidden bg-background/60 border border-border/60">
         <iframe
-          src={url}
+          ref={frameRef}
+          src={embedUrl}
           title="Get the AI Sight workbook"
-          className="w-full h-[560px] border-0"
+          className="w-full border-0 block"
+          style={{ height }}
+          scrolling="no"
           loading="eager"
           allow="payment"
           onLoad={() => track("download")}

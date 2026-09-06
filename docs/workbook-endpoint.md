@@ -85,28 +85,71 @@ them, and a second contact table is exactly the sync you would own forever. Both
 
 ## Still on you
 
-### 1. Create the Planets product, then set one env var
+### 1. ~~Create the Planets product, then set one env var~~ - DONE 2026-09-06
 
-Add a **DOWNLOAD** product in Planets: price 0 USD and 0 INR, Downloads Enabled, the workbook
-PDF uploaded to secure storage. Then set:
+The product exists: `ai-sight-workbook` on the `anshulrastogi` storefront, type `file`,
+price 0 USD, published, `downloads_disabled: false`, one 2.1 MB PDF in the
+`creator-products` bucket.
 
-```
-VITE_WORKBOOK_PLANETS_URL = <the product's public URL>
-```
+No env var is needed any more. `WORKBOOK.planetsUrl` in `src/lib/data.ts` now defaults to
+the live product URL, because this URL goes into 15 video descriptions and must not depend
+on somebody remembering a Vercel setting. `VITE_WORKBOOK_PLANETS_URL` still overrides it if
+the product ever moves.
 
-That is the only value `/workbook` needs. Until it is set the page says the download is not
-switched on yet and points at your email address, rather than rendering an empty frame.
+Note `price_cents_inr` is **null**, not 0. That is fine at zero - every guard in
+`create-checkout` that would reject a half-priced product tests `> 0` - but do not set a USD
+price without setting the INR one, or the rail guard at line 249 starts rejecting checkouts.
 
-### 2. Test that a zero-price order actually sends the file - do this before anything else
+### 2. Does a zero-price order actually send? Half answered.
 
-**This is the highest-risk unknown in the plan.** A free order skips Razorpay and Dodo
-entirely, so it may never reach the code path that sends receipts. And no product on your
-tenant has ever used `files[]` - all four are empty - so the download path is unexercised
-too.
+**The free order path is confirmed in production.** `create-checkout` line 283: when
+`finalPriceCents === 0` it inserts a `status: paid, provider: free` order and calls
+`fulfillPaidOrder` synchronously - no Razorpay, no Dodo, no webhook round trip. Five
+zero-amount orders exist on the tenant and every receipt shows `delivered` in `email_log`,
+about one second after the order. So the order will be created and mail will go out.
 
-Place one test order against the zero-price product, then check `email_log` for a row with a
-`delivered` status carrying the file link. Five minutes, and it either confirms the plan or
-finds the gap now rather than on 15 September.
+**The file half is still unexercised.** Before 2026-09-06 no product on the entire platform
+had ever been type `file`/`download` or had anything in `files[]`, so
+`files[] -> get-download -> signed URL` has never run for a real buyer. The workbook is the
+first. Place one real order from a phone before the announcement.
+
+### 2b. Delivery is two emails and a six-digit code, not one email with a link
+
+Found while tracing `get-download`, and it changes what the page can promise.
+
+`get-download` requires a verified device session in `enrollment_access_sessions`. The
+emailed `access_token` alone is deliberately not enough - it is forwardable and never
+expires, so on its own it would hand the creator's files to anyone holding the link.
+Sessions are only ever minted by `get-enrollment` on `action: verify_code`.
+
+So the real path is:
+
+1. Email into the embed -> order created -> receipt email, "Access order details".
+2. That button opens `/purchases/<access_token>`.
+3. The buyer requests a code -> **second email**, "NNNNNN is your purchase access code".
+4. Code entered -> device session -> download works.
+
+The live free orders show exactly this timing: receipt at 17:20:33, access code at 17:20:52,
+a second code at 17:21:52.
+
+For a paid course that is correct security. For a free lead magnet it is real friction, and
+it breaks the "the email arrives inside a minute and they have the PDF" acceptance line -
+the *first* email arrives inside a minute, the PDF takes a code round-trip. Decide before
+15 September whether that is acceptable; if it is not, the fix is on the Socioverse side,
+not here.
+
+Related: the receipt copy reads "Payment received.", "Your files are ready." and
+"Amount paid: $0.00" on a free order. Worth a pass in `_shared/fulfillment.ts`.
+
+### 2c. Planets does NOT write to `leads`
+
+The premise this whole design rests on - "the billing email IS the lead, Socioverse `leads`
+is the single contact database" - is **not true today**. Neither `create-checkout` nor
+`_shared/fulfillment.ts` references `leads` at all, and none of the existing free-order
+buyer emails appear in that table. Buyers land in `orders` and stop there.
+
+That is survivable for delivery, which does not care. It is not survivable for the list. If
+the marketing list matters, something has to bridge order -> lead on the Socioverse side.
 
 ### 3. Reconcile consent to email
 
@@ -117,15 +160,36 @@ into the checkout needs one of:
 - an order webhook this site can receive; or
 - a periodic job matching on IP and time window - workable, but weak as evidence.
 
+Checked 2026-09-06: **the first option does not exist.** `create-checkout` accepts exactly
+four fields - `product_id`, `buyer_email`, `buyer_name`, `discount_code` - and builds
+`orders.metadata` from a fixed set of server-side keys. There is no passthrough to carry a
+`consent_token` in. It needs a Socioverse code change, not a URL parameter.
+
 Until one exists, `workbook_unreconciled_consent` grows and never drains. **If that view is
 not empty and not shrinking, the marketing list is silently not being built.** The workbook
 itself is unaffected either way, which is the right way round.
 
-### 4. If the iframe is refused
+### 4. ~~If the iframe is refused~~ - RESOLVED, but only on the right route
 
-If Planets sends `X-Frame-Options: DENY` or a restrictive `frame-ancestors`, the embed will
-render blank. The page always draws an "open it in a new tab" link underneath for exactly
-that reason, but check it on a real phone before the announcement.
+Measured 2026-09-06:
+
+```
+https://www.socioverse.io/anshulrastogi/ai-sight       ->  X-Frame-Options: SAMEORIGIN
+https://www.socioverse.io/d/anshulrastogi/ai-sight-workbook?embed=1
+                                                        ->  Content-Security-Policy: frame-ancestors *
+```
+
+The storefront routes refuse to be framed. The dedicated `/d/` embed route is explicitly
+open, and posts `{ type: "socioverse:embed-height", height }` back to the parent so the
+frame resizes instead of scrolling inside a fixed box.
+
+`Checkout` in `Workbook.tsx` appends `?embed=1` for the frame and keeps the bare URL for the
+"open it in a new tab" link. The height listener checks both the origin and that the message
+came from this frame - without the source check any page could drive the checkout's height.
+A contract test pins both URLs, so someone dropping `?embed=1` gets a red test and not a
+blank box on the one page the whole release funnels into.
+
+Still check it on a real phone before the announcement.
 
 ### 5. Housekeeping
 
@@ -194,8 +258,12 @@ matters:
 - [x] Privacy policy linked, and accurate to what the code does
 - [x] Capture and send are the same system, decision recorded here with the reason
 - [x] Redirect rules written and documented, 301 not 308 - **held back until sightofanshul.com serves, see (6)**
-- [ ] Download shown AND the email arrives inside a minute - **needs (1) and (2)**
-- [ ] PDF URL stable and public - **needs the PDF, handoff 01**
+- [x] Planets product created, priced 0, PDF uploaded, page wired to it
+- [x] The embed actually renders cross-origin - `/d/...?embed=1`, `frame-ancestors *`
+- [ ] Download shown AND the email arrives inside a minute - **first email yes, the PDF
+      needs a six-digit code round-trip, see (2b)**
+- [x] PDF URL stable and public - 2.1 MB in `creator-products`, served by signed URL
 - [ ] Both domains resolve; anshulrastogi.com 301s to sightofanshul.com - **needs DNS**
-- [ ] Marketing list contains only opted-in contacts - **needs reconciliation (3)**
+- [ ] Marketing list contains only opted-in contacts - **needs reconciliation (3), and
+      Planets does not write to `leads` at all, see (2c)**
 - [ ] Tested end to end with a real address on a phone - **after the above**
