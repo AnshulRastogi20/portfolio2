@@ -1,4 +1,7 @@
 name: Keep Supabase awake
+# Runs on Sight Actions, not GitHub Actions (owner 2026-11-21: complete replacement). Sight reads this file and runs it
+# on its own server (sight-runtime src/actions/). The workflow is DISABLED on GitHub (no paid Actions budget): do not
+# re-enable it there.
 
 # Supabase pauses free-tier projects after 7 days with no API activity. That
 # is what took ddpubhkgcbcwncyeebzc offline and made the whole site silently
